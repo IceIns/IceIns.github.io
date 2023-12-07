@@ -129,43 +129,43 @@
     <content><![CDATA[<p>扫描线</p>
 <span id="more"></span>
 
-<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><h3 id="矩形面积并"><a href="#矩形面积并" class="headerlink" title="矩形面积并"></a>矩形面积并</h3><p>给出 $n$ 个边平行于坐标轴的矩形，求它们的面积并。</p>
-<h2 id="扫描线"><a href="#扫描线" class="headerlink" title="扫描线"></a>扫描线</h2><p>将问题拆解成时间序列关键点，可以想象一条线在平面上扫过，在一些特定的位置这条线上对应的状态会发生变化。</p>
-<p>两要素：</p>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a><font face="楷体">引入</font></h2><h3 id="矩形面积并"><a href="#矩形面积并" class="headerlink" title="矩形面积并"></a><font face="楷体">矩形面积并</font></h3><p><font face="楷体">给出 $n$ 个边平行于坐标轴的矩形，求它们的面积并。</font></p>
+<h2 id="扫描线"><a href="#扫描线" class="headerlink" title="扫描线"></a><font face="楷体">扫描线</font></h2><p><font face="楷体">将问题拆解成时间序列关键点，可以想象一条线在平面上扫过，在一些特定的位置这条线上对应的状态会发生变化。</font></p>
+<p><font face="楷体">两要素：</font></p>
 <ul>
-<li>时间序列：状态发生变化的关键点。</li>
-<li>维护当前时间状态的数据结构。</li>
+<li><font face="楷体">时间序列：状态发生变化的关键点。</font></li>
+<li><font face="楷体">维护当前时间状态的数据结构。</font></li>
 </ul>
-<h2 id="引入的解"><a href="#引入的解" class="headerlink" title="引入的解"></a>引入的解</h2><p>两要素：</p>
+<h2 id="引入的解"><a href="#引入的解" class="headerlink" title="引入的解"></a><font face="楷体">引入的解</font></h2><p><font face="楷体">两要素：</font></p>
 <ul>
-<li>时间序列：每个矩形的上下边</li>
-<li>数据结构：线段树（区间修改，查询覆盖的区间长度）</li>
+<li><font face="楷体">时间序列：每个矩形的上下边</font></li>
+<li><font face="楷体">数据结构：线段树（区间修改，查询覆盖的区间长度）</font></li>
 </ul>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="判断-n-条线段中是否存在有交点的线段"><a href="#判断-n-条线段中是否存在有交点的线段" class="headerlink" title="判断 $n$ 条线段中是否存在有交点的线段"></a>判断 $n$ 条线段中是否存在有交点的线段</h3><p>朴素做法：$O(n^2)$。</p>
-<p>尝试扫描线，一条垂直于 $x$ 轴的线从左向右扫。</p>
-<p>关键点：线段的端点（左端点加入，右端点删除）</p>
-<p>考虑对于每一个时间点的竖线，把所有与之相交的线段，按纵坐标（y）升序排序。那么两条有交点的线段的先后顺序会在某一时刻发生变化。</p>
-<p>具体而言，其先后顺序发生变化的情况有两种：</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a><font face="楷体">应用</font></h2><h3 id="判断-n-条线段中是否存在有交点的线段"><a href="#判断-n-条线段中是否存在有交点的线段" class="headerlink" title="判断 $n$ 条线段中是否存在有交点的线段"></a><font face="楷体">判断 $n$ 条线段中是否存在有交点的线段</font></h3><p><font face="楷体">朴素做法：$O(n^2)$。</font></p>
+<p><font face="楷体">尝试扫描线，一条垂直于 $x$ 轴的线从左向右扫。</font></p>
+<p><font face="楷体">关键点：线段的端点（左端点加入，右端点删除）</font></p>
+<p><font face="楷体">考虑对于每一个时间点的竖线，把所有与之相交的线段，按纵坐标（y）升序排序。那么两条有交点的线段的先后顺序会在某一时刻发生变化。</font></p>
+<p><font face="楷体">具体而言，其先后顺序发生变化的情况有两种：</font></p>
 <ul>
-<li>新加入一条线段，与这条线段相邻的两条线段先后顺序发生变化。</li>
-<li>删除一条线段，原本被这条线段隔开的两条线段先后顺序发生变化。</li>
+<li><font face="楷体">新加入一条线段，与这条线段相邻的两条线段先后顺序发生变化。</font></li>
+<li><font face="楷体">删除一条线段，原本被这条线段隔开的两条线段先后顺序发生变化。</font></li>
 </ul>
-<p>使用 set 维护。</p>
-<p>时间复杂度：$O(n\log n)$。</p>
-<p>细节：</p>
+<p><font face="楷体">使用 set 维护。</font></p>
+<p><font face="楷体">时间复杂度：$O(n\log n)$。</font></p>
+<p><font face="楷体">细节：</font></p>
 <ul>
-<li>一个关键点上有多个操作的情况（多条线段共端点）</li>
-<li>线段与扫描线平行的情况（平行 y 轴）</li>
+<li><font face="楷体">一个关键点上有多个操作的情况（多条线段共端点）</font></li>
+<li><font face="楷体">线段与扫描线平行的情况（平行 y 轴）</font></li>
 </ul>
-<h3 id="面积并问题"><a href="#面积并问题" class="headerlink" title="面积并问题"></a>面积并问题</h3><p>对于部分问题，扫描线并不是最优解。</p>
-<h4 id="三角形面积并"><a href="#三角形面积并" class="headerlink" title="三角形面积并"></a>三角形面积并</h4><h5 id="法一：扫描线"><a href="#法一：扫描线" class="headerlink" title="法一：扫描线"></a>法一：扫描线</h5><ul>
-<li>关键点：三角形顶点，交点。</li>
-<li>关键点之间的面积可用梯形面积公式计算。</li>
+<h3 id="面积并问题"><a href="#面积并问题" class="headerlink" title="面积并问题"></a><font face="楷体">面积并问题</font></h3><p><font face="楷体">对于部分问题，扫描线并不是最优解。</font></p>
+<h4 id="三角形面积并"><a href="#三角形面积并" class="headerlink" title="三角形面积并"></a><font face="楷体">三角形面积并</font></h4><h5 id="法一：扫描线"><a href="#法一：扫描线" class="headerlink" title="法一：扫描线"></a><font face="楷体">法一：扫描线</font></h5><ul>
+<li><font face="楷体">关键点：三角形顶点，交点。</font></li>
+<li><font face="楷体">关键点之间的面积可用梯形面积公式计算。</font></li>
 </ul>
-<p>时间复杂度：$O(n^3)$</p>
-<h5 id="法二：轮廓法"><a href="#法二：轮廓法" class="headerlink" title="法二：轮廓法"></a>法二：轮廓法</h5><p>三角形的并本质上是多边形，如果能找到这个多边形的轮廓，可用直接使用求多边形面积的算法求得面积并。</p>
-<p>对于每一条边，求出它与其它所有三角形的交点，找到没有包含在任何三角形内部的部分。</p>
-<p>时间复杂度：$O(n^2)$</p>
+<p><font face="楷体">时间复杂度：$O(n^3)$</font></p>
+<h5 id="法二：轮廓法"><a href="#法二：轮廓法" class="headerlink" title="法二：轮廓法"></a><font face="楷体">法二：轮廓法</font></h5><p><font face="楷体">三角形的并本质上是多边形，如果能找到这个多边形的轮廓，可用直接使用求多边形面积的算法求得面积并。</font></p>
+<p><font face="楷体">对于每一条边，求出它与其它所有三角形的交点，找到没有包含在任何三角形内部的部分。</font></p>
+<p><font face="楷体">时间复杂度：$O(n^2)$</font></p>
 ]]></content>
       <categories>
         <category>计算几何</category>
@@ -177,33 +177,33 @@
     <content><![CDATA[<p>旋转卡壳</p>
 <span id="more"></span>
 
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>点集的直径：平面最远点对（一定是其凸包上的某两个极点）。</p>
-<p>性质</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a><font face="楷体">概念</font></h2><p><font face="楷体">点集的直径：平面最远点对（一定是其凸包上的某两个极点）。</font></p>
+<p><font face="楷体">性质</font></p>
 <ul>
-<li>各极点到其中一点的距离并不存在单调性。</li>
-<li>但是各极点到一条极边的距离存在单峰性。</li>
+<li><font face="楷体">各极点到其中一点的距离并不存在单调性。</font></li>
+<li><font face="楷体">但是各极点到一条极边的距离存在单峰性。</font></li>
 </ul>
-<h2 id="旋转卡壳"><a href="#旋转卡壳" class="headerlink" title="旋转卡壳"></a>旋转卡壳</h2><p>卡尺绕凸包旋转，其两边经过的点构成对踵点。</p>
+<h2 id="旋转卡壳"><a href="#旋转卡壳" class="headerlink" title="旋转卡壳"></a><font face="楷体">旋转卡壳</font></h2><p><font face="楷体">卡尺绕凸包旋转，其两边经过的点构成对踵点。</font></p>
 <img src="/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E5%85%AD%EF%BC%89/1.gif" class="" title="咕咕咕">
 
-<p>一个点的对踵点不好直接得出，且可能不止一个。但一条边的对踵点可以利用上页提到的单峰性找出。</p>
-<p>卡尺的一条边逆时针经过各条极边时，另一条边对应的对踵点也是逆时针依次经过，因此二者可以通过双指针进行遍历。</p>
-<p>卡尺旋转过程中一定存在某时刻其两边经过直径对应的两点。</p>
-<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><ul>
-<li>设定初始边指针 p，并找到其对踵点 q。</li>
-<li>p 指向下一条边。</li>
-<li>如果 q 点到 p 边的距离小于等于 q 的下一个点到 p 边的距离，则 q 指向下一个点。</li>
-<li>重复 3 直到找到 p 边的对踵点，更新答案。</li>
-<li>回到 2。</li>
+<p><font face="楷体">一个点的对踵点不好直接得出，且可能不止一个。但一条边的对踵点可以利用上页提到的单峰性找出。</font></p>
+<p><font face="楷体">卡尺的一条边逆时针经过各条极边时，另一条边对应的对踵点也是逆时针依次经过，因此二者可以通过双指针进行遍历。</font></p>
+<p><font face="楷体">卡尺旋转过程中一定存在某时刻其两边经过直径对应的两点。</font></p>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a><font face="楷体">算法流程</font></h2><ul>
+<li><font face="楷体">设定初始边指针 p，并找到其对踵点 q。</font></li>
+<li><font face="楷体">p 指向下一条边。</font></li>
+<li><font face="楷体">如果 q 点到 p 边的距离小于等于 q 的下一个点到 p 边的距离，则 q 指向下一个点。</font></li>
+<li><font face="楷体">重复 3 直到找到 p 边的对踵点，更新答案。</font></li>
+<li><font face="楷体">回到 2。</font></li>
 </ul>
-<p>此处的距离比较可转化为面积比较，从而可以使用叉积解决。</p>
-<p>时间复杂度：$O(n)$。</p>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="凸多边形间最大-小距离"><a href="#凸多边形间最大-小距离" class="headerlink" title="凸多边形间最大&#x2F;小距离"></a>凸多边形间最大&#x2F;小距离</h3><p>重新定义“对踵点”：</p>
-<p>以凸多边形某条边作为 y 轴，x 坐标最小的点。</p>
-<p>在此定义下，该点依然是和该边组成叉积最大的点。</p>
-<p>除此之外，算法流程与求点集直径一致。</p>
-<h3 id="凸多边形间最小面积-周长外接矩形"><a href="#凸多边形间最小面积-周长外接矩形" class="headerlink" title="凸多边形间最小面积&#x2F;周长外接矩形"></a>凸多边形间最小面积&#x2F;周长外接矩形</h3><p>不论是最小周长还是面积的外接矩形，其一定有一条边与凸包的一条极边共线。</p>
-<p>在旋转卡壳时，多维护方向上的两个极点即可。</p>
+<p><font face="楷体">此处的距离比较可转化为面积比较，从而可以使用叉积解决。</font></p>
+<p><font face="楷体">时间复杂度：$O(n)$。</font></p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a><font face="楷体">应用</font></h2><h3 id="凸多边形间最大-小距离"><a href="#凸多边形间最大-小距离" class="headerlink" title="凸多边形间最大&#x2F;小距离"></a><font face="楷体">凸多边形间最大&#x2F;小距离</font></h3><p><font face="楷体">重新定义“对踵点”：</font></p>
+<p><font face="楷体">以凸多边形某条边作为 y 轴，x 坐标最小的点。</font></p>
+<p><font face="楷体">在此定义下，该点依然是和该边组成叉积最大的点。</font></p>
+<p><font face="楷体">除此之外，算法流程与求点集直径一致。</font></p>
+<h3 id="凸多边形间最小面积-周长外接矩形"><a href="#凸多边形间最小面积-周长外接矩形" class="headerlink" title="凸多边形间最小面积&#x2F;周长外接矩形"></a><font face="楷体">凸多边形间最小面积&#x2F;周长外接矩形</font></h3><p><font face="楷体">不论是最小周长还是面积的外接矩形，其一定有一条边与凸包的一条极边共线。</font></p>
+<p><font face="楷体">在旋转卡壳时，多维护方向上的两个极点即可。</font></p>
 ]]></content>
       <categories>
         <category>计算几何</category>
@@ -215,54 +215,54 @@
     <content><![CDATA[<p><font face="楷体">半平面交</font></p>
 <span id="more"></span>
 
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>半平面：有向直线左侧的区域。</p>
-<p>半平面交：多个半平面的交集。</p>
-<p>半平面交涉及直线均使用点向式表示。</p>
-<p>性质：半平面交一定是凸集。</p>
-<p>特别地，可以加入一个相当大的边界，将交集无穷大的情况转化为有边界，这样交集可以用一个凸多边形表示。</p>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><h3 id="法一：朴素算法"><a href="#法一：朴素算法" class="headerlink" title="法一：朴素算法"></a>法一：朴素算法</h3><p>求出各直线的交点，判断各交点是否在所有平面内。</p>
-<p>对满足条件的各点求凸包。</p>
-<p>时间复杂度：$O(n^3)$。</p>
-<h3 id="法二：增量法；"><a href="#法二：增量法；" class="headerlink" title="法二：增量法；"></a>法二：增量法；</h3><p>每次用直线去切割当前的凸多边形。</p>
-<p>时间复杂度：$O(n^2)$。</p>
-<h3 id="法三：排序增量法："><a href="#法三：排序增量法：" class="headerlink" title="法三：排序增量法："></a>法三：排序增量法：</h3><p>求凸包算法中，对点进行排序可以有效降低复杂度。</p>
-<p>利用凸多边形各边方向向量的有序性，同样可以对各直线进行排序后求半平面交。</p>
-<p>对于方向向量同向的直线，只需要考虑最左的一个。</p>
-<h4 id="维护过程"><a href="#维护过程" class="headerlink" title="维护过程"></a>维护过程</h4><p>用双端队列维护当前的半平面交：</p>
-<p>当加入一个新的半平时，可能有以下几种情况。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a><font face="楷体">概念</font></h2><p><font face="楷体">半平面：有向直线左侧的区域。</font></p>
+<p><font face="楷体">半平面交：多个半平面的交集。</font></p>
+<p><font face="楷体">半平面交涉及直线均使用点向式表示。</font></p>
+<p><font face="楷体">性质：半平面交一定是凸集。</font></p>
+<p><font face="楷体">特别地，可以加入一个相当大的边界，将交集无穷大的情况转化为有边界，这样交集可以用一个凸多边形表示。</font></p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a><font face="楷体">做法</font></h2><h3 id="法一：朴素算法"><a href="#法一：朴素算法" class="headerlink" title="法一：朴素算法"></a><font face="楷体">法一：朴素算法</font></h3><p><font face="楷体">求出各直线的交点，判断各交点是否在所有平面内。</font></p>
+<p><font face="楷体">对满足条件的各点求凸包。</font></p>
+<p><font face="楷体">时间复杂度：$O(n^3)$。</font></p>
+<h3 id="法二：增量法；"><a href="#法二：增量法；" class="headerlink" title="法二：增量法；"></a><font face="楷体">法二：增量法；</font></h3><p><font face="楷体">每次用直线去切割当前的凸多边形。</font></p>
+<p><font face="楷体">时间复杂度：$O(n^2)$。</font></p>
+<h3 id="法三：排序增量法："><a href="#法三：排序增量法：" class="headerlink" title="法三：排序增量法："></a><font face="楷体">法三：排序增量法：</font></h3><p><font face="楷体">求凸包算法中，对点进行排序可以有效降低复杂度。</font></p>
+<p><font face="楷体">利用凸多边形各边方向向量的有序性，同样可以对各直线进行排序后求半平面交。</font></p>
+<p><font face="楷体">对于方向向量同向的直线，只需要考虑最左的一个。</font></p>
+<h4 id="维护过程"><a href="#维护过程" class="headerlink" title="维护过程"></a><font face="楷体">维护过程</font></h4><p><font face="楷体">用双端队列维护当前的半平面交：</font></p>
+<p><font face="楷体">当加入一个新的半平时，可能有以下几种情况。</font></p>
 <ul>
-<li>队尾的一些半平面变成冗余的，从队尾弹出。</li>
-<li>队首的一些半平面变成冗余的，从队首弹出。</li>
-<li>半平面交变成空集。</li>
+<li><font face="楷体">队尾的一些半平面变成冗余的，从队尾弹出。</font></li>
+<li><font face="楷体">队首的一些半平面变成冗余的，从队首弹出。</font></li>
+<li><font face="楷体">半平面交变成空集。</font></li>
 </ul>
-<p>时间复杂度：$O(n\log n)$。瓶颈在于排序。</p>
-<h4 id="判断冗余"><a href="#判断冗余" class="headerlink" title="判断冗余"></a>判断冗余</h4><p>队尾&#x2F;首两条直线的交点在新加入的直线右侧。</p>
-<h4 id="外边界"><a href="#外边界" class="headerlink" title="外边界"></a>外边界</h4><p>在加入外边界的前提下，半平面交中相邻各边逆时针旋转不超过 $180^\circ$。</p>
-<p>当无解的情况出现时，新加入的直线与队首差。一定大于等于 $180^\circ$，并且会把队中除队首外的直线全部弹出。</p>
-<p>因此，每加入一条新直线，弹出冗余半平面后与队尾比较，如果逆时针旋转大于等于  $180^\circ$，则交集为空。</p>
-<p>此时，外边界的加入是必要的。</p>
-<h4 id="先处理队尾，再处理队首"><a href="#先处理队尾，再处理队首" class="headerlink" title="先处理队尾，再处理队首"></a>先处理队尾，再处理队首</h4><p>当出现一个可以把队列里的点全部弹出去的向量（即队列里的所有点都在该向量的右侧），则我们必须先处理队尾，再处理队首。</p>
-<p>原因如下：</p>
+<p><font face="楷体">时间复杂度：$O(n\log n)$。瓶颈在于排序。</font></p>
+<h4 id="判断冗余"><a href="#判断冗余" class="headerlink" title="判断冗余"></a><font face="楷体">判断冗余</font></h4><p><font face="楷体">队尾&#x2F;首两条直线的交点在新加入的直线右侧。</font></p>
+<h4 id="外边界"><a href="#外边界" class="headerlink" title="外边界"></a><font face="楷体">外边界</font></h4><p><font face="楷体">在加入外边界的前提下，半平面交中相邻各边逆时针旋转不超过 $180^\circ$。</font></p>
+<p><font face="楷体">当无解的情况出现时，新加入的直线与队首差。一定大于等于 $180^\circ$，并且会把队中除队首外的直线全部弹出。</font></p>
+<p><font face="楷体">因此，每加入一条新直线，弹出冗余半平面后与队尾比较，如果逆时针旋转大于等于  $180^\circ$，则交集为空。</font></p>
+<p><font face="楷体">此时，外边界的加入是必要的。</font></p>
+<h4 id="先处理队尾，再处理队首"><a href="#先处理队尾，再处理队首" class="headerlink" title="先处理队尾，再处理队首"></a><font face="楷体">先处理队尾，再处理队首</font></h4><p><font face="楷体">当出现一个可以把队列里的点全部弹出去的向量（即队列里的所有点都在该向量的右侧），则我们必须先处理队尾，再处理队首。</font></p>
+<p><font face="楷体">原因如下：</font></p>
 <img src="/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/1.jpg" class="" title="咕咕咕">
 
-<p>一般情况下，我们在队列里（队列顺序为 $\lbrace\vec u,\vec v\rbrace$）后面加一条边（向量 $\vec w$）,会产生一个交点 $N$，缩小 $\vec v$ 后面的范围。</p>
+<p><font face="楷体">一般情况下，我们在队列里（队列顺序为 $\lbrace\vec u,\vec v\rbrace$）后面加一条边（向量 $\vec w$）,会产生一个交点 $N$，缩小 $\vec v$ 后面的范围。</font></p>
 <img src="/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/2.jpg" class="" title="咕咕咕">
 
-<p>但是毕竟每次操作都是1一般的，因此可能会有把 $M$ 点 $\lceil$挤出去$\rfloor$  的情况。</p>
+<p><font face="楷体">但是毕竟每次操作都是1一般的，因此可能会有把 $M$ 点 $\lceil$挤出去$\rfloor$  的情况。</font></p>
 <img src="/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/3.jpg" class="" title="咕咕咕">
 
-<p>如果此时出现了 $\vec a$，使得 $M$ 在 $\vec a$ 的右侧，那么 $M$ 就要出队了。此时如果先处理队首，显然是扩大了范围。实际上 $M$ 点是由 $\vec u$ 和 $\vec v$ 共同构成的，因此需要考虑影响到现有进程的是 $\vec u$ 还是 $\vec v$。而因为我们在极角排序后，向量是逆时针顺序，所以 $\vec v$ 的影响更大一些。</p>
-<p>就如上图，如果 $M$ 确认在 $\vec a$ 的右侧，那么此时 $\vec v$ 的影响一定不会队半平面交的答案作出任何的贡献。</p>
-<p>而我们排除队首的原因是 <strong>当前直线的限制比队首大</strong>，这个条件的前提是队列里有不止两个直线，不然就会出现上面的情况。</p>
-<p>所以一定要先排除队尾在排除队首。</p>
-<h4 id="交点在新加入直线上"><a href="#交点在新加入直线上" class="headerlink" title="交点在新加入直线上"></a>交点在新加入直线上</h4><p>队尾&#x2F;首两条直线的交点在新加入的直线上时，一般不认为这时的队尾&#x2F;首是冗余的，这样便可区分出交集面积为 0 与交集为空。</p>
-<p>特殊情况：多条直线交于一点。</p>
-<h3 id="法四：分治法"><a href="#法四：分治法" class="headerlink" title="法四：分治法"></a>法四：分治法</h3><p>时间复杂度：$O(n\log n)$。</p>
-<p>$[l,r]$ 直线的半平面交是$[l,mid]$ 半平面交和 $[mid+1,r]$ 半平面交的交集。</p>
-<p>核心在于实现 $O(n)$ 求两个凸多边形的交。</p>
-<h4 id="实现一："><a href="#实现一：" class="headerlink" title="实现一："></a>实现一：</h4><p>使用法三求两个凸多边形半平面交得到凸多边形的交。</p>
-<p>因为半平面交求出的交的边是有序的，所以合并 $[l,mid]$ 和 $[mid+1,r]$ 时，两个凸多边形都是有序的，那么使用法三维护的时间复杂度瓶颈即为维护双端队列的复杂度。为 $O(n)$。</p>
-<h4 id="实现二："><a href="#实现二：" class="headerlink" title="实现二："></a>实现二：</h4><p>对两个凸多边形的顶点进行扫描线，对两相邻竖线之间的梯形求交。单次 $O(1)$。共 $O(n)$ 条竖线。</p>
+<p><font face="楷体">如果此时出现了 $\vec a$，使得 $M$ 在 $\vec a$ 的右侧，那么 $M$ 就要出队了。此时如果先处理队首，显然是扩大了范围。实际上 $M$ 点是由 $\vec u$ 和 $\vec v$ 共同构成的，因此需要考虑影响到现有进程的是 $\vec u$ 还是 $\vec v$。而因为我们在极角排序后，向量是逆时针顺序，所以 $\vec v$ 的影响更大一些。</font></p>
+<p><font face="楷体">就如上图，如果 $M$ 确认在 $\vec a$ 的右侧，那么此时 $\vec v$ 的影响一定不会队半平面交的答案作出任何的贡献。</font></p>
+<p><font face="楷体">而我们排除队首的原因是 <strong>当前直线的限制比队首大</strong>，这个条件的前提是队列里有不止两个直线，不然就会出现上面的情况。</font></p>
+<p><font face="楷体">所以一定要先排除队尾在排除队首。</font></p>
+<h4 id="交点在新加入直线上"><a href="#交点在新加入直线上" class="headerlink" title="交点在新加入直线上"></a><font face="楷体">交点在新加入直线上</font></h4><p><font face="楷体">队尾&#x2F;首两条直线的交点在新加入的直线上时，一般不认为这时的队尾&#x2F;首是冗余的，这样便可区分出交集面积为 0 与交集为空。</font></p>
+<p><font face="楷体">特殊情况：多条直线交于一点。</font></p>
+<h3 id="法四：分治法"><a href="#法四：分治法" class="headerlink" title="法四：分治法"></a><font face="楷体">法四：分治法</font></h3><p><font face="楷体">时间复杂度：$O(n\log n)$。</font></p>
+<p><font face="楷体">$[l,r]$ 直线的半平面交是$[l,mid]$ 半平面交和 $[mid+1,r]$ 半平面交的交集。</font></p>
+<p><font face="楷体">核心在于实现 $O(n)$ 求两个凸多边形的交。</font></p>
+<h4 id="实现一："><a href="#实现一：" class="headerlink" title="实现一："></a><font face="楷体">实现一：</font></h4><p><font face="楷体">使用法三求两个凸多边形半平面交得到凸多边形的交。</font></p>
+<p><font face="楷体">因为半平面交求出的交的边是有序的，所以合并 $[l,mid]$ 和 $[mid+1,r]$ 时，两个凸多边形都是有序的，那么使用法三维护的时间复杂度瓶颈即为维护双端队列的复杂度。为 $O(n)$。</font></p>
+<h4 id="实现二："><a href="#实现二：" class="headerlink" title="实现二："></a><font face="楷体">实现二：</font></h4><p><font face="楷体">对两个凸多边形的顶点进行扫描线，对两相邻竖线之间的梯形求交。单次 $O(1)$。共 $O(n)$ 条竖线。</font></p>
 ]]></content>
       <categories>
         <category>计算几何</category>
@@ -451,54 +451,54 @@
     <content><![CDATA[<p>凸包基础</p>
 <span id="more"></span>
 
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="凸多边形"><a href="#凸多边形" class="headerlink" title="凸多边形"></a>凸多边形</h3><p>所有内角大小都在 $[0,\pi]$ 范围内的简单多边形。</p>
-<h3 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a>凸包</h3><p>在平面上能包含所有给定点的最小凸多边形。</p>
-<p>可以理解为用一个橡皮筋包含住所有给定点的形态。</p>
-<p>性质：凸包用最小的周长围住了所有点。</p>
-<h3 id="极点"><a href="#极点" class="headerlink" title="极点"></a>极点</h3><p>凸包的顶点</p>
-<p>性质：若点 P 是点集 S 的一个极点，那么存在一条经过点 P 的直线 l，使得点集 S 中除了 P 的所有点都在 l 的同一侧。</p>
-<h3 id="极边"><a href="#极边" class="headerlink" title="极边"></a>极边</h3><p>凸包的边</p>
-<p>性质：点集中除了极边上的点外都在极边所在直线的同一侧。</p>
-<h2 id="求凸包"><a href="#求凸包" class="headerlink" title="求凸包"></a>求凸包</h2><h3 id="极点法"><a href="#极点法" class="headerlink" title="极点法"></a>极点法</h3><p>枚举每个点，判断每个点是否是极点。</p>
-<p>依据：将凸包以凸包内一点为顶点进行三角剖分，非极点一定落在某个三角形内部，枚举另外三个点组成三角形，若点落在了某个三角形内部，则它不是极点。</p>
-<p>时间复杂度：$O(n^4)$。</p>
-<h3 id="极边法"><a href="#极边法" class="headerlink" title="极边法"></a>极边法</h3><p>枚举两点组成的边，判断它是否是极边。</p>
-<p>依据：其它点在极边所在直线的同一侧。</p>
-<p>时间复杂度：$O(n^3)$。</p>
-<h3 id="增量法"><a href="#增量法" class="headerlink" title="增量法"></a>增量法</h3><p>每次用一个点去更新凸包。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><font face="楷体">定义</font></h2><h3 id="凸多边形"><a href="#凸多边形" class="headerlink" title="凸多边形"></a><font face="楷体">凸多边形</font></h3><p><font face="楷体">所有内角大小都在 $[0,\pi]$ 范围内的简单多边形。</font></p>
+<h3 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a><font face="楷体">凸包</font></h3><p><font face="楷体">在平面上能包含所有给定点的最小凸多边形。</font></p>
+<p><font face="楷体">可以理解为用一个橡皮筋包含住所有给定点的形态。</font></p>
+<p><font face="楷体">性质：凸包用最小的周长围住了所有点。</font></p>
+<h3 id="极点"><a href="#极点" class="headerlink" title="极点"></a><font face="楷体">极点</font></h3><p><font face="楷体">凸包的顶点</font></p>
+<p><font face="楷体">性质：若点 P 是点集 S 的一个极点，那么存在一条经过点 P 的直线 l，使得点集 S 中除了 P 的所有点都在 l 的同一侧。</font></p>
+<h3 id="极边"><a href="#极边" class="headerlink" title="极边"></a><font face="楷体">极边</font></h3><p><font face="楷体">凸包的边</font></p>
+<p><font face="楷体">性质：点集中除了极边上的点外都在极边所在直线的同一侧。</font></p>
+<h2 id="求凸包"><a href="#求凸包" class="headerlink" title="求凸包"></a><font face="楷体">求凸包</font></h2><h3 id="极点法"><a href="#极点法" class="headerlink" title="极点法"></a><font face="楷体">极点法</font></h3><p><font face="楷体">枚举每个点，判断每个点是否是极点。</font></p>
+<p><font face="楷体">依据：将凸包以凸包内一点为顶点进行三角剖分，非极点一定落在某个三角形内部，枚举另外三个点组成三角形，若点落在了某个三角形内部，则它不是极点。</font></p>
+<p><font face="楷体">时间复杂度：$O(n^4)$。</font></p>
+<h3 id="极边法"><a href="#极边法" class="headerlink" title="极边法"></a><font face="楷体">极边法</font></h3><p><font face="楷体">枚举两点组成的边，判断它是否是极边。</font></p>
+<p><font face="楷体">依据：其它点在极边所在直线的同一侧。</font></p>
+<p><font face="楷体">时间复杂度：$O(n^3)$。</font></p>
+<h3 id="增量法"><a href="#增量法" class="headerlink" title="增量法"></a><font face="楷体">增量法</font></h3><p><font face="楷体">每次用一个点去更新凸包。</font></p>
 <ul>
-<li>若点在凸包内，舍弃</li>
-<li>若点在凸包外，找凸包的切线</li>
+<li><font face="楷体">若点在凸包内，舍弃</font></li>
+<li><font face="楷体">若点在凸包外，找凸包的切线</font></li>
 </ul>
-<p>可推广至三维凸包、动态凸包。</p>
-<p>判断点在凸包内：$n$ 次 to-left 测试。$O(n)$。</p>
-<p>找凸包的切线：前驱和后继都在射线的同一侧。暴力 $O(n)$。</p>
-<p>时间复杂度：$O(n^2)$。</p>
-<p>判断点在凸包内和找凸包的切线均存在 $O(n\log n)$ 做法。</p>
-<h3 id="Gift-wrapping"><a href="#Gift-wrapping" class="headerlink" title="Gift wrapping"></a>Gift wrapping</h3><p>从一条极边出发遍历其它点找到下一条极边。</p>
-<p>时间复杂度：$O(nh)$，最坏 $O(n^2)$，$h$ 表示凸包的极点数。</p>
-<p>起点的确定：</p>
-<p>点集中最左&#x2F;右&#x2F;上&#x2F;下的点一定是凸包的极点（若最左&#x2F;右&#x2F;上&#x2F;下的点不唯一，则是极边上的点，此时取另一个方向上坐标最大&#x2F;小的点）。</p>
-<h3 id="Graham-scan"><a href="#Graham-scan" class="headerlink" title="Graham scan"></a>Graham scan</h3><p>基于极角排序的求凸包算法。</p>
-<p>算法流程：</p>
+<p><font face="楷体">可推广至三维凸包、动态凸包。</font></p>
+<p><font face="楷体">判断点在凸包内：$n$ 次 to-left 测试。$O(n)$。</font></p>
+<p><font face="楷体">找凸包的切线：前驱和后继都在射线的同一侧。暴力 $O(n)$。</font></p>
+<p><font face="楷体">时间复杂度：$O(n^2)$。</font></p>
+<p><font face="楷体">判断点在凸包内和找凸包的切线均存在 $O(n\log n)$ 做法。</font></p>
+<h3 id="Gift-wrapping"><a href="#Gift-wrapping" class="headerlink" title="Gift wrapping"></a><font face="楷体">Gift wrapping</font></h3><p><font face="楷体">从一条极边出发遍历其它点找到下一条极边。</font></p>
+<p><font face="楷体">时间复杂度：$O(nh)$，最坏 $O(n^2)$，$h$ 表示凸包的极点数。</font></p>
+<p><font face="楷体">起点的确定：</font></p>
+<p><font face="楷体">点集中最左&#x2F;右&#x2F;上&#x2F;下的点一定是凸包的极点（若最左&#x2F;右&#x2F;上&#x2F;下的点不唯一，则是极边上的点，此时取另一个方向上坐标最大&#x2F;小的点）。</font></p>
+<h3 id="Graham-scan"><a href="#Graham-scan" class="headerlink" title="Graham scan"></a><font face="楷体">Graham scan</font></h3><p><font face="楷体">基于极角排序的求凸包算法。</font></p>
+<p><font face="楷体">算法流程：</font></p>
 <ul>
-<li>以最左下角的点为极点，进行极角排序。</li>
-<li>将极点与极点的下一个点入栈</li>
-<li>对于要入栈的下一个点，如果从栈顶连向该点需要顺时针旋转，则弹出栈顶。</li>
-<li>重复 3，直到从栈顶连向该点需要逆时针旋转。</li>
-<li>将下一个点入栈，回到 3。</li>
+<li><font face="楷体">以最左下角的点为极点，进行极角排序。</font></li>
+<li><font face="楷体">将极点与极点的下一个点入栈。</font></li>
+<li><font face="楷体">对于要入栈的下一个点，如果从栈顶连向该点需要顺时针旋转，则弹出栈顶。</font></li>
+<li><font face="楷体">重复 3，直到从栈顶连向该点需要逆时针旋转。</font></li>
+<li><font face="楷体">将下一个点入栈，回到 3。</font></li>
 </ul>
-<p>时间复杂度：$O(n\log n)$。瓶颈为极角排序。</p>
-<h3 id="Andrew’s-algorithm"><a href="#Andrew’s-algorithm" class="headerlink" title="Andrew’s algorithm"></a>Andrew’s algorithm</h3><p>基于横坐标（x）排序的求凸包算法。</p>
-<p>以最左最右两点为界，凸包可以分为上凸包和下凸包两部分。</p>
-<p>算法流程：</p>
+<p><font face="楷体">时间复杂度：$O(n\log n)$。瓶颈为极角排序。</font></p>
+<h3 id="Andrew’s-algorithm"><a href="#Andrew’s-algorithm" class="headerlink" title="Andrew’s algorithm"></a><font face="楷体">Andrew’s algorithm</font></h3><p><font face="楷体">基于横坐标（x）排序的求凸包算法。</font></p>
+<p><font face="楷体">以最左最右两点为界，凸包可以分为上凸包和下凸包两部分。</font></p>
+<p><font face="楷体">算法流程：</font></p>
 <ul>
-<li>对点集以横坐标（x）为第一关键字，纵坐标（y）为第二关键字排序。</li>
-<li>正序遍历每个点，用栈维护下凸包。</li>
-<li>倒序遍历每个点，用栈维护上凸包。</li>
+<li><font face="楷体">对点集以横坐标（x）为第一关键字，纵坐标（y）为第二关键字排序。</font></li>
+<li><font face="楷体">正序遍历每个点，用栈维护下凸包。</font></li>
+<li><font face="楷体">倒序遍历每个点，用栈维护上凸包。</font></li>
 </ul>
-<p>栈的维护方式与 Graham scan 一致。</p>
-<p>时间复杂度：$O(n\log n)$。瓶颈为排序。</p>
+<p><font face="楷体">栈的维护方式与 Graham scan 一致。</font></p>
+<p><font face="楷体">时间复杂度：$O(n\log n)$。瓶颈为排序。</font></p>
 ]]></content>
       <categories>
         <category>计算几何</category>
@@ -510,23 +510,23 @@
     <content><![CDATA[<p>极角序</p>
 <span id="more"></span>
 
-<h2 id="极坐标系"><a href="#极坐标系" class="headerlink" title="极坐标系"></a>极坐标系</h2><ul>
-<li>极点：O</li>
-<li>极轴：$\overrightarrow{OL}$</li>
-<li>极径：$r$</li>
-<li>极角：$\varphi$</li>
-<li>极坐标：$(r,\varphi)$</li>
+<h2 id="极坐标系"><a href="#极坐标系" class="headerlink" title="极坐标系"></a><font face="楷体">极坐标系</font></h2><ul>
+<li><font face="楷体">极点：O</font></li>
+<li><font face="楷体">极轴：$\overrightarrow{OL}$</font></li>
+<li><font face="楷体">极径：$r$</font></li>
+<li><font face="楷体">极角：$\varphi$</font></li>
+<li><font face="楷体">极坐标：$(r,\varphi)$</font></li>
 </ul>
 <p>$\tan\varphi&#x3D;\dfrac{y}{x}$</p>
-<h2 id="极角排序"><a href="#极角排序" class="headerlink" title="极角排序"></a>极角排序</h2><ul>
-<li>半平面内的极角排序</li>
+<h2 id="极角排序"><a href="#极角排序" class="headerlink" title="极角排序"></a><font face="楷体">极角排序</font></h2><ul>
+<li><font face="楷体">半平面内的极角排序</font></li>
 </ul>
-<h3 id="排序范围小于-180-circ"><a href="#排序范围小于-180-circ" class="headerlink" title="排序范围小于 $180^\circ$"></a>排序范围小于 $180^\circ$</h3><p>to-left 测试，即叉积比较。</p>
-<h3 id="排序范围小于-360-circ"><a href="#排序范围小于-360-circ" class="headerlink" title="排序范围小于 $360^\circ$"></a>排序范围小于 $360^\circ$</h3><h4 id="有精度损失"><a href="#有精度损失" class="headerlink" title="有精度损失"></a>有精度损失</h4><p>使用反三角函数 $\text{atan2}(y,x)$（精度更高） 函数计算极角，然后排序。</p>
-<h4 id="无精度损失"><a href="#无精度损失" class="headerlink" title="无精度损失"></a>无精度损失</h4><p>先划分上下平面，同一部分内进行叉积比较。</p>
-<p>下半平面$&lt;$原点$&lt;$x正半轴$&lt;$上半平面$&lt;$负半轴</p>
+<h3 id="排序范围小于-180-circ"><a href="#排序范围小于-180-circ" class="headerlink" title="排序范围小于 $180^\circ$"></a><font face="楷体">排序范围小于 $180^\circ$</font></h3><p><font face="楷体">to-left 测试，即叉积比较。</font></p>
+<h3 id="排序范围小于-360-circ"><a href="#排序范围小于-360-circ" class="headerlink" title="排序范围小于 $360^\circ$"></a><font face="楷体">排序范围小于 $360^\circ$</font></h3><h4 id="有精度损失"><a href="#有精度损失" class="headerlink" title="有精度损失 "></a><font face="楷体">有精度损失 </font></h4><p><font face="楷体">使用反三角函数 $\text{atan2}(y,x)$（精度更高） 函数计算极角，然后排序。</font></p>
+<h4 id="无精度损失"><a href="#无精度损失" class="headerlink" title="无精度损失"></a><font face="楷体">无精度损失</font></h4><p><font face="楷体">先划分上下平面，同一部分内进行叉积比较。</font></p>
+<p><font face="楷体">下半平面$&lt;$原点$&lt;$x正半轴$&lt;$上半平面$&lt;$负半轴</font></p>
 <hr>
-<p>时间复杂度：$O(n\log n)$。</p>
+<p><font face="楷体">时间复杂度：$O(n\log n)$。</font></p>
 ]]></content>
       <categories>
         <category>计算几何</category>
