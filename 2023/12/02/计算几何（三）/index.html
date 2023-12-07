@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"iceinsky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="凸包基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算几何（三）">
+<meta property="og:url" content="http://iceinsky.top/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="咕咕咕">
+<meta property="og:description" content="凸包基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-02T13:52:10.000Z">
+<meta property="article:modified_time" content="2023-12-02T15:19:58.000Z">
+<meta property="article:author" content="ice_in_sky">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://iceinsky.top/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算几何（三） | 咕咕咕</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕咕咕</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://iceinsky.top/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ice_in_sky">
+      <meta itemprop="description" content="乱我心者，今日之日多烦忧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕咕咕">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算几何（三）
+        </h1>
+
+        <div class="post-meta">
+	  
+ 	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-02 21:52:10 / 修改时间：23:19:58" itemprop="dateCreated datePublished" datetime="2023-12-02T21:52:10+08:00">2023-12-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" itemprop="url" rel="index"><span itemprop="name">计算几何</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>凸包基础</p>
+<span id="more"></span>
+
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="凸多边形"><a href="#凸多边形" class="headerlink" title="凸多边形"></a>凸多边形</h3><p>所有内角大小都在 $[0,\pi]$ 范围内的简单多边形。</p>
+<h3 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a>凸包</h3><p>在平面上能包含所有给定点的最小凸多边形。</p>
+<p>可以理解为用一个橡皮筋包含住所有给定点的形态。</p>
+<p>性质：凸包用最小的周长围住了所有点。</p>
+<h3 id="极点"><a href="#极点" class="headerlink" title="极点"></a>极点</h3><p>凸包的顶点</p>
+<p>性质：若点 P 是点集 S 的一个极点，那么存在一条经过点 P 的直线 l，使得点集 S 中除了 P 的所有点都在 l 的同一侧。</p>
+<h3 id="极边"><a href="#极边" class="headerlink" title="极边"></a>极边</h3><p>凸包的边</p>
+<p>性质：点集中除了极边上的点外都在极边所在直线的同一侧。</p>
+<h2 id="求凸包"><a href="#求凸包" class="headerlink" title="求凸包"></a>求凸包</h2><h3 id="极点法"><a href="#极点法" class="headerlink" title="极点法"></a>极点法</h3><p>枚举每个点，判断每个点是否是极点。</p>
+<p>依据：将凸包以凸包内一点为顶点进行三角剖分，非极点一定落在某个三角形内部，枚举另外三个点组成三角形，若点落在了某个三角形内部，则它不是极点。</p>
+<p>时间复杂度：$O(n^4)$。</p>
+<h3 id="极边法"><a href="#极边法" class="headerlink" title="极边法"></a>极边法</h3><p>枚举两点组成的边，判断它是否是极边。</p>
+<p>依据：其它点在极边所在直线的同一侧。</p>
+<p>时间复杂度：$O(n^3)$。</p>
+<h3 id="增量法"><a href="#增量法" class="headerlink" title="增量法"></a>增量法</h3><p>每次用一个点去更新凸包。</p>
+<ul>
+<li>若点在凸包内，舍弃</li>
+<li>若点在凸包外，找凸包的切线</li>
+</ul>
+<p>可推广至三维凸包、动态凸包。</p>
+<p>判断点在凸包内：$n$ 次 to-left 测试。$O(n)$。</p>
+<p>找凸包的切线：前驱和后继都在射线的同一侧。暴力 $O(n)$。</p>
+<p>时间复杂度：$O(n^2)$。</p>
+<p>判断点在凸包内和找凸包的切线均存在 $O(n\log n)$ 做法。</p>
+<h3 id="Gift-wrapping"><a href="#Gift-wrapping" class="headerlink" title="Gift wrapping"></a>Gift wrapping</h3><p>从一条极边出发遍历其它点找到下一条极边。</p>
+<p>时间复杂度：$O(nh)$，最坏 $O(n^2)$，$h$ 表示凸包的极点数。</p>
+<p>起点的确定：</p>
+<p>点集中最左&#x2F;右&#x2F;上&#x2F;下的点一定是凸包的极点（若最左&#x2F;右&#x2F;上&#x2F;下的点不唯一，则是极边上的点，此时取另一个方向上坐标最大&#x2F;小的点）。</p>
+<h3 id="Graham-scan"><a href="#Graham-scan" class="headerlink" title="Graham scan"></a>Graham scan</h3><p>基于极角排序的求凸包算法。</p>
+<p>算法流程：</p>
+<ul>
+<li>以最左下角的点为极点，进行极角排序。</li>
+<li>将极点与极点的下一个点入栈</li>
+<li>对于要入栈的下一个点，如果从栈顶连向该点需要顺时针旋转，则弹出栈顶。</li>
+<li>重复 3，直到从栈顶连向该点需要逆时针旋转。</li>
+<li>将下一个点入栈，回到 3。</li>
+</ul>
+<p>时间复杂度：$O(n\log n)$。瓶颈为极角排序。</p>
+<h3 id="Andrew’s-algorithm"><a href="#Andrew’s-algorithm" class="headerlink" title="Andrew’s algorithm"></a>Andrew’s algorithm</h3><p>基于横坐标（x）排序的求凸包算法。</p>
+<p>以最左最右两点为界，凸包可以分为上凸包和下凸包两部分。</p>
+<p>算法流程：</p>
+<ul>
+<li>对点集以横坐标（x）为第一关键字，纵坐标（y）为第二关键字排序。</li>
+<li>正序遍历每个点，用栈维护下凸包。</li>
+<li>倒序遍历每个点，用栈维护上凸包。</li>
+</ul>
+<p>栈的维护方式与 Graham scan 一致。</p>
+<p>时间复杂度：$O(n\log n)$。瓶颈为排序。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ice_in_sky
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://iceinsky.top/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/" title="计算几何（三）">http://iceinsky.top/2023/12/02/计算几何（三）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="计算几何（二）">
+      <i class="fa fa-chevron-left"></i> 计算几何（二）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E5%9B%9B%EF%BC%89/" rel="next" title="计算几何（四）">
+      计算几何（四） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%B8%E5%A4%9A%E8%BE%B9%E5%BD%A2"><span class="nav-number">1.1.</span> <span class="nav-text">凸多边形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%B8%E5%8C%85"><span class="nav-number">1.2.</span> <span class="nav-text">凸包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">极点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E8%BE%B9"><span class="nav-number">1.4.</span> <span class="nav-text">极边</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E5%87%B8%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">求凸包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E7%82%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">极点法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E8%BE%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">极边法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">增量法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gift-wrapping"><span class="nav-number">2.4.</span> <span class="nav-text">Gift wrapping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graham-scan"><span class="nav-number">2.5.</span> <span class="nav-text">Graham scan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Andrew%E2%80%99s-algorithm"><span class="nav-number">2.6.</span> <span class="nav-text">Andrew’s algorithm</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ice_in_sky"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ice_in_sky</p>
+  <div class="site-description" itemprop="description">乱我心者，今日之日多烦忧</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Thu Nov 30 2023 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ice_in_sky</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">17k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
