@@ -638,7 +638,7 @@
 <li><font face="楷体">点在多边形上，对于每条边特判。</font></li>
 <li><font face="楷体">引出射线交多边形于顶点，视作在在射线上侧（影响自下而上还是自上而下的判断）</font>。</li>
 </ul>
-<h3 id="判断点是否在凸多边形内"><a href="#判断点是否在凸多边形内" class="headerlink" title="判断点是否在凸多边形内"></a><font face="楷体">判断点是否在凸多边形内</font></h3><h4 id="n-次-to-left-测试"><a href="#n-次-to-left-测试" class="headerlink" title="n 次 to-left 测试"></a><font face="楷体">n 次 to-left 测试</font></h4><p>$O(n^2)$</p>
+<h3 id="判断点是否在凸多边形内"><a href="#判断点是否在凸多边形内" class="headerlink" title="判断点是否在凸多边形内"></a><font face="楷体">判断点是否在凸多边形内</font></h3><h4 id="n-次-to-left-测试"><a href="#n-次-to-left-测试" class="headerlink" title="n 次 to-left 测试"></a><font face="楷体">n 次 to-left 测试</font></h4><p>$O(n)$</p>
 <h4 id="二分"><a href="#二分" class="headerlink" title="二分"></a><font face="楷体">二分</font></h4><p>$O(\log n)$</p>
 ]]></content>
       <categories>
