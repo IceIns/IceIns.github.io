@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>牛客小白月赛85</title>
+    <url>/2024/01/06/%E7%89%9B%E5%AE%A2%E5%B0%8F%E7%99%BD%E6%9C%88%E8%B5%9B85/</url>
+    <content><![CDATA[<p>概述：</p>
+<ul>
+<li>阅读理解，题面普遍片场（讲故事）（为什么我当初出了一道阅读理解就被dis了，这场全是。</li>
+<li>A-D 都是一种：我不会 $\neq$ 我不能过。</li>
+<li>开场 50 分钟才想起来还有小白月赛，D 题思路秒了（假贪心）WA 了半小时。然后去拿了个外卖，回来意识到想假了，又想了一下过了。本来不打算写了，看到榜一 10 分钟不到秒了前三题，最后 14 分钟打算挣扎一下，结果 C 上来就 WA 了两发，直接下机。</li>
+<li>总结：不训练导致的（自从南京回来快两个月了）！</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="A-ACCEPT"><a href="#A-ACCEPT" class="headerlink" title="A.ACCEPT"></a>A.ACCEPT</h2><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给一个只含 <code>A</code> <code>C</code> <code>E</code> <code>P</code> <code>T</code> 的字符串，问重新排列后最多几个 <code>ACCEPT</code>。</p>
+<h3 id="解："><a href="#解：" class="headerlink" title="解："></a>解：</h3><p>经典思路，统计五种字符的数量，按比例求最小值即可（1:2:1:1:1）</p>
+<h2 id="B-咕呱蛙"><a href="#B-咕呱蛙" class="headerlink" title="B.咕呱蛙"></a>B.咕呱蛙</h2><h3 id="题目描述：-1"><a href="#题目描述：-1" class="headerlink" title="题目描述："></a>题目描述：</h3><p>第 $i$ 层有 $i$ 个青蛙，问前 $i$ 层青蛙总数为偶数的第 $x$ 个 $i$ 是几。</p>
+<h3 id="解：-1"><a href="#解：-1" class="headerlink" title="解："></a>解：</h3><p>实际就是求数列 $a_i&#x3D;\dfrac{i\times (i+1)}{2}$ 的第 $x$ 个偶数。</p>
+<p>打表打出来发现就是 $4i-3,4i$ 是偶数。答案就是 $\lfloor\frac{n}{2}\rfloor\times 4+[n\bmod 2]\times 3$。</p>
+<p>直接研究式子，或者考虑 $1…i$ 的奇偶性也可以。</p>
+<h2 id="C-得分显示"><a href="#C-得分显示" class="headerlink" title="C.得分显示"></a>C.得分显示</h2><h3 id="题目描述：-2"><a href="#题目描述：-2" class="headerlink" title="题目描述："></a>题目描述：</h3><p>$a_i&#x3D;\lfloor i\times x\rfloor$。求 $\max\lbrace x\rbrace$。 </p>
+<h3 id="解：-2"><a href="#解：-2" class="headerlink" title="解："></a>解：</h3><p>$a_i&#x3D;\lfloor i\times x\rfloor\Rightarrow x\in [\lceil\frac{a_i}{i}\rceil,\lfloor\frac{a_i+1}{i}\rfloor)$</p>
+<p>所以其实就是 $n$ 个区间求交，左端点求 $max$，右端点求 $min$ 即可，同时又因为题目保证有解且求 $max\lbrace x\rbrace$，所以答案就是 $\min\lbrace\lfloor\frac{a_i+1}{i}\rfloor\rbrace$。</p>
+<p>但是这个题面就把题目变得迷惑起来（引导人考虑相邻两个数之间的增量）。</p>
+<p>从另一个角度去二分也可以。</p>
+<h2 id="D-阿里马马与四十大盗"><a href="#D-阿里马马与四十大盗" class="headerlink" title="D.阿里马马与四十大盗"></a>D.阿里马马与四十大盗</h2><h3 id="题目描述：-3"><a href="#题目描述：-3" class="headerlink" title="题目描述："></a>题目描述：</h3><p>在 $a_i&#x3D;0$ 的位置可以选择回满血，并花费恢复生命值的时间，或者直接走。</p>
+<p>在 $a_i&gt;0$ 的位置会损失 $a_i$ 的生命，求从 $1$ 到 $n$ 的最小时间。</p>
+<p>移动一格花费 $1$ 的时间，只能往相邻的格子移动。</p>
+<h3 id="解：-3"><a href="#解：-3" class="headerlink" title="解："></a>解：</h3><p>题目大量冗余信息。</p>
+<p>移动的时间没用，直接在答案上 $+n-1$ 即可。因为不能往回走，$a_i$ 不会消失，时间不会变少。</p>
+<p>一个错误的贪心：能不回血就不回血。想假的原因是贪心的滞后性。</p>
+<p>正确的贪心：花费的时间只和起止血量和经过的 $a_i$ 之和有关。所以枚举最后一次回血的位置，算 $a_i$ 的前缀和即可。</p>
+<h2 id="E-烙饼"><a href="#E-烙饼" class="headerlink" title="E.烙饼"></a>E.烙饼</h2><p>待补。</p>
+]]></content>
+      <tags>
+        <tag>牛客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>计算几何（九）</title>
     <url>/2023/12/07/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B9%9D%EF%BC%89/</url>
     <content><![CDATA[<p>杂项</p>
