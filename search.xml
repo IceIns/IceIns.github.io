@@ -524,7 +524,7 @@
 <h3 id="排序范围小于-180-circ"><a href="#排序范围小于-180-circ" class="headerlink" title="排序范围小于 $180^\circ$"></a><font face="楷体">排序范围小于 $180^\circ$</font></h3><p><font face="楷体">to-left 测试，即叉积比较。</font></p>
 <h3 id="排序范围小于-360-circ"><a href="#排序范围小于-360-circ" class="headerlink" title="排序范围小于 $360^\circ$"></a><font face="楷体">排序范围小于 $360^\circ$</font></h3><h4 id="有精度损失"><a href="#有精度损失" class="headerlink" title="有精度损失 "></a><font face="楷体">有精度损失 </font></h4><p><font face="楷体">使用反三角函数 $\text{atan2}(y,x)$（精度更高） 函数计算极角，然后排序。</font></p>
 <h4 id="无精度损失"><a href="#无精度损失" class="headerlink" title="无精度损失"></a><font face="楷体">无精度损失</font></h4><p><font face="楷体">先划分上下平面，同一部分内进行叉积比较。</font></p>
-<p><font face="楷体">下半平面$&lt;$原点$&lt;$x正半轴$&lt;$上半平面$&lt;$负半轴</font></p>
+<p><font face="楷体">下半平面$&lt;$原点$&lt;$ x 正半轴$&lt;$上半平面$&lt;$ x 负半轴</font></p>
 <hr>
 <p><font face="楷体">时间复杂度：$O(n\log n)$。</font></p>
 ]]></content>
