@@ -7,12 +7,12 @@
 <span id="more"></span>
 
 <p>树状数组是一种基于二进制位性质的类树形结构，可以 $O(\log n)$ 进行单点修改，$O(\log n)$ 进行前缀询问的数据结构。</p>
-<h2 id="性质-："><a href="#性质-：" class="headerlink" title="性质 ："></a>性质 ：</h2><p>$lowbit(x)&#x3D;x&amp;-x$</p>
+<h2 id="性质-："><a href="#性质-：" class="headerlink" title="性质 ："></a>性质 ：</h2><p>$lowbit(x)&#x3D;x\And-x$</p>
 <p>$lowbit(x)$ 定义为非负整数 $x$ 在二进制表达下，最低位的 $1$ 及其后面的 $0$ 构成的二进制数。同时也是最大的整除 $x$ 的 $2$ 的整数幂。</p>
 <p>证明：</p>
 <p>在计算机中，负整数的二进制表示，为正整数的二进制取反后加 $1$ 。</p>
 <p>也就是保留从后往前第一个 $1$ 后将其它位置取反。</p>
-<p>所以 $x&amp;-x$ 即为 $x$ 在二进制表达下，最低位的 $1$ 及其后面的 $0$ 构成的二进制数。</p>
+<p>所以 $x\And-x$ 即为 $x$ 在二进制表达下，最低位的 $1$ 及其后面的 $0$ 构成的二进制数。</p>
 <h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>树状数组定义了 $tr[x]$ 表示区间 $[x-lowbit(x)+1,x]$ 的信息和。我们称这个区间为 $x$ 的管辖区间。</p>
 <img src="/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/1.png" class="" title="咕咕咕">
 
@@ -27,7 +27,7 @@
 <p>每一次 $lowbit(x)$ 都会变高成下一个 $1$ 的位。所以时间复杂度同样是 $O(\log n)$ 的。</p>
 <details>
 <summary>查看代码</summary>
-<pre><code>  
+<pre><code>
 struct BIT&#123;
     int tr[N],n;
     int lowbit(int x)&#123;
@@ -45,7 +45,7 @@ struct BIT&#123;
 </code></pre>
 </details>
 
-
+<p>深度</p>
 ]]></content>
       <categories>
         <category>数据结构</category>
