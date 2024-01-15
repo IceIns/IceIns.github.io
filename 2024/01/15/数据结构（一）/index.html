@@ -22,19 +22,19 @@
     var CONFIG = {"hostname":"iceinsky.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="凸包基础">
+  <meta name="description" content="树状数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算几何（三）">
-<meta property="og:url" content="http://iceinsky.top/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:title" content="数据结构（一）">
+<meta property="og:url" content="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="咕咕咕">
-<meta property="og:description" content="凸包基础">
+<meta property="og:description" content="树状数组">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-02T13:52:10.000Z">
-<meta property="article:modified_time" content="2023-12-07T11:44:10.000Z">
+<meta property="article:published_time" content="2024-01-15T02:24:57.000Z">
+<meta property="article:modified_time" content="2024-01-15T02:26:36.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://iceinsky.top/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/">
+<link rel="canonical" href="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>计算几何（三） | 咕咕咕</title>
+  <title>数据结构（一） | 咕咕咕</title>
   
 
 
@@ -200,7 +200,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://iceinsky.top/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -213,7 +213,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          计算几何（三）
+          数据结构（一）
         </h1>
 
         <div class="post-meta">
@@ -224,23 +224,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-12-02 21:52:10" itemprop="dateCreated datePublished" datetime="2023-12-02T21:52:10+08:00">2023-12-02</time>
+              <time title="创建时间：2024-01-15 10:24:57 / 修改时间：10:26:36" itemprop="dateCreated datePublished" datetime="2024-01-15T10:24:57+08:00">2024-01-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-07 19:44:10" itemprop="dateModified" datetime="2023-12-07T19:44:10+08:00">2023-12-07</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" itemprop="url" rel="index"><span itemprop="name">计算几何</span></a>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
                 </span>
             </span>
 
@@ -250,7 +244,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>4</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -269,57 +263,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>凸包基础</p>
+        <p>树状数组</p>
 <span id="more"></span>
-
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><font face="楷体">定义</font></h2><h3 id="凸多边形"><a href="#凸多边形" class="headerlink" title="凸多边形"></a><font face="楷体">凸多边形</font></h3><p><font face="楷体">所有内角大小都在 $[0,\pi]$ 范围内的简单多边形。</font></p>
-<h3 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a><font face="楷体">凸包</font></h3><p><font face="楷体">在平面上能包含所有给定点的最小凸多边形。</font></p>
-<p><font face="楷体">可以理解为用一个橡皮筋包含住所有给定点的形态。</font></p>
-<p><font face="楷体">性质：凸包用最小的周长围住了所有点。</font></p>
-<h3 id="极点"><a href="#极点" class="headerlink" title="极点"></a><font face="楷体">极点</font></h3><p><font face="楷体">凸包的顶点</font></p>
-<p><font face="楷体">性质：若点 P 是点集 S 的一个极点，那么存在一条经过点 P 的直线 l，使得点集 S 中除了 P 的所有点都在 l 的同一侧。</font></p>
-<h3 id="极边"><a href="#极边" class="headerlink" title="极边"></a><font face="楷体">极边</font></h3><p><font face="楷体">凸包的边</font></p>
-<p><font face="楷体">性质：点集中除了极边上的点外都在极边所在直线的同一侧。</font></p>
-<h2 id="求凸包"><a href="#求凸包" class="headerlink" title="求凸包"></a><font face="楷体">求凸包</font></h2><h3 id="极点法"><a href="#极点法" class="headerlink" title="极点法"></a><font face="楷体">极点法</font></h3><p><font face="楷体">枚举每个点，判断每个点是否是极点。</font></p>
-<p><font face="楷体">依据：将凸包以凸包内一点为顶点进行三角剖分，非极点一定落在某个三角形内部，枚举另外三个点组成三角形，若点落在了某个三角形内部，则它不是极点。</font></p>
-<p><font face="楷体">时间复杂度：$O(n^4)$。</font></p>
-<h3 id="极边法"><a href="#极边法" class="headerlink" title="极边法"></a><font face="楷体">极边法</font></h3><p><font face="楷体">枚举两点组成的边，判断它是否是极边。</font></p>
-<p><font face="楷体">依据：其它点在极边所在直线的同一侧。</font></p>
-<p><font face="楷体">时间复杂度：$O(n^3)$。</font></p>
-<h3 id="增量法"><a href="#增量法" class="headerlink" title="增量法"></a><font face="楷体">增量法</font></h3><p><font face="楷体">每次用一个点去更新凸包。</font></p>
-<ul>
-<li><font face="楷体">若点在凸包内，舍弃</font></li>
-<li><font face="楷体">若点在凸包外，找凸包的切线</font></li>
-</ul>
-<p><font face="楷体">可推广至三维凸包、动态凸包。</font></p>
-<p><font face="楷体">判断点在凸包内：$n$ 次 to-left 测试。$O(n)$。</font></p>
-<p><font face="楷体">找凸包的切线：前驱和后继都在射线的同一侧。暴力 $O(n)$。</font></p>
-<p><font face="楷体">时间复杂度：$O(n^2)$。</font></p>
-<p><font face="楷体">判断点在凸包内和找凸包的切线均存在 $O(n\log n)$ 做法。</font></p>
-<h3 id="Gift-wrapping"><a href="#Gift-wrapping" class="headerlink" title="Gift wrapping"></a><font face="楷体">Gift wrapping</font></h3><p><font face="楷体">从一条极边出发遍历其它点找到下一条极边。</font></p>
-<p><font face="楷体">时间复杂度：$O(nh)$，最坏 $O(n^2)$，$h$ 表示凸包的极点数。</font></p>
-<p><font face="楷体">起点的确定：</font></p>
-<p><font face="楷体">点集中最左&#x2F;右&#x2F;上&#x2F;下的点一定是凸包的极点（若最左&#x2F;右&#x2F;上&#x2F;下的点不唯一，则是极边上的点，此时取另一个方向上坐标最大&#x2F;小的点）。</font></p>
-<h3 id="Graham-scan"><a href="#Graham-scan" class="headerlink" title="Graham scan"></a><font face="楷体">Graham scan</font></h3><p><font face="楷体">基于极角排序的求凸包算法。</font></p>
-<p><font face="楷体">算法流程：</font></p>
-<ul>
-<li><font face="楷体">以最左下角的点为极点，进行极角排序。</font></li>
-<li><font face="楷体">将极点与极点的下一个点入栈。</font></li>
-<li><font face="楷体">对于要入栈的下一个点，如果从栈顶连向该点需要顺时针旋转，则弹出栈顶。</font></li>
-<li><font face="楷体">重复 3，直到从栈顶连向该点需要逆时针旋转。</font></li>
-<li><font face="楷体">将下一个点入栈，回到 3。</font></li>
-</ul>
-<p><font face="楷体">时间复杂度：$O(n\log n)$。瓶颈为极角排序。</font></p>
-<h3 id="Andrew’s-algorithm"><a href="#Andrew’s-algorithm" class="headerlink" title="Andrew’s algorithm"></a><font face="楷体">Andrew’s algorithm</font></h3><p><font face="楷体">基于横坐标（x）排序的求凸包算法。</font></p>
-<p><font face="楷体">以最左最右两点为界，凸包可以分为上凸包和下凸包两部分。</font></p>
-<p><font face="楷体">算法流程：</font></p>
-<ul>
-<li><font face="楷体">对点集以横坐标（x）为第一关键字，纵坐标（y）为第二关键字排序。</font></li>
-<li><font face="楷体">正序遍历每个点，用栈维护下凸包。</font></li>
-<li><font face="楷体">倒序遍历每个点，用栈维护上凸包。</font></li>
-</ul>
-<p><font face="楷体">栈的维护方式与 Graham scan 一致。</font></p>
-<p><font face="楷体">时间复杂度：$O(n\log n)$。瓶颈为排序。</font></p>
 
     </div>
 
@@ -335,7 +280,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://iceinsky.top/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/" title="计算几何（三）">http://iceinsky.top/2023/12/02/计算几何（三）/</a>
+    <a href="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/" title="数据结构（一）">http://iceinsky.top/2024/01/15/数据结构（一）/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -352,13 +297,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="计算几何（二）">
-      <i class="fa fa-chevron-left"></i> 计算几何（二）
+    <a href="/2024/01/06/%E6%B3%B0%E6%8B%89%E7%91%9E%E4%BA%9A-%E5%8F%AC%E5%94%A4%E5%B8%88%E6%B5%81%E7%A8%8B/" rel="prev" title="泰拉瑞亚-召唤师流程">
+      <i class="fa fa-chevron-left"></i> 泰拉瑞亚-召唤师流程
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E5%9B%9B%EF%BC%89/" rel="next" title="计算几何（四）">
-      计算几何（四） <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -417,7 +359,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%B8%E5%A4%9A%E8%BE%B9%E5%BD%A2"><span class="nav-number">1.1.</span> <span class="nav-text">凸多边形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%B8%E5%8C%85"><span class="nav-number">1.2.</span> <span class="nav-text">凸包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">极点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E8%BE%B9"><span class="nav-number">1.4.</span> <span class="nav-text">极边</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E5%87%B8%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">求凸包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E7%82%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">极点法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E8%BE%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">极边法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">增量法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gift-wrapping"><span class="nav-number">2.4.</span> <span class="nav-text">Gift wrapping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graham-scan"><span class="nav-number">2.5.</span> <span class="nav-text">Graham scan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Andrew%E2%80%99s-algorithm"><span class="nav-number">2.6.</span> <span class="nav-text">Andrew’s algorithm</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
