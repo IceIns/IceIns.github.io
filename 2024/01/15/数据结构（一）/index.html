@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/1.png">
 <meta property="article:published_time" content="2024-01-15T02:24:57.000Z">
-<meta property="article:modified_time" content="2024-01-15T08:11:04.000Z">
+<meta property="article:modified_time" content="2024-01-15T08:16:16.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/1.png">
@@ -228,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-15 10:24:57 / 修改时间：16:11:04" itemprop="dateCreated datePublished" datetime="2024-01-15T10:24:57+08:00">2024-01-15</time>
+              <time title="创建时间：2024-01-15 10:24:57 / 修改时间：16:16:16" itemprop="dateCreated datePublished" datetime="2024-01-15T10:24:57+08:00">2024-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,14 +246,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>3.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -288,25 +288,7 @@
 <p>这样的 $x’$ 可以通过 $x$ 开始不断 $+lowbit(x)$ 得到。</p>
 <h3 id="解释-2-："><a href="#解释-2-：" class="headerlink" title="解释 $2$："></a>解释 $2$：</h3><p>根据树状数组的树形结构，$tr[x’]$ 覆盖了 $x$ 当且仅当 $x’$ 是 $x$ 的祖先结点，那么不断跳父节点就可以得到 $x’$ 了，而跳父节点的操作，在树状数组上就是 $+lowbit(x)$。</p>
 <p>每一次 $+lowbit(x)$ 都会变成下一个 $1$ 更高的第一个 $0$ 的位。所以时间复杂度同样是 $O(\log n)$ 的。</p>
-<details>
-<summary>代码</summary>
-<pre><code>
-struct BIT&#123;
-    int tr[N],n;
-    int lowbit(int x)&#123;
-        return x&(-x);
-    &#125;
-    void update(int x,int v)&#123;
-        for(;x<=n;x+=lowbit(x)) tr[x]+=v;
-    &#125;
-    int query(int x)&#123;
-        int res=0;
-        for(;x;x-=lowbit(x)) res+=tr[x];
-        return res;
-    &#125;
-&#125;Bit;
-</code></pre>
-</details>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">BIT</span>&#123;</span><br><span class="line">	<span class="type">int</span> tr[N],n;</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">lowbit</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> x&amp;(-x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(;x&lt;=n;x+=<span class="built_in">lowbit</span>(x)) tr[x]+=v;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">		<span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(;x;x-=<span class="built_in">lowbit</span>(x)) res+=tr[x];</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;Bit;</span><br></pre></td></tr></table></figure>
 
 <h2 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h2><h3 id="前缀-min-max-："><a href="#前缀-min-max-：" class="headerlink" title="前缀 $\min&#x2F;\max$："></a>前缀 $\min&#x2F;\max$：</h3><p>若能理解树状数组的原理，便不难解决这个问题。</p>
 <p>树状数组将前缀询问分成了 $O(\log n)$ 个独立的区间，那么只要是能够通过合并两个区间信息得到的大区间信息，都可以可以维护的。</p>
@@ -332,36 +314,11 @@ struct BIT&#123;
 <li>$x-lowbit(x)&lt;l$，将 $a[x]$ 合并即可，然后继续从 $tr[x-1]$ 考虑。直到 $x&#x3D;l$，$a[x]$ 即为原序列，直接在原序列上维护即可。</li>
 <li>$x-lowbit(x)\geq l$，正常考虑。</li>
 </ul>
-<details>
-<summary>代码</summary>
-<pre><code>
-int query(int l,int r) &#123;
-    int ans=0;
-    while(r>=l)&#123;
-        ans=max(ans,a[r]);
-        --r;
-        for(;r-lowbit(r)>=l;r-=lowbit(r)) ans=max(ans,tr[r]);
-    &#125;
-    return ans;
-&#125;
-</code></pre>
-</details>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;=l)&#123;</span><br><span class="line">        ans=<span class="built_in">max</span>(ans,a[r]);</span><br><span class="line">        --r;</span><br><span class="line">        <span class="keyword">for</span>(;r-<span class="built_in">lowbit</span>(r)&gt;=l;r-=<span class="built_in">lowbit</span>(r)) ans=<span class="built_in">max</span>(ans,tr[r]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="单点修改："><a href="#单点修改：" class="headerlink" title="单点修改："></a>单点修改：</h4><p>不可差分信息单点修改同最值（最值本身即为一种不可差分信息）。不能使用旧值更新新值。</p>
-<p>但是，树状数组上，$x$ 的儿子的信息是没有发生变化的（也就依然是新值），所以先用儿子更新 $tr[x]$，再用修改的新值更新 $tr[x]$ 即可。同时，由于 $x$ 的新值会破坏它的所有父节点的信息，所以 $x$ 所有的父节点也都要用儿子更新一遍。</p>
-<details>
-<summary>代码</summary>
-<pre><code>
-void update(int x,int v) &#123;
-    a[x]=v;
-    for (;x<=n;x+=lowbit(x))&#123;
-        tr[x]=a[x];
-        for (v=1;v<lowbit(x);v<<=1) 
-            tr[x]=max(tr[x],tr[x-v]);
-    &#125;
-&#125;
-</code></pre>
-</details>
+<p>但是，树状数组上，$x$ 的儿子的信息是没有发生变化的（也就依然是新值），所以先用儿子更新 $tr[x]$，再用修改的新值更新 $tr[x]$ 即可。同时，由于 $x$ 的新值会破坏它的所有父节点的信息，所以 $x$ 所有的父节点也都要用儿子更新一遍</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    a[x]=v;</span><br><span class="line">    <span class="keyword">for</span> (;x&lt;=n;x+=<span class="built_in">lowbit</span>(x))&#123;</span><br><span class="line">        tr[x]=a[x];</span><br><span class="line">        <span class="keyword">for</span> (v=<span class="number">1</span>;v&lt;<span class="built_in">lowbit</span>(x);v&lt;&lt;=<span class="number">1</span>) </span><br><span class="line">            tr[x]=<span class="built_in">max</span>(tr[x],tr[x-v]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>上述做法虽然是 $O(\log^2n)$ 的，但是很显然，其常数巨小，实际表现不一定会在所有情况下劣于线段树的 $O(\log n)$，而且代码量极短。</p>
 <h3 id="权值树状数组："><a href="#权值树状数组：" class="headerlink" title="权值树状数组："></a>权值树状数组：</h3><p>正常情况下，使用树状数组维护的是一个序列，而权值树状数组维护的则是问题的值域。原理与使用与普通树状数组无异，这里不再赘述。</p>
@@ -371,40 +328,12 @@ void update(int x,int v) &#123;
 <h4 id="树状数组-二分："><a href="#树状数组-二分：" class="headerlink" title="树状数组$+$二分："></a>树状数组$+$二分：</h4><p>更形象的叫法应该是：树状数组套二分。那么就是在外层二分模型下，查询前缀和。同时维护单点加。</p>
 <p>时间复杂度：$O(\log^2n)$。</p>
 <p>虽然是 $O(\log^2n)$，但是实际表现却十分优先，许多情况下，并不比线段树上二分劣。</p>
-<details>
-<summary>代码</summary>
-<pre><code>
-int l,r,mid;
-l=1,r=n;
-while(r-l>4)&#123;
-    mid=l+r>>1;
-    if(Bit.query(mid)>v) r=mid;
-    else l=mid+1;
-&#125;
-for(mid=l;mid<=r;mid++) if(Bit.query(mid)>v) break;
-</code></pre>
-</details>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> l,r,mid;</span><br><span class="line">l=<span class="number">1</span>,r=n;</span><br><span class="line"><span class="keyword">while</span>(r-l&gt;<span class="number">4</span>)&#123;</span><br><span class="line">	mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(Bit.<span class="built_in">query</span>(mid)&gt;v) r=mid;</span><br><span class="line">	<span class="keyword">else</span> l=mid+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(mid=l;mid&lt;=r;mid++) <span class="keyword">if</span>(Bit.<span class="built_in">query</span>(mid)&gt;v) <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
 
 <h4 id="树状数组上二分："><a href="#树状数组上二分：" class="headerlink" title="树状数组上二分："></a>树状数组上二分：</h4><p>更准确地这里应该是树状数组上倍增，但是一般而言倍增和二分可以互相转化，所以也无伤大雅。</p>
 <p>从最高位开始，若这一位的管辖区间和加上已累加的超过了 $y$，则考虑下一位，否则就累加到答案中。最多考虑 $\log n$ 位。</p>
 <p>时间复杂度：$O(\log n)$。</p>
-<details>
-<summary>代码</summary>
-<pre><code>
-int ask(int v)&#123;
-        int _log=0;
-        while((1<<_log)<=n)  _log++;
-        _log--;
-        int i,x=0;
-        FOR(i,_log,0)
-        if(tr[x+(1<<i)]<=v)&#123;
-            v-=tr[x+(1<<i)];
-            x+=(1<<i);
-        &#125;
-        return v;
-    &#125;
-</code></pre>
-</details>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">ask</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> _log=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((<span class="number">1</span>&lt;&lt;_log)&lt;=n)  _log++;</span><br><span class="line">    _log--;</span><br><span class="line">    <span class="type">int</span> i,x=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">FOR</span>(i,_log,<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span>(tr[x+(<span class="number">1</span>&lt;&lt;i)]&lt;=v)&#123;</span><br><span class="line">        v-=tr[x+(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">        x+=(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -564,12 +493,12 @@ int ask(int v)&#123;
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">22k</span>
+    <span title="站点总字数">24k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20 分钟</span>
+    <span title="站点阅读时长">22 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
