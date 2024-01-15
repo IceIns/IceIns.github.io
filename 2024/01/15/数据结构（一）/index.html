@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/1.png">
 <meta property="article:published_time" content="2024-01-15T02:24:57.000Z">
-<meta property="article:modified_time" content="2024-01-15T08:03:06.000Z">
+<meta property="article:modified_time" content="2024-01-15T08:11:04.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/1.png">
@@ -228,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-15 10:24:57 / 修改时间：16:03:06" itemprop="dateCreated datePublished" datetime="2024-01-15T10:24:57+08:00">2024-01-15</time>
+              <time title="创建时间：2024-01-15 10:24:57 / 修改时间：16:11:04" itemprop="dateCreated datePublished" datetime="2024-01-15T10:24:57+08:00">2024-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,7 +246,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -371,9 +371,40 @@ void update(int x,int v) &#123;
 <h4 id="树状数组-二分："><a href="#树状数组-二分：" class="headerlink" title="树状数组$+$二分："></a>树状数组$+$二分：</h4><p>更形象的叫法应该是：树状数组套二分。那么就是在外层二分模型下，查询前缀和。同时维护单点加。</p>
 <p>时间复杂度：$O(\log^2n)$。</p>
 <p>虽然是 $O(\log^2n)$，但是实际表现却十分优先，许多情况下，并不比线段树上二分劣。</p>
+<details>
+<summary>代码</summary>
+<pre><code>
+int l,r,mid;
+l=1,r=n;
+while(r-l>4)&#123;
+    mid=l+r>>1;
+    if(Bit.query(mid)>v) r=mid;
+    else l=mid+1;
+&#125;
+for(mid=l;mid<=r;mid++) if(Bit.query(mid)>v) break;
+</code></pre>
+</details>
+
 <h4 id="树状数组上二分："><a href="#树状数组上二分：" class="headerlink" title="树状数组上二分："></a>树状数组上二分：</h4><p>更准确地这里应该是树状数组上倍增，但是一般而言倍增和二分可以互相转化，所以也无伤大雅。</p>
 <p>从最高位开始，若这一位的管辖区间和加上已累加的超过了 $y$，则考虑下一位，否则就累加到答案中。最多考虑 $\log n$ 位。</p>
 <p>时间复杂度：$O(\log n)$。</p>
+<details>
+<summary>代码</summary>
+<pre><code>
+int ask(int v)&#123;
+        int _log=0;
+        while((1<<_log)<=n)  _log++;
+        _log--;
+        int i,x=0;
+        FOR(i,_log,0)
+        if(tr[x+(1<<i)]<=v)&#123;
+            v-=tr[x+(1<<i)];
+            x+=(1<<i);
+        &#125;
+        return v;
+    &#125;
+</code></pre>
+</details>
 
     </div>
 
