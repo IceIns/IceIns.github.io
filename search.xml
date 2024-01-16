@@ -92,6 +92,11 @@
     <content><![CDATA[<p>线段树</p>
 <span id="more"></span>
 
+<p>千呼万唤始出来。</p>
+<p>线段树是算法竞赛中最常用的、应用最广的用来维护 <strong>区间信息</strong> 的数据结构。</p>
+<p>线段树可以在 $O(\log n)$ 的时间复杂度内实现单点修改、区间修改、区间查询等操作。</p>
+<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>线段树将每个长度不为 $1$ 的区间划分成左右两个区间递归求解，把整个线段划分成一个树形结构。</p>
+<p><img src="D:\Blog\source_posts\数据结构（二）\1.jpg"></p>
 ]]></content>
       <categories>
         <category>数据结构</category>
