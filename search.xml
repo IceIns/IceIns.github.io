@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Codeforces-Round-920-Div3</title>
+    <url>/2024/01/16/Codeforces-Round-920-Div3/</url>
+    <content><![CDATA[<p>A-D，耻辱之夜。</p>
+<span id="more"></span>
+
+<h2 id="A-Square"><a href="#A-Square" class="headerlink" title="A.Square"></a>A.Square</h2><p>题意：以任意顺序给出正方形的四个顶点坐标，求面积。</p>
+<p>解：</p>
+<p>$(\max\lbrace x\rbrace-\min\lbrace x\rbrace)^2$ 即可。</p>
+<h2 id="B-Arranging-Cats"><a href="#B-Arranging-Cats" class="headerlink" title="B.Arranging Cats"></a>B.Arranging Cats</h2><p>题意：可以取出，交换，放入 $1$，求将 $a$ 变成 $b$ 的最小操作数。</p>
+<p>解：</p>
+<p>首先，对于 $a_i&#x3D;b_i$ 的位置，不用考虑，</p>
+<p>其次，那就只有 $a_i&#x3D;1,b_i&#x3D;0$ 或 $a_i&#x3D;0,b_i&#x3D;1$ 的情况了。贪心地想，先移动 $1$ 去匹配 $1<br>$，然后把多的 $1$ 取出即可。 </p>
+<p>答案就是 $\max\lbrace[a_i&#x3D;1],[b_i&#x3D;1]\rbrace$。</p>
+<h2 id="C-Sending-Messages"><a href="#C-Sending-Messages" class="headerlink" title="C.Sending Messages"></a>C.Sending Messages</h2><p>题意：在 $t_i$ 时刻，手机必须是开机状态。开机状态下，每持续 $1s$，消耗 $a$ 能量；关机不消耗能量，但是开机消耗 $b$ 的能量，初始第 $0s$ 有 $c$ 的能量且出于开机状态。判断是否可以在能量耗尽前满足 $n$ 个时刻都是开机状态。</p>
+<p>解：</p>
+<p>$t_i$ 必是开机状态，那么 $t_i$ 时刻之后便与 $t_i$ 之前无关，即：贪心地让 $t_i$ 时刻的能量尽可能大即可。在 $t_{i-1}$ 到 $t_i$ 之间，只能是开机一次，或者全程开机。那么比较一下这两者的大小即可。</p>
+<h2 id="D-Very-Different-Array"><a href="#D-Very-Different-Array" class="headerlink" title="D.Very Different Array"></a>D.Very Different Array</h2><p>题意：给定两个序列 $a_n$ 和 $b_m$，要求在 $b_m$ 中选出 $n$ 个数使得 $\sum\limits_{i&#x3D;1}^n|a_i-c_i|$ 最大。求最大值。</p>
+<p>解；</p>
+<p>贪心地想，将 $b_m$ 中大的和 $a_n$ 中小的进行匹配，$b_m$ 中小的和 $a_n$ 中大的进行匹配。</p>
+<p>答案与序列的顺序无关，那么可以先将 $a_n,b_m$ 升序，然后用 $b_m$ 的后缀和 $a_n$ 的前缀匹配，$b_m$ 的前缀和 $a_n$ 的后缀匹配即可。枚举这个分界点，一定可以找到最大值。</p>
+<p>证明：</p>
+<p>引理：</p>
+<p>最后的答案形式一定是：</p>
+<ul>
+<li>在分界点前（含分界点），$a_i&lt;b_i$。</li>
+<li>在分界点后：$a_i&gt;b_i$</li>
+</ul>
+<p>因为如果在分界点后，存在一个位置 $a_i&lt;b_i$，那么 $b_i$ 完全可以移到 $a_i$ 的前面，因为 $a_j&lt;a_i(j&lt;i)$，在前面同样满足 $a_j&lt;b_i$ 且此时答案会变大。</p>
+<p>此时，若 分界点前的，不是 $b_m$ 的后缀，那么在 $b_m$ 中一定存在一个比分界点前的 $b_i$ 大的元素去替换它了。</p>
+<h2 id="E-Eat-the-Chip"><a href="#E-Eat-the-Chip" class="headerlink" title="E.Eat the Chip"></a>E.Eat the Chip</h2><p>题意：Alice 每次可以向 $(x+1,y-1),(x+1,y),(x+1,y+1)$ 移动，Bob 每次可以向 $(x-1,y-1),(x-1,y),(x-1,y+1)$ 移动。一方将棋子移动到另一方上则该方获胜，反之则是平局，求胜者。</p>
+<p>解：</p>
+<p>引理：</p>
+<p>若 $y_0&#x3D;y_1$，即 Alice 和 Bob 在同一列：</p>
+<ul>
+<li>$|x_0-x_1|$ 为奇数时，Alice 必胜。</li>
+<li>$|x_0-x_1|$ 为偶数时，Bob 必胜。</li>
+</ul>
+<p>假设 $|x_0-x_1|$ 为偶数时，后手必胜。</p>
+<p>那么，$|x_0-x_1|$ 为奇数时，先手往下走，使 $|x_0-x_1|$ 为偶数，且仍满足 $y_0&#x3D;y_1$，那么此时的后手必胜即为初始时的先手必胜。</p>
+<p>核心变成 $|x_0-x_1|$ 为偶数时，后手必胜：</p>
+<p>策略：无论先手怎么走，后手都选择走到和对方同一列。</p>
+<p>那么每次 $|x_0-x_1|$ 变小 $1$，因为 $|x_0-x_1|$ 为偶数，那么最后就是后手必胜。</p>
+<p>对于 $y_0\neq y_1$ 的情况：</p>
+<ul>
+<li>若 $|x_0-x_1|$ 为奇数，那么 Bob 不能获胜，容易发现 $|x_0-x_1|$ 为奇数时最后一步（使得 $x_0&#x3D;x_1$ 的那步）一定是 Alice 走出来的。</li>
+<li>若 $|x_0-x_1|$ 为偶数，那么 Alice 不能获胜。同上。</li>
+</ul>
+<p>所以：</p>
+<ul>
+<li>$|x_0-x_1|$ 为奇数时，Alice 要在 y 轴追上 Bob，而 Bob 要尽可能地远离 Alice。因为一旦移动的过程中，出现了 $y_0&#x3D;y_1$，那就是 Alice 获胜。所以 Alice 要朝 Bob 的方向移动，Bob 要朝面向 Alice 的另一个方向移动。</li>
+<li>$|x_0-x_1|$ 为偶数时，同上。</li>
+</ul>
+<p>因为 $h\leq 10^6$，所以最多走 $10^6$ 步，所以模拟这个过程即可。</p>
+<p>同时，因为奇偶交替的强性质，直接用式子 $O(1)$ 判断也可以。</p>
+<h2 id="F-Sum-of-Progression"><a href="#F-Sum-of-Progression" class="headerlink" title="F.Sum of Progression"></a>F.Sum of Progression</h2><p>题意：$q$ 次询问 $s,d,k$ 求 $a_s+a_{s+d}\times2+…+a_{s+(k-1)d}\times k$。</p>
+<p>解：</p>
+<p>对索引等差求和是根号分治的一种经典思路。</p>
+<p>先考虑这样一个问题：</p>
+<p>求 $\sum\limits_{i&#x3D;l}^r(i-l+1)\times a_i$。</p>
+<p>先把式子拆成：$\sum\limits_{i&#x3D;l}^ri\times a_i-(l-1)\sum\limits_{i&#x3D;l}^ra_i$。</p>
+<p>然后对前后两部分分别做前缀和差分即可。</p>
+<p>那么此题也是一样。</p>
+<p>设阈值为 $t$：</p>
+<ul>
+<li>若 $d&gt;t$，$k\leq\lfloor\frac{n}{d}\rfloor&lt;\lfloor\frac{n}{t}\rfloor$。暴力求和即可。</li>
+<li>若 $d\leq t$，用上述套路解决。$sum[i][j][0&#x2F;1]$ 表示公差为 $j$ 的前 $i$ 个数的两种前缀和。</li>
+</ul>
+<p>时间复杂度：$O(q\lfloor\frac{n}{t}\rfloor)$。</p>
+<p>空间复杂度：$O(nt)$。</p>
+<p>直接将 $t$ 设为 $\sqrt n$ 即可。</p>
+<p>时间复杂度；$O(n\sqrt n)$。</p>
+<p>空间复杂度：$O(n\sqrt n)$。</p>
+<h3 id="addition："><a href="#addition：" class="headerlink" title="addition："></a>addition：</h3><p>看到一种不显式设阈值分析的根号算法。</p>
+<p>将询问离线。对于每个 $s\bmod d$，求从 $s\bmod d$ 开始的公差为 $d$ 的一个序列。同样使用前文中的两种前缀和维护。每次询问时，直接 $O(1)$ 差分询问即可。这样的询问时间复杂度就是 $O(q)$ 的了。</p>
+<p>考虑从 $s\bmod d$ 开始的公差为 $d$ 的序列的维护。对于一组 $s\bmod d$，直接暴力加公差的时间复杂度为 $O(\frac{n}{d})$。但是对于同一组 $(s\bmod d,d)$（即：起点和公差相同的情况）可以略去。</p>
+<p>因为 $s\bmod d$ 的值只有 $[0,d)$，所以一<strong>种</strong> $d$ 的值会产生 $d\times \frac{n}{d}&#x3D;n$ 的时间消耗。那么总共只有 $n$ 个 $d$，所以最多只会有 $\sqrt n\times n$ 的时间消耗。</p>
+<p>因为 $1+2+…+d&#x3D;\frac{d\times(d+1)}{2}$，$d\leq \sqrt n$。所以最多也就只有 $\sqrt n$ 种 $d$，所以暴力预处理的时间复杂度也只有 $O(n\sqrt n)$。</p>
+<p>空间复杂度同样为 $O(n\sqrt n)$。</p>
+<p>但是是暴力。而且不用设阈值。</p>
+<h2 id="G-Mischievous-Shooter"><a href="#G-Mischievous-Shooter" class="headerlink" title="G.Mischievous Shooter"></a>G.Mischievous Shooter</h2><p>待补。</p>
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+  </entry>
+  <entry>
     <title>数据结构（二）</title>
     <url>/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<p>线段树</p>
