@@ -29,14 +29,14 @@
 <meta property="og:site_name" content="咕咕咕">
 <meta property="og:description" content="半平面交">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://iceinsky.top/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/1.jpg">
-<meta property="og:image" content="http://iceinsky.top/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/2.jpg">
-<meta property="og:image" content="http://iceinsky.top/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/3.jpg">
+<meta property="og:image" content="http://iceinsky.top/.top//12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/1.jpg">
+<meta property="og:image" content="http://iceinsky.top/.top//12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/2.jpg">
+<meta property="og:image" content="http://iceinsky.top/.top//12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/3.jpg">
 <meta property="article:published_time" content="2023-12-04T07:18:56.000Z">
 <meta property="article:modified_time" content="2023-12-07T11:52:10.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://iceinsky.top/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/1.jpg">
+<meta name="twitter:image" content="http://iceinsky.top/.top//12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/1.jpg">
 
 <link rel="canonical" href="http://iceinsky.top/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/">
 
@@ -304,13 +304,13 @@
 <p><font face="楷体">此时，外边界的加入是必要的。</font></p>
 <h4 id="先处理队尾，再处理队首"><a href="#先处理队尾，再处理队首" class="headerlink" title="先处理队尾，再处理队首"></a><font face="楷体">先处理队尾，再处理队首</font></h4><p><font face="楷体">当出现一个可以把队列里的点全部弹出去的向量（即队列里的所有点都在该向量的右侧），则我们必须先处理队尾，再处理队首。</font></p>
 <p><font face="楷体">原因如下：</font></p>
-<img src="/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/1.jpg" class="" title="咕咕咕">
+<img src="/.top//12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/1.jpg" class title="咕咕咕">
 
 <p><font face="楷体">一般情况下，我们在队列里（队列顺序为 $\lbrace\vec u,\vec v\rbrace$）后面加一条边（向量 $\vec w$）,会产生一个交点 $N$，缩小 $\vec v$ 后面的范围。</font></p>
-<img src="/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/2.jpg" class="" title="咕咕咕">
+<img src="/.top//12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/2.jpg" class title="咕咕咕">
 
 <p><font face="楷体">但是毕竟每次操作都是1一般的，因此可能会有把 $M$ 点 $\lceil$挤出去$\rfloor$  的情况。</font></p>
-<img src="/2023/12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/3.jpg" class="" title="咕咕咕">
+<img src="/.top//12/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%BA%94%EF%BC%89/3.jpg" class title="咕咕咕">
 
 <p><font face="楷体">如果此时出现了 $\vec a$，使得 $M$ 在 $\vec a$ 的右侧，那么 $M$ 就要出队了。此时如果先处理队首，显然是扩大了范围。实际上 $M$ 点是由 $\vec u$ 和 $\vec v$ 共同构成的，因此需要考虑影响到现有进程的是 $\vec u$ 还是 $\vec v$。而因为我们在极角排序后，向量是逆时针顺序，所以 $\vec v$ 的影响更大一些。</font></p>
 <p><font face="楷体">就如上图，如果 $M$ 确认在 $\vec a$ 的右侧，那么此时 $\vec v$ 的影响一定不会队半平面交的答案作出任何的贡献。</font></p>
