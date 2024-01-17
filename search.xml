@@ -107,7 +107,7 @@
 <p>在实际应用中，采用二进制编码的方式表示树上的结点：</p>
 <p>设当前结点为 $x$，则左儿子为 $x&lt;&lt;1$，右儿子为 $x&lt;&lt;1|1$。</p>
 <p>（用一个结构体维护结点蕴含所有信息，把左右儿子的序号直接存进结构体也是一种常见写法，但是笔者看来更适合之后的动态开点线段树）</p>
-<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><p>对于一个 $[x,y]$ 一定能被拆分成 $\log n$ 个线段树上结点所表示的区间并。</p>
+<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><p>对于一个 $[x,y]$ 一定能被拆分成 $O(\log n)$ 个线段树上结点所表示的区间并。</p>
 <p>这是支持线段树完成 $O(\log n)$ 实现区间操作的基本原理。</p>
 <p>证明：</p>
 <p>在线段树上递归时，考虑第一个中点位于 $[x,y]$ 之间的区间 $[l,r]$。此时，$[x,y]$ 便可以依 $mid$ 划分为两部分：$[x,mid]$ 和 $[mid+1,y]$。$mid$ 是 $[l,mid]$ 的右端点，$mid+1$ 是 $[mid+1,r]$ 的左端点。</p>
@@ -127,12 +127,24 @@
 <h2 id="单点修改："><a href="#单点修改：" class="headerlink" title="单点修改："></a>单点修改：</h2><p>线段树的单点修改较区间修改更复杂，下面先考虑单点修改。</p>
 <p>（单点修改是区间修改的子集，若线段树一定能支持某类操作的区间修改，则一定能支持单点修改，反之不然）</p>
 <p>从线段树的根节点开始，递归到 $[x,x]$ 所在结点。后回溯更新祖先结点信息。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> t,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;<span class="comment">//l=r一定满足l=x=r</span></span><br><span class="line"> 		tr[t],sum+=v;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;=mid) <span class="built_in">update</span>(t&lt;&lt;<span class="number">1</span>,l,mid,x,v);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">update</span>(t&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,x,v);</span><br><span class="line">    <span class="built_in">push_up</span>(t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> t,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;<span class="comment">//l=r一定满足l=x=r</span></span><br><span class="line">		tr[t],sum+=v;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;=mid) <span class="built_in">update</span>(t&lt;&lt;<span class="number">1</span>,l,mid,x,v);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">update</span>(t&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,x,v);</span><br><span class="line">    <span class="built_in">push_up</span>(t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="子结点信息更新父节点信息："><a href="#子结点信息更新父节点信息：" class="headerlink" title="子结点信息更新父节点信息："></a>子结点信息更新父节点信息：</h2><p>一般将此操作写作 <code>push_up</code> 作为一个单独的函数出现。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void push_up(int t)&#123;</span><br><span class="line">    tr[t].sum=tr[t&lt;&lt;1].sum+tr[t&lt;&lt;1|1].sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="区间修改："><a href="#区间修改：" class="headerlink" title="区间修改："></a>区间修改：</h2><p>先找到区间修改在</p>
+<h2 id="区间修改："><a href="#区间修改：" class="headerlink" title="区间修改："></a>区间修改：</h2><p>类比区间询问，将修改区间 $[x,y]$ 拆分成线段树上 $O(\log n)$ 个区间。把修改的信息标记到这个区间上。但是这时候就能发现，这样并没有维护住线段树的定义信息。标记的区间的儿子结点的信息没有更新，标记的区间的父节点的信息也没有更新。可要让所有结点的信息都完成更新，则需要修改 $O(n)$ 个结点的信息，这是不能接受的。</p>
+<h3 id="标记永久化："><a href="#标记永久化：" class="headerlink" title="标记永久化："></a>标记永久化：</h3><p>修改操作和询问操作是紧密联系在一起的，如果不支持询问的操作，那么修改的支持便毫无意义。</p>
+<p>以区间加，单点查询为例：</p>
+<p>因为单点查询时，必然递归经过所有包含单点的区间。所以可以把修改的信息和初始信息分开考虑，将标记就固定在修改到的区间上。那么在查询时，把递归路径上经过的区间上的标记信息累计起来即可。</p>
+<p>但是标记永久化具有较大的局限性，例如在信息不可直接叠加值时，便不具有可永久化的性质。比如：区间赋值；同时维护区间加和区间乘。</p>
+<p>但是标记永久化也有它的优点，例如：不用像懒标记那样下传标记，常数较小；在可持久化线段树中，对区间修改标记永久化，可以少乘 $O(\log n)$ 的空间。</p>
+<h3 id="懒标记："><a href="#懒标记：" class="headerlink" title="懒标记："></a>懒标记：</h3><p>对于懒的解释：延迟下传。</p>
+<p>在前文考虑维护住线段树定义时，是因为要保证其它点也满足线段树的定义。但是，</p>
+<p><strong>修改操作和询问操作是紧密联系在一起的</strong>。试想，如果在后续的询问操作中，没有用到这里修改操作所涉及的点，那么是否还需要去把所有点都更新？</p>
+<p>因此，秉持不用不管的原则，只有当询问操作递归经过这个区间时，才将这个区间上的标记信息下传更新子结点的信息。至于父结点信息，在修改操作递归到这个区间的过程中直接修改即可。</p>
+<p>注意，懒标记的标记与标记永久化的标记不同，懒标记的标记是与线段树结点的信息结合起来的，是需要通过懒标记去修改结点上的信息的。而标记永久化的标记是与线段树结点的信息独立的。也就是标记永久化过程中的结点信息是不变的（始终为建树时的信息）而懒标记过程中的结点信息是会随着懒标记的下传而更新的（当前结点的懒标记下传后，懒标记信息清空，结点信息更新）</p>
+<p>懒标记具有较强的扩展性，可以维护更多信息。但是需要维护的内容更多，代码更长。</p>
+<p>懒标记中，懒标记下传函数一般写作 <code>push_down</code>，结点信息更新一般不写成函数，笔者写作 <code>eval</code>。</p>
 ]]></content>
       <categories>
         <category>数据结构</category>
