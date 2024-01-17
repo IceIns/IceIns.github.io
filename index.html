@@ -76,7 +76,7 @@
   </style>
 </noscript>
 
-<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -224,7 +224,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-17 14:10:07 / 修改时间：14:10:50" itemprop="dateCreated datePublished" datetime="2024-01-17T14:10:07+08:00">2024-01-17</time>
+              <time title="创建时间：2024-01-17 14:10:07 / 修改时间：16:33:48" itemprop="dateCreated datePublished" datetime="2024-01-17T14:10:07+08:00">2024-01-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +242,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -262,6 +262,35 @@
 
       
           <p>分块</p>
+<p>分块是优美的暴力，但却并不是暴力。</p>
+<p>常见分块为根号分块，一种基于根号均衡的根号算法。</p>
+<p>在数据结构问题中，一般使用的为序列分块。</p>
+<h2 id="根号均衡："><a href="#根号均衡：" class="headerlink" title="根号均衡："></a>根号均衡：</h2><p>$a\times b&#x3D;n$，$\min\lbrace a,b\rbrace\leq \sqrt n$.</p>
+<p>$a+\frac na\geq 2\sqrt n$</p>
+<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>序列分块。</p>
+<p>将原序列按 $t$ 为块长，划分成 $\frac nt$ 块。</p>
+<img src="/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%89%EF%BC%89/1.png" class="" title="咕咕咕">
+
+<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><p>对于一个区间 $[l,r]$，一定可以拆分成：</p>
+<ul>
+<li>块的三部分：$l$ 到 $l$ 所在块的右端点；$l$ 所在块的下一块到 $r$ 所在块的上一块；$r$ 所在块的左端点到 $r$ 的左端点。</li>
+<li>特殊情况：$l,r$ 在同一块内。</li>
+</ul>
+<p>对于块的三部分，一个块为一个整体，共有 $O(\frac nt)$ 个块，$l$ 和 $r$ 的块内元素共有 $O(t)$ 个。同样的，$l,r$ 在同一块内，元素个数为 $O(t)$ 个。$r$ 的块内元素共有 $O(t)$ 个。同样的，$l,r$ 在同一块内，元素个数为 $O(t)$ 个。</p>
+<h2 id="分（建）块："><a href="#分（建）块：" class="headerlink" title="分（建）块："></a>分（建）块：</h2><p>枚举块的编号，遍历块的范围内元素以维护整块信息即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">bh</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)/t+<span class="number">1</span>;&#125;<span class="comment">//计算 x 所在的块的编号</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">left</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)*t+<span class="number">1</span>;&#125;<span class="comment">//计算第 x 个块的左端点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">right</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">min</span>(n,x*t);&#125;<span class="comment">//计算 x 个块的右端点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,<span class="built_in">bh</span>(n))</span><br><span class="line">	<span class="built_in">For</span>(j,<span class="built_in">left</span>(i),<span class="built_in">right</span>(i))</span><br><span class="line">		block[i].sum+=a[j];</span><br></pre></td></tr></table></figure>
+
+<p>注意一点：$n$ 是序列的右端点，但不一定是整块的右端点，要小心处理。体现在代码中，计算块的右端点时，和 $n$ 取 $\min$。</p>
+<h2 id="询问："><a href="#询问：" class="headerlink" title="询问："></a>询问：</h2><p>以区间求和为例分析，若维护整块的和，散块暴力累计。则单次询问时间为 $O(t+\frac nt)$。当 $t&#x3D;\sqrt n$ 时，$O(t+\frac nt)$ 取得最小值，为 $O(2\sqrt n)$。所以一般块长设为 $\sqrt n$。</p>
+<p>但是具体题目具体分析。由于不同题目限制不同，所得时间复杂度也不尽相同，所以块长也会做相应调整。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">For</span>(i,<span class="built_in">bh</span>(l)+<span class="number">1</span>,<span class="built_in">bh</span>(r)<span class="number">-1</span>) res+=block[i].sum;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">bh</span>(l)==<span class="built_in">bh</span>(r))&#123;</span><br><span class="line">        <span class="built_in">For</span>(i,l,r) res+=a[i]+block[<span class="built_in">bh</span>(i)].tag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">For</span>(i,l,<span class="built_in">right</span>(<span class="built_in">bh</span>(l))) res+=a[i]+block[<span class="built_in">bh</span>(i)].tag;</span><br><span class="line">        <span class="built_in">For</span>(i,<span class="built_in">left</span>(<span class="built_in">bh</span>(r)),r) res+=a[i]+block[<span class="built_in">bh</span>(i)].tag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改："><a href="#修改：" class="headerlink" title="修改："></a>修改：</h2><p>与询问一致，同样是散块暴力，整块整体维护。</p>
+<p>但是此时存在一个问题：修改时维护了整块的整体的答案，但是整块内的信息并未得到维护，而在之后的询问中，询问到散块信息时，是需要整块内的信息的，所以这里需要借助和线段树一样的懒标记。</p>
+<p>进行区间修改时，维护懒标记的信息。需要用到散块信息时，则将懒标记下传，维护散块信息。后重新维护整块信息。</p>
+<p>笔者将下传标记维护散块信息写作 <code>down</code>，重新维护整块信息写作 <code>up</code>，两个过程一同视作块的重构过程。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,ll c)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="built_in">For</span>(i,<span class="built_in">bh</span>(l)+<span class="number">1</span>,<span class="built_in">bh</span>(r)<span class="number">-1</span>)</span><br><span class="line">        block[i].tag+=c,block[i].sum+=c*t;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">bh</span>(l)==<span class="built_in">bh</span>(r))&#123;</span><br><span class="line">        <span class="built_in">For</span>(i,l,r) a[i]+=c,block[<span class="built_in">bh</span>(i)].sum+=c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">For</span>(i,l,<span class="built_in">right</span>(<span class="built_in">bh</span>(l))) a[i]+=c,block[<span class="built_in">bh</span>(i)].sum+=c;</span><br><span class="line">        <span class="built_in">For</span>(i,<span class="built_in">left</span>(<span class="built_in">bh</span>(r)),r) a[i]+=c,block[<span class="built_in">bh</span>(i)].sum+=c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -405,7 +434,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-17 14:05:58" itemprop="dateModified" datetime="2024-01-17T14:05:58+08:00">2024-01-17</time>
+                <time title="修改时间：2024-01-17 14:30:04" itemprop="dateModified" datetime="2024-01-17T14:30:04+08:00">2024-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -423,7 +452,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.2k</span>
+              <span>5.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1230,12 +1259,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">32k</span>
+    <span title="站点总字数">34k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">29 分钟</span>
+    <span title="站点阅读时长">31 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

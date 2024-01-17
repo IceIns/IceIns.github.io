@@ -4,6 +4,35 @@
     <title>数据结构（三）</title>
     <url>/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%89%EF%BC%89/</url>
     <content><![CDATA[<p>分块</p>
+<p>分块是优美的暴力，但却并不是暴力。</p>
+<p>常见分块为根号分块，一种基于根号均衡的根号算法。</p>
+<p>在数据结构问题中，一般使用的为序列分块。</p>
+<h2 id="根号均衡："><a href="#根号均衡：" class="headerlink" title="根号均衡："></a>根号均衡：</h2><p>$a\times b&#x3D;n$，$\min\lbrace a,b\rbrace\leq \sqrt n$.</p>
+<p>$a+\frac na\geq 2\sqrt n$</p>
+<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>序列分块。</p>
+<p>将原序列按 $t$ 为块长，划分成 $\frac nt$ 块。</p>
+<img src="/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%89%EF%BC%89/1.png" class="" title="咕咕咕">
+
+<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><p>对于一个区间 $[l,r]$，一定可以拆分成：</p>
+<ul>
+<li>块的三部分：$l$ 到 $l$ 所在块的右端点；$l$ 所在块的下一块到 $r$ 所在块的上一块；$r$ 所在块的左端点到 $r$ 的左端点。</li>
+<li>特殊情况：$l,r$ 在同一块内。</li>
+</ul>
+<p>对于块的三部分，一个块为一个整体，共有 $O(\frac nt)$ 个块，$l$ 和 $r$ 的块内元素共有 $O(t)$ 个。同样的，$l,r$ 在同一块内，元素个数为 $O(t)$ 个。$r$ 的块内元素共有 $O(t)$ 个。同样的，$l,r$ 在同一块内，元素个数为 $O(t)$ 个。</p>
+<h2 id="分（建）块："><a href="#分（建）块：" class="headerlink" title="分（建）块："></a>分（建）块：</h2><p>枚举块的编号，遍历块的范围内元素以维护整块信息即可。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">bh</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)/t+<span class="number">1</span>;&#125;<span class="comment">//计算 x 所在的块的编号</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">left</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)*t+<span class="number">1</span>;&#125;<span class="comment">//计算第 x 个块的左端点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">right</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">min</span>(n,x*t);&#125;<span class="comment">//计算 x 个块的右端点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,<span class="built_in">bh</span>(n))</span><br><span class="line">	<span class="built_in">For</span>(j,<span class="built_in">left</span>(i),<span class="built_in">right</span>(i))</span><br><span class="line">		block[i].sum+=a[j];</span><br></pre></td></tr></table></figure>
+
+<p>注意一点：$n$ 是序列的右端点，但不一定是整块的右端点，要小心处理。体现在代码中，计算块的右端点时，和 $n$ 取 $\min$。</p>
+<h2 id="询问："><a href="#询问：" class="headerlink" title="询问："></a>询问：</h2><p>以区间求和为例分析，若维护整块的和，散块暴力累计。则单次询问时间为 $O(t+\frac nt)$。当 $t&#x3D;\sqrt n$ 时，$O(t+\frac nt)$ 取得最小值，为 $O(2\sqrt n)$。所以一般块长设为 $\sqrt n$。</p>
+<p>但是具体题目具体分析。由于不同题目限制不同，所得时间复杂度也不尽相同，所以块长也会做相应调整。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">For</span>(i,<span class="built_in">bh</span>(l)+<span class="number">1</span>,<span class="built_in">bh</span>(r)<span class="number">-1</span>) res+=block[i].sum;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">bh</span>(l)==<span class="built_in">bh</span>(r))&#123;</span><br><span class="line">        <span class="built_in">For</span>(i,l,r) res+=a[i]+block[<span class="built_in">bh</span>(i)].tag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">For</span>(i,l,<span class="built_in">right</span>(<span class="built_in">bh</span>(l))) res+=a[i]+block[<span class="built_in">bh</span>(i)].tag;</span><br><span class="line">        <span class="built_in">For</span>(i,<span class="built_in">left</span>(<span class="built_in">bh</span>(r)),r) res+=a[i]+block[<span class="built_in">bh</span>(i)].tag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改："><a href="#修改：" class="headerlink" title="修改："></a>修改：</h2><p>与询问一致，同样是散块暴力，整块整体维护。</p>
+<p>但是此时存在一个问题：修改时维护了整块的整体的答案，但是整块内的信息并未得到维护，而在之后的询问中，询问到散块信息时，是需要整块内的信息的，所以这里需要借助和线段树一样的懒标记。</p>
+<p>进行区间修改时，维护懒标记的信息。需要用到散块信息时，则将懒标记下传，维护散块信息。后重新维护整块信息。</p>
+<p>笔者将下传标记维护散块信息写作 <code>down</code>，重新维护整块信息写作 <code>up</code>，两个过程一同视作块的重构过程。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,ll c)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="built_in">For</span>(i,<span class="built_in">bh</span>(l)+<span class="number">1</span>,<span class="built_in">bh</span>(r)<span class="number">-1</span>)</span><br><span class="line">        block[i].tag+=c,block[i].sum+=c*t;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">bh</span>(l)==<span class="built_in">bh</span>(r))&#123;</span><br><span class="line">        <span class="built_in">For</span>(i,l,r) a[i]+=c,block[<span class="built_in">bh</span>(i)].sum+=c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">For</span>(i,l,<span class="built_in">right</span>(<span class="built_in">bh</span>(l))) a[i]+=c,block[<span class="built_in">bh</span>(i)].sum+=c;</span><br><span class="line">        <span class="built_in">For</span>(i,<span class="built_in">left</span>(<span class="built_in">bh</span>(r)),r) a[i]+=c,block[<span class="built_in">bh</span>(i)].sum+=c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>数据结构</category>
@@ -141,8 +170,9 @@
 <h3 id="标记永久化："><a href="#标记永久化：" class="headerlink" title="标记永久化："></a>标记永久化：</h3><p>修改操作和询问操作是紧密联系在一起的，如果不支持询问的操作，那么修改的支持便毫无意义。</p>
 <p>以区间加，单点查询为例：</p>
 <p>因为单点查询时，必然递归经过所有包含单点的区间。所以可以把修改的信息和初始信息分开考虑，将标记就固定在修改到的区间上。那么在查询时，把递归路径上经过的区间上的标记信息累计起来即可。</p>
-<p>但是标记永久化具有较大的局限性，例如在信息不可直接叠加值时，便不具有可永久化的性质。比如：区间赋值；同时维护区间加和区间乘。</p>
-<p>但是标记永久化也有它的优点，例如：不用像懒标记那样下传标记，常数较小；在可持久化线段树中，对区间修改标记永久化，可以少乘 $O(\log n)$ 的空间。</p>
+<p>但是对于区间询问，就有所不同，因为区间询问时不会递归到拆分之后的区间的后代结点，而若修改的标记标记到了某个拆分之后的区间的后代结点上，就会对答案产生影响。所以对于区间询问，永久化的标记同样要作用于祖先结点。查询时只会查询到标记的某一个祖先结点而不会有多个，所以不影响答案。</p>
+<p>同时，标记永久化具有较大的局限性，例如在信息不可直接叠加值时，便不具有可永久化的性质。比如：区间赋值；同时维护区间加和区间乘。</p>
+<p>标记永久化也有它的优点，例如：不用像懒标记那样下传标记，常数较小；在可持久化线段树中，对区间修改标记永久化，空间复杂度可以少乘 $O(\log n)$ 。</p>
 <h3 id="懒标记："><a href="#懒标记：" class="headerlink" title="懒标记："></a>懒标记：</h3><p>对于懒的解释：延迟下传。</p>
 <p>在前文考虑维护住线段树定义时，是因为要保证其它点也满足线段树的定义。但是，</p>
 <p><strong>修改操作和询问操作是紧密联系在一起的</strong>。试想，如果在后续的询问操作中，没有用到这里修改操作所涉及的点，那么是否还需要去把所有点都更新？</p>
