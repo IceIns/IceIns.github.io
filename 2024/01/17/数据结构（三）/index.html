@@ -22,16 +22,16 @@
     var CONFIG = {"hostname":"iceinsky.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="分块 分块是优美的暴力，但却并不是暴力。 常见分块为根号分块，一种基于根号均衡的根号算法。 在数据结构问题中，一般使用的为序列分块。 根号均衡：$a\times b&#x3D;n$，$\min\lbrace a,b\rbrace\leq \sqrt n$. $a+\frac na\geq 2\sqrt n$ 定义：序列分块。 将原序列按 $t$ 为块长，划分成 $\frac nt$ 块。   性质">
+  <meta name="description" content="分块">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构（三）">
 <meta property="og:url" content="http://iceinsky.top/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="咕咕咕">
-<meta property="og:description" content="分块 分块是优美的暴力，但却并不是暴力。 常见分块为根号分块，一种基于根号均衡的根号算法。 在数据结构问题中，一般使用的为序列分块。 根号均衡：$a\times b&#x3D;n$，$\min\lbrace a,b\rbrace\leq \sqrt n$. $a+\frac na\geq 2\sqrt n$ 定义：序列分块。 将原序列按 $t$ 为块长，划分成 $\frac nt$ 块。   性质">
+<meta property="og:description" content="分块">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://iceinsky.top/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%89%EF%BC%89/1.png">
 <meta property="article:published_time" content="2024-01-17T06:10:07.000Z">
-<meta property="article:modified_time" content="2024-01-17T08:58:32.000Z">
+<meta property="article:modified_time" content="2024-01-17T09:03:38.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://iceinsky.top/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%89%EF%BC%89/1.png">
@@ -228,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-17 14:10:07 / 修改时间：16:58:32" itemprop="dateCreated datePublished" datetime="2024-01-17T14:10:07+08:00">2024-01-17</time>
+              <time title="创建时间：2024-01-17 14:10:07 / 修改时间：17:03:38" itemprop="dateCreated datePublished" datetime="2024-01-17T14:10:07+08:00">2024-01-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,6 +266,8 @@
 
       
         <p>分块</p>
+<span id="more"></span>
+
 <p>分块是优美的暴力，但却并不是暴力。</p>
 <p>常见分块为根号分块，一种基于根号均衡的根号算法。</p>
 <p>在数据结构问题中，一般使用的为序列分块。</p>
@@ -282,7 +284,7 @@
 </ul>
 <p>对于块的三部分，一个块为一个整体，共有 $O(\frac nt)$ 个块，$l$ 和 $r$ 的块内元素共有 $O(t)$ 个。同样的，$l,r$ 在同一块内，元素个数为 $O(t)$ 个。$r$ 的块内元素共有 $O(t)$ 个。同样的，$l,r$ 在同一块内，元素个数为 $O(t)$ 个。</p>
 <h2 id="分（建）块："><a href="#分（建）块：" class="headerlink" title="分（建）块："></a>分（建）块：</h2><p>枚举块的编号，遍历块的范围内元素以维护整块信息即可。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">bh</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)/t+<span class="number">1</span>;&#125;<span class="comment">//计算 x 所在的块的编号</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">left</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)*t+<span class="number">1</span>;&#125;<span class="comment">//计算第 x 个块的左端点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">right</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">min</span>(n,x*t);&#125;<span class="comment">//计算 x 个块的右端点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,<span class="built_in">bh</span>(n))</span><br><span class="line">	<span class="built_in">For</span>(j,<span class="built_in">left</span>(i),<span class="built_in">right</span>(i))</span><br><span class="line">		block[i].sum+=a[j];</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">bh</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)/t+<span class="number">1</span>;&#125;<span class="comment">//计算 x 所在的块的编号</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">left</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)*t+<span class="number">1</span>;&#125;<span class="comment">//计算第 x 个块的左端点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">right</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">min</span>(n,x*t);&#125;<span class="comment">//计算 x 个块的右端点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,<span class="built_in">bh</span>(n))</span><br><span class="line">    <span class="built_in">For</span>(j,<span class="built_in">left</span>(i),<span class="built_in">right</span>(i))</span><br><span class="line">    	block[i].sum+=a[j];</span><br></pre></td></tr></table></figure>
 
 <p>注意一点：$n$ 是序列的右端点，但不一定是整块的右端点，要小心处理。体现在代码中，计算块的右端点时，和 $n$ 取 $\min$。</p>
 <h2 id="询问："><a href="#询问：" class="headerlink" title="询问："></a>询问：</h2><p>以区间求和为例分析，若维护整块的和，散块暴力累计。则单次询问时间为 $O(t+\frac nt)$。当 $t&#x3D;\sqrt n$ 时，$O(t+\frac nt)$ 取得最小值，为 $O(2\sqrt n)$。所以一般块长设为 $\sqrt n$。</p>
@@ -332,7 +334,10 @@
     <a href="/2024/01/16/Codeforces-Round-920-Div3/" rel="prev" title="Codeforces-Round-920-Div3">
       <i class="fa fa-chevron-left"></i> Codeforces-Round-920-Div3
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%9B%EF%BC%89/" rel="next" title="数据结构（四）">
+      数据结构（四） <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -407,7 +412,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -456,7 +461,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">34k</span>
+    <span title="站点总字数">35k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>

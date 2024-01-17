@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据结构（四）</title>
+    <url>/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
+    <content><![CDATA[<p>莫队</p>
+<span id="more"></span>
+
+<p>普通莫队是一个基于分块的离线解决静态区间询问问题的算法。</p>
+<p>但莫队算法扩展性极强，具有许多扩展莫队算法，</p>
+<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>设询问区间为 $[l_i,r_i]$。对原序列索引分块。将询问区间离线后以 $l_i$ 所在块的编号为第一关键字，$r_i$ 为第二关键字升序。</p>
+<p>对于每个询问 $[l_i,r_i]$ 的答案，由 $[l_1,r_1]$ 扩展而来，每次暴力移动 $l,r$ 指针。</p>
+<p>此时，升序后的 $[l_i,r_i]$ 呈现，同一块内的 $l_i$ 对应的询问 $[l_i,r_i]$ 视作一个整体，共有 $\frac nt$ 个块。在一个块内的 $r$ 最多移动 $n$ 次（因为同一块内的 $r$ 升序，最多从 $1$ 移动到 $n$。在同一个块内 $l$ 每次扩展最多移动 $t$ 次。同时，从一个块的右端点询问的 $l$ 向下一个块的左端点的 $l$ 扩展时，$l$ 最多移动 $2t$，$r$ 最多移动 $n$。</p>
+<p>综上：处理完 $m$ 个询问，$l,r$ 指针的总移动次数为：$O(\frac{n^2}{t}+mt)$。</p>
+<p>当 $t&#x3D;\frac{n}{\sqrt m}$ 时，时间复杂度最优为：$O(n\sqrt m)$。</p>
+<p>一般认为 $n,m$ 同阶，所以直接取 $\sqrt n$。</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+  </entry>
+  <entry>
     <title>数据结构（三）</title>
     <url>/2024/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%89%EF%BC%89/</url>
     <content><![CDATA[<p>分块</p>
+<span id="more"></span>
+
 <p>分块是优美的暴力，但却并不是暴力。</p>
 <p>常见分块为根号分块，一种基于根号均衡的根号算法。</p>
 <p>在数据结构问题中，一般使用的为序列分块。</p>
@@ -20,7 +41,7 @@
 </ul>
 <p>对于块的三部分，一个块为一个整体，共有 $O(\frac nt)$ 个块，$l$ 和 $r$ 的块内元素共有 $O(t)$ 个。同样的，$l,r$ 在同一块内，元素个数为 $O(t)$ 个。$r$ 的块内元素共有 $O(t)$ 个。同样的，$l,r$ 在同一块内，元素个数为 $O(t)$ 个。</p>
 <h2 id="分（建）块："><a href="#分（建）块：" class="headerlink" title="分（建）块："></a>分（建）块：</h2><p>枚举块的编号，遍历块的范围内元素以维护整块信息即可。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">bh</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)/t+<span class="number">1</span>;&#125;<span class="comment">//计算 x 所在的块的编号</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">left</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)*t+<span class="number">1</span>;&#125;<span class="comment">//计算第 x 个块的左端点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">right</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">min</span>(n,x*t);&#125;<span class="comment">//计算 x 个块的右端点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,<span class="built_in">bh</span>(n))</span><br><span class="line">	<span class="built_in">For</span>(j,<span class="built_in">left</span>(i),<span class="built_in">right</span>(i))</span><br><span class="line">		block[i].sum+=a[j];</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">bh</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)/t+<span class="number">1</span>;&#125;<span class="comment">//计算 x 所在的块的编号</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">left</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x<span class="number">-1</span>)*t+<span class="number">1</span>;&#125;<span class="comment">//计算第 x 个块的左端点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">right</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">min</span>(n,x*t);&#125;<span class="comment">//计算 x 个块的右端点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,<span class="built_in">bh</span>(n))</span><br><span class="line">    <span class="built_in">For</span>(j,<span class="built_in">left</span>(i),<span class="built_in">right</span>(i))</span><br><span class="line">    	block[i].sum+=a[j];</span><br></pre></td></tr></table></figure>
 
 <p>注意一点：$n$ 是序列的右端点，但不一定是整块的右端点，要小心处理。体现在代码中，计算块的右端点时，和 $n$ 取 $\min$。</p>
 <h2 id="询问："><a href="#询问：" class="headerlink" title="询问："></a>询问：</h2><p>以区间求和为例分析，若维护整块的和，散块暴力累计。则单次询问时间为 $O(t+\frac nt)$。当 $t&#x3D;\sqrt n$ 时，$O(t+\frac nt)$ 取得最小值，为 $O(2\sqrt n)$。所以一般块长设为 $\sqrt n$。</p>
