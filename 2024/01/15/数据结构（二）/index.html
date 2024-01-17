@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89/1.jpg">
 <meta property="article:published_time" content="2024-01-15T08:24:31.000Z">
-<meta property="article:modified_time" content="2024-01-16T08:40:06.000Z">
+<meta property="article:modified_time" content="2024-01-17T02:34:32.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://iceinsky.top/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89/1.jpg">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-16 16:40:06" itemprop="dateModified" datetime="2024-01-16T16:40:06+08:00">2024-01-16</time>
+                <time title="修改时间：2024-01-17 10:34:32" itemprop="dateModified" datetime="2024-01-17T10:34:32+08:00">2024-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,14 +252,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>138</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -278,9 +278,39 @@
 <p>线段树是算法竞赛中最常用的、应用最广的用来维护 <strong>区间信息</strong> 的数据结构。</p>
 <p>线段树可以在 $O(\log n)$ 的时间复杂度内实现单点修改、区间修改、区间查询等操作。</p>
 <h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>线段树将每个长度不为 $1$ 的区间划分成左右两个区间递归求解，把整个线段划分成一个树形结构。</p>
+<p>设 $x$ 的管辖区间为 $[l,r]$，则 $x$ 的左儿子的管辖区间为 $[l,mid]$，$x$ 的右儿子的管辖区间为 $[mid+1,r]$。</p>
 <img src="/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89/1.jpg" class="" title="咕咕咕">
 
-<h2 id="询问："><a href="#询问：" class="headerlink" title="询问："></a>询问：</h2>
+<p>在实际应用中，采用二进制编码的方式表示树上的结点：</p>
+<p>设当前结点为 $x$，则左儿子为 $x&lt;&lt;1$，右儿子为 $x&lt;&lt;1|1$。</p>
+<p>（用一个结构体维护结点蕴含所有信息，把左右儿子的序号直接存进结构体也是一种常见写法，但是笔者看来更适合之后的动态开点线段树）</p>
+<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><p>对于一个 $[x,y]$ 一定能被拆分成 $\log n$ 个线段树上结点所表示的区间并。</p>
+<p>这是支持线段树完成 $O(\log n)$ 实现区间操作的基本原理。</p>
+<p>证明：</p>
+<p>在线段树上递归时，考虑第一个中点位于 $[x,y]$ 之间的区间 $[l,r]$。此时，$[x,y]$ 便可以依 $mid$ 划分为两部分：$[x,mid]$ 和 $[mid+1,y]$。$mid$ 是 $[l,mid]$ 的右端点，$mid+1$ 是 $[mid+1,r]$ 的左端点。</p>
+<p>先考虑 $[mid+1,r]$ 中划分 $[mid+1,y]$ 的情况。</p>
+<p>容易发现，$[mid+1,r]$ 中划分 $[mid+1,y]$ 的第一个区间长度是 $\leq y-mid$ 的最大 $2$ 的整数幂。之后的递归也是同理，所以 $[mid+1,y]$ 就被划分成了若干个严格递减的 $2$ 的整数幂长度的区间，容易发现，这个至多是 $O(\log n)$ 级别的。$[l,mid]$ 划分 $[x,mid]$ 同理。</p>
+<p>综上：一个 $[x,y]$ 一定能被拆分成 $\log n$ 个线段树上结点所表示的区间并。</p>
+<p>（本文以线段树维护区间和，区间加示例）</p>
+<h2 id="建树："><a href="#建树：" class="headerlink" title="建树："></a>建树：</h2><p>按定义所规定的管辖区间递归建树即可。用子结点信息更新父节点信息。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> t,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">        tr[t].sum=a[l];</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">build</span>(t&lt;&lt;<span class="number">1</span>,l,mid);</span><br><span class="line">    <span class="built_in">build</span>(t&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">    <span class="built_in">push_up</span>(t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="区间询问："><a href="#区间询问：" class="headerlink" title="区间询问："></a>区间询问：</h2><p>在具体的线段树代码实现中，不唯一，不局限。只要本质相同即可。</p>
+<p>下面以笔者代码分析：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> t,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> mid=l+r&gt;&gt;<span class="number">1</span>,res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;=l&amp;&amp;r&lt;=y) <span class="keyword">return</span> tr[t].sum;<span class="comment">//返回信息</span></span><br><span class="line">    <span class="keyword">if</span>(x&lt;=mid) res+=<span class="built_in">query</span>(t&lt;&lt;<span class="number">1</span>,l,mid,x,y);<span class="comment">//返回左儿子的信息</span></span><br><span class="line">    <span class="keyword">if</span>(y&gt;mid) res+=<span class="built_in">query</span>(t&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,x,y);<span class="comment">//返回右儿子的信息</span></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当递归到的结点所在区间完全包含于询问区间，则直接返回结点信息。</p>
+<p>询问区间在递归时，可以改成前文中的 $[x,mid]$ 和 $[mid+1,y]$，不影响结果。因为之后递归的结点区间若完全包含于 $[x,mid]$ 或 $[mid+1,y]$ 则一定也完全包含于 $[x,y]$。</p>
+<h2 id="单点修改："><a href="#单点修改：" class="headerlink" title="单点修改："></a>单点修改：</h2><p>线段树的单点修改较区间修改更复杂，下面先考虑单点修改。</p>
+<p>（单点修改是区间修改的子集，若线段树一定能支持某类操作的区间修改，则一定能支持单点修改，反之不然）</p>
+<p>从线段树的根节点开始，递归到 $[x,x]$ 所在结点。后回溯更新祖先结点信息。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> t,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;<span class="comment">//l=r一定满足l=x=r</span></span><br><span class="line"> 		tr[t],sum+=v;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;=mid) <span class="built_in">update</span>(t&lt;&lt;<span class="number">1</span>,l,mid,x,v);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">update</span>(t&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,x,v);</span><br><span class="line">    <span class="built_in">push_up</span>(t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="子结点信息更新父节点信息："><a href="#子结点信息更新父节点信息：" class="headerlink" title="子结点信息更新父节点信息："></a>子结点信息更新父节点信息：</h2><p>一般将此操作写作 <code>push_up</code> 作为一个单独的函数出现。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void push_up(int t)&#123;</span><br><span class="line">    tr[t].sum=tr[t&lt;&lt;1].sum+tr[t&lt;&lt;1|1].sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="区间修改："><a href="#区间修改：" class="headerlink" title="区间修改："></a>区间修改：</h2><p>先找到区间修改在</p>
+
     </div>
 
     
@@ -377,7 +407,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A2%E9%97%AE%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">询问：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">性质：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E6%A0%91%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">建树：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E8%AF%A2%E9%97%AE%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">区间询问：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E7%82%B9%E4%BF%AE%E6%94%B9%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">单点修改：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E7%BB%93%E7%82%B9%E4%BF%A1%E6%81%AF%E6%9B%B4%E6%96%B0%E7%88%B6%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">子结点信息更新父节点信息：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E4%BF%AE%E6%94%B9%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">区间修改：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -442,12 +472,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">27k</span>
+    <span title="站点总字数">29k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">24 分钟</span>
+    <span title="站点阅读时长">26 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
