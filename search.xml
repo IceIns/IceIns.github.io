@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Codeforces-Round-920-Div3</title>
+    <url>/2024/01/16/Codeforces-Round-920-Div3/</url>
+    <content><![CDATA[<p>A-D，耻辱之夜。</p>
+<span id="more"></span>
+
+<h2 id="A-Square"><a href="#A-Square" class="headerlink" title="A.Square"></a>A.Square</h2><p>题意：以任意顺序给出正方形的四个顶点坐标，求面积。</p>
+<p>解：</p>
+<p>$(\max\lbrace x\rbrace-\min\lbrace x\rbrace)^2$ 即可。</p>
+<h2 id="B-Arranging-Cats"><a href="#B-Arranging-Cats" class="headerlink" title="B.Arranging Cats"></a>B.Arranging Cats</h2><p>题意：可以取出，交换，放入 $1$，求将 $a$ 变成 $b$ 的最小操作数。</p>
+<p>解：</p>
+<p>首先，对于 $a_i&#x3D;b_i$ 的位置，不用考虑，</p>
+<p>其次，那就只有 $a_i&#x3D;1,b_i&#x3D;0$ 或 $a_i&#x3D;0,b_i&#x3D;1$ 的情况了。贪心地想，先移动 $1$ 去匹配 $1<br>$，然后把多的 $1$ 取出即可。 </p>
+<p>答案就是 $\max\lbrace[a_i&#x3D;1],[b_i&#x3D;1]\rbrace$。</p>
+<h2 id="C-Sending-Messages"><a href="#C-Sending-Messages" class="headerlink" title="C.Sending Messages"></a>C.Sending Messages</h2><p>题意：在 $t_i$ 时刻，手机必须是开机状态。开机状态下，每持续 $1s$，消耗 $a$ 能量；关机不消耗能量，但是开机消耗 $b$ 的能量，初始第 $0s$ 有 $c$ 的能量且出于开机状态。判断是否可以在能量耗尽前满足 $n$ 个时刻都是开机状态。</p>
+<p>解：</p>
+<p>$t_i$ 必是开机状态，那么 $t_i$ 时刻之后便与 $t_i$ 之前无关，即：贪心地让 $t_i$ 时刻的能量尽可能大即可。在 $t_{i-1}$ 到 $t_i$ 之间，只能是开机一次，或者全程开机。那么比较一下这两者的大小即可。</p>
+<h2 id="D-Very-Different-Array"><a href="#D-Very-Different-Array" class="headerlink" title="D.Very Different Array"></a>D.Very Different Array</h2><p>题意：给定两个序列 $a_n$ 和 $b_m$，要求在 $b_m$ 中选出 $n$ 个数使得 $\sum\limits_{i&#x3D;1}^n|a_i-c_i|$ 最大。求最大值。</p>
+<p>解；</p>
+<p>贪心地想，将 $b_m$ 中大的和 $a_n$ 中小的进行匹配，$b_m$ 中小的和 $a_n$ 中大的进行匹配。</p>
+<p>答案与序列的顺序无关，那么可以先将 $a_n,b_m$ 升序，然后用 $b_m$ 的后缀和 $a_n$ 的前缀匹配，$b_m$ 的前缀和 $a_n$ 的后缀匹配即可。枚举这个分界点，一定可以找到最大值。</p>
+<p>证明：</p>
+<p>引理：</p>
+<p>最后的答案形式一定是：</p>
+<ul>
+<li>在分界点前（含分界点），$a_i&lt;b_i$。</li>
+<li>在分界点后：$a_i&gt;b_i$</li>
+</ul>
+<p>因为如果在分界点后，存在一个位置 $a_i&lt;b_i$，那么 $b_i$ 完全可以移到 $a_i$ 的前面，因为 $a_j&lt;a_i(j&lt;i)$，在前面同样满足 $a_j&lt;b_i$ 且此时答案会变大。</p>
+<p>此时，若 分界点前的，不是 $b_m$ 的后缀，那么在 $b_m$ 中一定存在一个比分界点前的 $b_i$ 大的元素去替换它了。</p>
+<h2 id="E-Eat-the-Chip"><a href="#E-Eat-the-Chip" class="headerlink" title="E.Eat the Chip"></a>E.Eat the Chip</h2><p>题意：Alice 每次可以向 $(x+1,y-1),(x+1,y),(x+1,y+1)$ 移动，Bob 每次可以向 $(x-1,y-1),(x-1,y),(x-1,y+1)$ 移动。一方将棋子移动到另一方上则该方获胜，反之则是平局，求胜者。</p>
+<p>解：</p>
+<p>引理：</p>
+<p>若 $y_0&#x3D;y_1$，即 Alice 和 Bob 在同一列：</p>
+<ul>
+<li>$|x_0-x_1|$ 为奇数时，Alice 必胜。</li>
+<li>$|x_0-x_1|$ 为偶数时，Bob 必胜。</li>
+</ul>
+<p>假设 $|x_0-x_1|$ 为偶数时，后手必胜。</p>
+<p>那么，$|x_0-x_1|$ 为奇数时，先手往下走，使 $|x_0-x_1|$ 为偶数，且仍满足 $y_0&#x3D;y_1$，那么此时的后手必胜即为初始时的先手必胜。</p>
+<p>核心变成 $|x_0-x_1|$ 为偶数时，后手必胜：</p>
+<p>策略：无论先手怎么走，后手都选择走到和对方同一列。</p>
+<p>那么每次 $|x_0-x_1|$ 变小 $1$，因为 $|x_0-x_1|$ 为偶数，那么最后就是后手必胜。</p>
+<p>对于 $y_0\neq y_1$ 的情况：</p>
+<ul>
+<li>若 $|x_0-x_1|$ 为奇数，那么 Bob 不能获胜，容易发现 $|x_0-x_1|$ 为奇数时最后一步（使得 $x_0&#x3D;x_1$ 的那步）一定是 Alice 走出来的。</li>
+<li>若 $|x_0-x_1|$ 为偶数，那么 Alice 不能获胜。同上。</li>
+</ul>
+<p>所以：</p>
+<ul>
+<li>$|x_0-x_1|$ 为奇数时，Alice 要在 y 轴追上 Bob，而 Bob 要尽可能地远离 Alice。因为一旦移动的过程中，出现了 $y_0&#x3D;y_1$，那就是 Alice 获胜。所以 Alice 要朝 Bob 的方向移动，Bob 要朝面向 Alice 的另一个方向移动。</li>
+<li>$|x_0-x_1|$ 为偶数时，同上。</li>
+</ul>
+<p>因为 $h\leq 10^6$，所以最多走 $10^6$ 步，所以模拟这个过程即可。</p>
+<p>同时，因为奇偶交替的强性质，直接用式子 $O(1)$ 判断也可以。</p>
+<h2 id="F-Sum-of-Progression"><a href="#F-Sum-of-Progression" class="headerlink" title="F.Sum of Progression"></a>F.Sum of Progression</h2><p>题意：$q$ 次询问 $s,d,k$ 求 $a_s+a_{s+d}\times2+…+a_{s+(k-1)d}\times k$。</p>
+<p>解：</p>
+<p>对索引等差求和是根号分治的一种经典思路。</p>
+<p>先考虑这样一个问题：</p>
+<p>求 $\sum\limits_{i&#x3D;l}^r(i-l+1)\times a_i$。</p>
+<p>先把式子拆成：$\sum\limits_{i&#x3D;l}^ri\times a_i-(l-1)\sum\limits_{i&#x3D;l}^ra_i$。</p>
+<p>然后对前后两部分分别做前缀和差分即可。</p>
+<p>那么此题也是一样。</p>
+<p>设阈值为 $t$：</p>
+<ul>
+<li>若 $d&gt;t$，$k\leq\lfloor\frac{n}{d}\rfloor&lt;\lfloor\frac{n}{t}\rfloor$。暴力求和即可。</li>
+<li>若 $d\leq t$，用上述套路解决。$sum[i][j][0&#x2F;1]$ 表示公差为 $j$ 的前 $i$ 个数的两种前缀和。</li>
+</ul>
+<p>时间复杂度：$O(q\lfloor\frac{n}{t}\rfloor)$。</p>
+<p>空间复杂度：$O(nt)$。</p>
+<p>直接将 $t$ 设为 $\sqrt n$ 即可。</p>
+<p>时间复杂度；$O(n\sqrt n)$。</p>
+<p>空间复杂度：$O(n\sqrt n)$。</p>
+<h3 id="addition："><a href="#addition：" class="headerlink" title="addition："></a>addition：</h3><p>看到一种不显式设阈值分析的根号算法。</p>
+<p>将询问离线。对于每个 $s\bmod d$，求从 $s\bmod d$ 开始的公差为 $d$ 的一个序列。同样使用前文中的两种前缀和维护。每次询问时，直接 $O(1)$ 差分询问即可。这样的询问时间复杂度就是 $O(q)$ 的了。</p>
+<p>考虑从 $s\bmod d$ 开始的公差为 $d$ 的序列的维护。对于一组 $s\bmod d$，直接暴力加公差的时间复杂度为 $O(\frac{n}{d})$。但是对于同一组 $(s\bmod d,d)$（即：起点和公差相同的情况）可以略去。</p>
+<p>因为 $s\bmod d$ 的值只有 $[0,d)$，所以一<strong>种</strong> $d$ 的值会产生 $d\times \frac{n}{d}&#x3D;n$ 的时间消耗。那么总共只有 $n$ 个 $d$，所以最多只会有 $\sqrt n\times n$ 的时间消耗。</p>
+<p>因为 $1+2+…+d&#x3D;\frac{d\times(d+1)}{2}$，$d\leq \sqrt n$。所以最多也就只有 $\sqrt n$ 种 $d$，所以暴力预处理的时间复杂度也只有 $O(n\sqrt n)$。</p>
+<p>空间复杂度同样为 $O(n\sqrt n)$。</p>
+<p>但是是暴力。而且不用设阈值。</p>
+<h2 id="G-Mischievous-Shooter"><a href="#G-Mischievous-Shooter" class="headerlink" title="G.Mischievous Shooter"></a>G.Mischievous Shooter</h2><p>待补。</p>
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+  </entry>
+  <entry>
     <title>“锐评”清华社杯</title>
     <url>/2023/12/03/%E2%80%9C%E9%94%90%E8%AF%84%E2%80%9D%E6%B8%85%E5%8D%8E%E7%A4%BE%E6%9D%AF/</url>
     <content><![CDATA[<blockquote>
@@ -167,89 +253,80 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces-Round-920-Div3</title>
-    <url>/2024/01/16/Codeforces-Round-920-Div3/</url>
-    <content><![CDATA[<p>A-D，耻辱之夜。</p>
+    <title>数据结构（一）</title>
+    <url>/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<p>树状数组</p>
 <span id="more"></span>
 
-<h2 id="A-Square"><a href="#A-Square" class="headerlink" title="A.Square"></a>A.Square</h2><p>题意：以任意顺序给出正方形的四个顶点坐标，求面积。</p>
-<p>解：</p>
-<p>$(\max\lbrace x\rbrace-\min\lbrace x\rbrace)^2$ 即可。</p>
-<h2 id="B-Arranging-Cats"><a href="#B-Arranging-Cats" class="headerlink" title="B.Arranging Cats"></a>B.Arranging Cats</h2><p>题意：可以取出，交换，放入 $1$，求将 $a$ 变成 $b$ 的最小操作数。</p>
-<p>解：</p>
-<p>首先，对于 $a_i&#x3D;b_i$ 的位置，不用考虑，</p>
-<p>其次，那就只有 $a_i&#x3D;1,b_i&#x3D;0$ 或 $a_i&#x3D;0,b_i&#x3D;1$ 的情况了。贪心地想，先移动 $1$ 去匹配 $1<br>$，然后把多的 $1$ 取出即可。 </p>
-<p>答案就是 $\max\lbrace[a_i&#x3D;1],[b_i&#x3D;1]\rbrace$。</p>
-<h2 id="C-Sending-Messages"><a href="#C-Sending-Messages" class="headerlink" title="C.Sending Messages"></a>C.Sending Messages</h2><p>题意：在 $t_i$ 时刻，手机必须是开机状态。开机状态下，每持续 $1s$，消耗 $a$ 能量；关机不消耗能量，但是开机消耗 $b$ 的能量，初始第 $0s$ 有 $c$ 的能量且出于开机状态。判断是否可以在能量耗尽前满足 $n$ 个时刻都是开机状态。</p>
-<p>解：</p>
-<p>$t_i$ 必是开机状态，那么 $t_i$ 时刻之后便与 $t_i$ 之前无关，即：贪心地让 $t_i$ 时刻的能量尽可能大即可。在 $t_{i-1}$ 到 $t_i$ 之间，只能是开机一次，或者全程开机。那么比较一下这两者的大小即可。</p>
-<h2 id="D-Very-Different-Array"><a href="#D-Very-Different-Array" class="headerlink" title="D.Very Different Array"></a>D.Very Different Array</h2><p>题意：给定两个序列 $a_n$ 和 $b_m$，要求在 $b_m$ 中选出 $n$ 个数使得 $\sum\limits_{i&#x3D;1}^n|a_i-c_i|$ 最大。求最大值。</p>
-<p>解；</p>
-<p>贪心地想，将 $b_m$ 中大的和 $a_n$ 中小的进行匹配，$b_m$ 中小的和 $a_n$ 中大的进行匹配。</p>
-<p>答案与序列的顺序无关，那么可以先将 $a_n,b_m$ 升序，然后用 $b_m$ 的后缀和 $a_n$ 的前缀匹配，$b_m$ 的前缀和 $a_n$ 的后缀匹配即可。枚举这个分界点，一定可以找到最大值。</p>
+<p>树状数组是一种基于二进制位性质的类树形结构，可以 $O(\log n)$ 进行单点修改，$O(\log n)$ 进行前缀询问的数据结构。</p>
+<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><p>$lowbit(x)&#x3D;x\And-x$</p>
+<p>$lowbit(x)$ 定义为非负整数 $x$ 在二进制表达下，最低位的 $1$ 及其后面的 $0$ 构成的二进制数。同时也是最大的整除 $x$ 的 $2$ 的整数幂。</p>
 <p>证明：</p>
-<p>引理：</p>
-<p>最后的答案形式一定是：</p>
+<p>在计算机中，负整数的二进制表示，为正整数的二进制取反后加 $1$ 。</p>
+<p>也就是保留从后往前第一个 $1$ 后将其它位置取反。</p>
+<p>所以 $x\And-x$ 即为 $x$ 在二进制表达下，最低位的 $1$ 及其后面的 $0$ 构成的二进制数。</p>
+<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>树状数组定义了 $tr[x]$ 表示区间 $[x-lowbit(x)+1,x]$ 的信息和。我们称这个区间为 $x$ 的管辖区间。</p>
+<img src="/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/1.png" class="" title="咕咕咕">
+
+<h2 id="询问："><a href="#询问：" class="headerlink" title="询问："></a>询问：</h2><p>那么对于一个前缀区间 $[1,x]$，一定能拆分成 $x$ 的二进制上 $1$ 的位数个 $tr[x]$ 的和。</p>
+<p>例如 $[1,5]$ 可以划分成 $[5,5]$ 和 $[1,4]$ 两个。</p>
+<p>$5:[100+1,101] 4:[000+1,100]$</p>
+<p>那么将这二进制位数个 $tr[x]$ 相加就实现了 $O(\log n)$ 的前缀查询，因为二进制位数是 $O(\log n)$ 级别的，而且是不大于 $O(\log n)$ 的。</p>
+<p>每一次 $-lowbit(x)$ 即可得到下一个区间。</p>
+<h2 id="修改："><a href="#修改：" class="headerlink" title="修改："></a>修改：</h2><p>要修改的是 $x$ 位置的单点值，但是我们需要修改不止一个 $tr[x’]$。因为是否修改 $tr[x’]$ 是取决于 $tr[x’]$ 是否覆盖了 $x$。</p>
+<h3 id="解释-1-："><a href="#解释-1-：" class="headerlink" title="解释 $1$："></a>解释 $1$：</h3><p>$tr[x’]$ 所管辖的区间为 $[x’-lowbit(x’)+1,x’]$。当 $x’-lowbit(x’)\leq x\land x\leq x’$ 时，tr[x’] 覆盖了 $x$。此时 $x’$ 满足，$x’$ 除 $lowbit(x’)$ 外的高位 为 $x$ 的前缀，且 $lowbit(x’)$ 为 $1$ 的这一位 $x$ 为 $0$。</p>
+<p>这样的 $x’$ 可以通过 $x$ 开始不断 $+lowbit(x)$ 得到。</p>
+<h3 id="解释-2-："><a href="#解释-2-：" class="headerlink" title="解释 $2$："></a>解释 $2$：</h3><p>根据树状数组的树形结构，$tr[x’]$ 覆盖了 $x$ 当且仅当 $x’$ 是 $x$ 的祖先结点，那么不断跳父节点就可以得到 $x’$ 了，而跳父节点的操作，在树状数组上就是 $+lowbit(x)$。</p>
+<p>每一次 $+lowbit(x)$ 都会变成下一个 $1$ 更高的第一个 $0$ 的位。所以时间复杂度同样是 $O(\log n)$ 的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">BIT</span>&#123;</span><br><span class="line">    <span class="type">int</span> tr[N],n;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lowbit</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x&amp;(-x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(;x&lt;=n;x+=<span class="built_in">lowbit</span>(x)) tr[x]+=v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(;x;x-=<span class="built_in">lowbit</span>(x)) res+=tr[x];</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Bit;</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h2><h3 id="前缀-min-max-："><a href="#前缀-min-max-：" class="headerlink" title="前缀 $\min&#x2F;\max$："></a>前缀 $\min&#x2F;\max$：</h3><p>若能理解树状数组的原理，便不难解决这个问题。</p>
+<p>树状数组将前缀询问分成了 $O(\log n)$ 个独立的区间，那么只要是能够通过合并两个区间信息得到的大区间信息，都可以可以维护的。</p>
+<p>单点修改则用修改后的信息更新 $O(\log)$ 个区间，那么是否支持修改为任意数呢？</p>
+<p>答案是否定的。对于前缀 $\min$ 只能支持单点减的修改；对于前缀 $\max$ 只能支持单点加的修改。</p>
+<p>因为树状数组修改是基于旧最值和新修改的值进行的更新，而最值不能依附于旧值，因为无法确定这个最值是否恰好是被修改的数。</p>
+<h3 id="区间询问："><a href="#区间询问：" class="headerlink" title="区间询问："></a>区间询问：</h3><p>树状数组本身维护的为前缀区间信息。然而若维护的信息是可差分的，即 $[l,r]$ 的信息可以通过 $[1,r]-[1,l-1]$ 得到，那么就可以利用树状数组支持区间询问。</p>
+<h3 id="区间修改："><a href="#区间修改：" class="headerlink" title="区间修改："></a>区间修改：</h3><p>同样的，若维护的信息是可差分的，那么将区间修改转化成单点加和单点减，即可实现区间修改。</p>
+<h3 id="区间询问-区间修改："><a href="#区间询问-区间修改：" class="headerlink" title="区间询问+区间修改："></a>区间询问+区间修改：</h3><p>使用上述差分的方法，也只能仅支持区间询问或仅支持区间修改，不能同时支持区间询问和区间修改。</p>
+<p>那么是否能使用树状数组同时支持区间询问和区间修改呢？</p>
+<p>也是有可能可以的。</p>
+<p>牢牢把握树状数组的本质：单点修改和前缀询问。树状数组本质是不能改变的，但是具体的询问和修改却可以依题目而变，所以可以尝试从修改和询问的性质入手。</p>
+<p>以区间加和区间求和为例：</p>
+<p>令 $b_i&#x3D;a_i-a_{i-1}，$$\sum\limits_{i&#x3D;l}^r a_i&#x3D;\sum\limits_{i&#x3D;l}^r\sum\limits_{j&#x3D;1}^i b_j$</p>
+<p>考虑每个 $b_j$ 的贡献，可得：$\sum\limits_{i&#x3D;l}^r(r-i+1)\times b_i&#x3D;(r+1)\times\sum\limits_{i&#x3D;l}^rb_i-\sum\limits_{i&#x3D;l}^rib_i$。</p>
+<p>所以只要维护两个树状数组，一个维护 $b_i$，一个维护 $ib_i$，即可。</p>
+<p>$b_i$ 已经是差分数组了，对 $b_i$ 的修改即为单点修改。</p>
+<h3 id="树状数组维护不可差分信息："><a href="#树状数组维护不可差分信息：" class="headerlink" title="树状数组维护不可差分信息："></a>树状数组维护不可差分信息：</h3><p>此部分数据结构功能对应线段树，但时间复杂度严格劣于线段树，选择性学习。</p>
+<p>树状数组维护不可差分信息，依然是只能支持单点修改和区间询问，但单点修改和区间询问时间复杂度均为 $O(\log^2n)$。</p>
+<h4 id="区间询问：-1"><a href="#区间询问：-1" class="headerlink" title="区间询问："></a>区间询问：</h4><p>对于区间询问 $[l,r]$ 同样是将区间拆分成若干个区间，只是现在不能拆到 $1$ 了，即拆分成的区间的范围不能小于 $l$。</p>
+<p>因此：</p>
 <ul>
-<li>在分界点前（含分界点），$a_i&lt;b_i$。</li>
-<li>在分界点后：$a_i&gt;b_i$</li>
+<li>$x-lowbit(x)&lt;l$，将 $a[x]$ 合并即可，然后继续从 $tr[x-1]$ 考虑。直到 $x&#x3D;l$，$a[x]$ 即为原序列，直接在原序列上维护即可。</li>
+<li>$x-lowbit(x)\geq l$，正常考虑。</li>
 </ul>
-<p>因为如果在分界点后，存在一个位置 $a_i&lt;b_i$，那么 $b_i$ 完全可以移到 $a_i$ 的前面，因为 $a_j&lt;a_i(j&lt;i)$，在前面同样满足 $a_j&lt;b_i$ 且此时答案会变大。</p>
-<p>此时，若 分界点前的，不是 $b_m$ 的后缀，那么在 $b_m$ 中一定存在一个比分界点前的 $b_i$ 大的元素去替换它了。</p>
-<h2 id="E-Eat-the-Chip"><a href="#E-Eat-the-Chip" class="headerlink" title="E.Eat the Chip"></a>E.Eat the Chip</h2><p>题意：Alice 每次可以向 $(x+1,y-1),(x+1,y),(x+1,y+1)$ 移动，Bob 每次可以向 $(x-1,y-1),(x-1,y),(x-1,y+1)$ 移动。一方将棋子移动到另一方上则该方获胜，反之则是平局，求胜者。</p>
-<p>解：</p>
-<p>引理：</p>
-<p>若 $y_0&#x3D;y_1$，即 Alice 和 Bob 在同一列：</p>
-<ul>
-<li>$|x_0-x_1|$ 为奇数时，Alice 必胜。</li>
-<li>$|x_0-x_1|$ 为偶数时，Bob 必胜。</li>
-</ul>
-<p>假设 $|x_0-x_1|$ 为偶数时，后手必胜。</p>
-<p>那么，$|x_0-x_1|$ 为奇数时，先手往下走，使 $|x_0-x_1|$ 为偶数，且仍满足 $y_0&#x3D;y_1$，那么此时的后手必胜即为初始时的先手必胜。</p>
-<p>核心变成 $|x_0-x_1|$ 为偶数时，后手必胜：</p>
-<p>策略：无论先手怎么走，后手都选择走到和对方同一列。</p>
-<p>那么每次 $|x_0-x_1|$ 变小 $1$，因为 $|x_0-x_1|$ 为偶数，那么最后就是后手必胜。</p>
-<p>对于 $y_0\neq y_1$ 的情况：</p>
-<ul>
-<li>若 $|x_0-x_1|$ 为奇数，那么 Bob 不能获胜，容易发现 $|x_0-x_1|$ 为奇数时最后一步（使得 $x_0&#x3D;x_1$ 的那步）一定是 Alice 走出来的。</li>
-<li>若 $|x_0-x_1|$ 为偶数，那么 Alice 不能获胜。同上。</li>
-</ul>
-<p>所以：</p>
-<ul>
-<li>$|x_0-x_1|$ 为奇数时，Alice 要在 y 轴追上 Bob，而 Bob 要尽可能地远离 Alice。因为一旦移动的过程中，出现了 $y_0&#x3D;y_1$，那就是 Alice 获胜。所以 Alice 要朝 Bob 的方向移动，Bob 要朝面向 Alice 的另一个方向移动。</li>
-<li>$|x_0-x_1|$ 为偶数时，同上。</li>
-</ul>
-<p>因为 $h\leq 10^6$，所以最多走 $10^6$ 步，所以模拟这个过程即可。</p>
-<p>同时，因为奇偶交替的强性质，直接用式子 $O(1)$ 判断也可以。</p>
-<h2 id="F-Sum-of-Progression"><a href="#F-Sum-of-Progression" class="headerlink" title="F.Sum of Progression"></a>F.Sum of Progression</h2><p>题意：$q$ 次询问 $s,d,k$ 求 $a_s+a_{s+d}\times2+…+a_{s+(k-1)d}\times k$。</p>
-<p>解：</p>
-<p>对索引等差求和是根号分治的一种经典思路。</p>
-<p>先考虑这样一个问题：</p>
-<p>求 $\sum\limits_{i&#x3D;l}^r(i-l+1)\times a_i$。</p>
-<p>先把式子拆成：$\sum\limits_{i&#x3D;l}^ri\times a_i-(l-1)\sum\limits_{i&#x3D;l}^ra_i$。</p>
-<p>然后对前后两部分分别做前缀和差分即可。</p>
-<p>那么此题也是一样。</p>
-<p>设阈值为 $t$：</p>
-<ul>
-<li>若 $d&gt;t$，$k\leq\lfloor\frac{n}{d}\rfloor&lt;\lfloor\frac{n}{t}\rfloor$。暴力求和即可。</li>
-<li>若 $d\leq t$，用上述套路解决。$sum[i][j][0&#x2F;1]$ 表示公差为 $j$ 的前 $i$ 个数的两种前缀和。</li>
-</ul>
-<p>时间复杂度：$O(q\lfloor\frac{n}{t}\rfloor)$。</p>
-<p>空间复杂度：$O(nt)$。</p>
-<p>直接将 $t$ 设为 $\sqrt n$ 即可。</p>
-<p>时间复杂度；$O(n\sqrt n)$。</p>
-<p>空间复杂度：$O(n\sqrt n)$。</p>
-<h3 id="addition："><a href="#addition：" class="headerlink" title="addition："></a>addition：</h3><p>看到一种不显式设阈值分析的根号算法。</p>
-<p>将询问离线。对于每个 $s\bmod d$，求从 $s\bmod d$ 开始的公差为 $d$ 的一个序列。同样使用前文中的两种前缀和维护。每次询问时，直接 $O(1)$ 差分询问即可。这样的询问时间复杂度就是 $O(q)$ 的了。</p>
-<p>考虑从 $s\bmod d$ 开始的公差为 $d$ 的序列的维护。对于一组 $s\bmod d$，直接暴力加公差的时间复杂度为 $O(\frac{n}{d})$。但是对于同一组 $(s\bmod d,d)$（即：起点和公差相同的情况）可以略去。</p>
-<p>因为 $s\bmod d$ 的值只有 $[0,d)$，所以一<strong>种</strong> $d$ 的值会产生 $d\times \frac{n}{d}&#x3D;n$ 的时间消耗。那么总共只有 $n$ 个 $d$，所以最多只会有 $\sqrt n\times n$ 的时间消耗。</p>
-<p>因为 $1+2+…+d&#x3D;\frac{d\times(d+1)}{2}$，$d\leq \sqrt n$。所以最多也就只有 $\sqrt n$ 种 $d$，所以暴力预处理的时间复杂度也只有 $O(n\sqrt n)$。</p>
-<p>空间复杂度同样为 $O(n\sqrt n)$。</p>
-<p>但是是暴力。而且不用设阈值。</p>
-<h2 id="G-Mischievous-Shooter"><a href="#G-Mischievous-Shooter" class="headerlink" title="G.Mischievous Shooter"></a>G.Mischievous Shooter</h2><p>待补。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;=l)&#123;</span><br><span class="line">        ans=<span class="built_in">max</span>(ans,a[r]);</span><br><span class="line">        --r;</span><br><span class="line">        <span class="keyword">for</span>(;r-<span class="built_in">lowbit</span>(r)&gt;=l;r-=<span class="built_in">lowbit</span>(r)) ans=<span class="built_in">max</span>(ans,tr[r]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="单点修改："><a href="#单点修改：" class="headerlink" title="单点修改："></a>单点修改：</h4><p>不可差分信息单点修改同最值（最值本身即为一种不可差分信息）。不能使用旧值更新新值。</p>
+<p>但是，树状数组上，$x$ 的儿子的信息是没有发生变化的（也就依然是新值），所以先用儿子更新 $tr[x]$，再用修改的新值更新 $tr[x]$ 即可。同时，由于 $x$ 的新值会破坏它的所有父节点的信息，所以 $x$ 所有的父节点也都要用儿子更新一遍</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    a[x]=v;</span><br><span class="line">    <span class="keyword">for</span> (;x&lt;=n;x+=<span class="built_in">lowbit</span>(x))&#123;</span><br><span class="line">        tr[x]=a[x];</span><br><span class="line">        <span class="keyword">for</span> (v=<span class="number">1</span>;v&lt;<span class="built_in">lowbit</span>(x);v&lt;&lt;=<span class="number">1</span>) </span><br><span class="line">            tr[x]=<span class="built_in">max</span>(tr[x],tr[x-v]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述做法虽然是 $O(\log^2n)$ 的，但是很显然，其常数巨小，实际表现不一定会在所有情况下劣于线段树的 $O(\log n)$，而且代码量极短。</p>
+<h3 id="权值树状数组："><a href="#权值树状数组：" class="headerlink" title="权值树状数组："></a>权值树状数组：</h3><p>正常情况下，使用树状数组维护的是一个序列，而权值树状数组维护的则是问题的值域。原理与使用与普通树状数组无异，这里不再赘述。</p>
+<p>这里只是引入这样将树状数组视作“计数器”维护值域的思想。</p>
+<p>通常使用权值树状数组维护逆序对数量与全局第 $k$ 小。</p>
+<h3 id="树状数组二分："><a href="#树状数组二分：" class="headerlink" title="树状数组二分："></a>树状数组二分：</h3><p>例如：在保证 $a_i\geq 0$ 的情况下，求最小的 $x$ 满足 $\sum\limits_{i&#x3D;1}^x a_i&gt;y$。且要求多次询问和单点加。</p>
+<h4 id="树状数组-二分："><a href="#树状数组-二分：" class="headerlink" title="树状数组$+$二分："></a>树状数组$+$二分：</h4><p>更形象的叫法应该是：树状数组套二分。那么就是在外层二分模型下，查询前缀和。同时维护单点加。</p>
+<p>时间复杂度：$O(\log^2n)$。</p>
+<p>虽然是 $O(\log^2n)$，但是实际表现却十分优先，许多情况下，并不比线段树上二分劣。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> l,r,mid;</span><br><span class="line">l=<span class="number">1</span>,r=n;</span><br><span class="line"><span class="keyword">while</span>(r-l&gt;<span class="number">4</span>)&#123;</span><br><span class="line">    mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(Bit.<span class="built_in">query</span>(mid)&gt;v) r=mid;</span><br><span class="line">    <span class="keyword">else</span> l=mid+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(mid=l;mid&lt;=r;mid++) <span class="keyword">if</span>(Bit.<span class="built_in">query</span>(mid)&gt;v) <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="树状数组上二分："><a href="#树状数组上二分：" class="headerlink" title="树状数组上二分："></a>树状数组上二分：</h4><p>更准确地这里应该是树状数组上倍增，但是一般而言倍增和二分可以互相转化，所以也无伤大雅。</p>
+<p>从最高位开始，若这一位的管辖区间和加上已累加的超过了 $y$，则考虑下一位，否则就累加到答案中。最多考虑 $\log n$ 位。</p>
+<p>时间复杂度：$O(\log n)$。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">ask</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> _log=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((<span class="number">1</span>&lt;&lt;_log)&lt;=n)  _log++;</span><br><span class="line">    _log--;</span><br><span class="line">    <span class="type">int</span> i,x=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">FOR</span>(i,_log,<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span>(tr[x+(<span class="number">1</span>&lt;&lt;i)]&lt;=v)&#123;</span><br><span class="line">        v-=tr[x+(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">        x+=(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> v+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Codeforces</category>
+        <category>数据结构</category>
       </categories>
   </entry>
   <entry>
@@ -342,83 +419,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数据结构（一）</title>
-    <url>/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<p>树状数组</p>
-<span id="more"></span>
-
-<p>树状数组是一种基于二进制位性质的类树形结构，可以 $O(\log n)$ 进行单点修改，$O(\log n)$ 进行前缀询问的数据结构。</p>
-<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><p>$lowbit(x)&#x3D;x\And-x$</p>
-<p>$lowbit(x)$ 定义为非负整数 $x$ 在二进制表达下，最低位的 $1$ 及其后面的 $0$ 构成的二进制数。同时也是最大的整除 $x$ 的 $2$ 的整数幂。</p>
-<p>证明：</p>
-<p>在计算机中，负整数的二进制表示，为正整数的二进制取反后加 $1$ 。</p>
-<p>也就是保留从后往前第一个 $1$ 后将其它位置取反。</p>
-<p>所以 $x\And-x$ 即为 $x$ 在二进制表达下，最低位的 $1$ 及其后面的 $0$ 构成的二进制数。</p>
-<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>树状数组定义了 $tr[x]$ 表示区间 $[x-lowbit(x)+1,x]$ 的信息和。我们称这个区间为 $x$ 的管辖区间。</p>
-<img src="/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89/1.png" class="" title="咕咕咕">
-
-<h2 id="询问："><a href="#询问：" class="headerlink" title="询问："></a>询问：</h2><p>那么对于一个前缀区间 $[1,x]$，一定能拆分成 $x$ 的二进制上 $1$ 的位数个 $tr[x]$ 的和。</p>
-<p>例如 $[1,5]$ 可以划分成 $[5,5]$ 和 $[1,4]$ 两个。</p>
-<p>$5:[100+1,101] 4:[000+1,100]$</p>
-<p>那么将这二进制位数个 $tr[x]$ 相加就实现了 $O(\log n)$ 的前缀查询，因为二进制位数是 $O(\log n)$ 级别的，而且是不大于 $O(\log n)$ 的。</p>
-<p>每一次 $-lowbit(x)$ 即可得到下一个区间。</p>
-<h2 id="修改："><a href="#修改：" class="headerlink" title="修改："></a>修改：</h2><p>要修改的是 $x$ 位置的单点值，但是我们需要修改不止一个 $tr[x’]$。因为是否修改 $tr[x’]$ 是取决于 $tr[x’]$ 是否覆盖了 $x$。</p>
-<h3 id="解释-1-："><a href="#解释-1-：" class="headerlink" title="解释 $1$："></a>解释 $1$：</h3><p>$tr[x’]$ 所管辖的区间为 $[x’-lowbit(x’)+1,x’]$。当 $x’-lowbit(x’)\leq x\land x\leq x’$ 时，tr[x’] 覆盖了 $x$。此时 $x’$ 满足，$x’$ 除 $lowbit(x’)$ 外的高位 为 $x$ 的前缀，且 $lowbit(x’)$ 为 $1$ 的这一位 $x$ 为 $0$。</p>
-<p>这样的 $x’$ 可以通过 $x$ 开始不断 $+lowbit(x)$ 得到。</p>
-<h3 id="解释-2-："><a href="#解释-2-：" class="headerlink" title="解释 $2$："></a>解释 $2$：</h3><p>根据树状数组的树形结构，$tr[x’]$ 覆盖了 $x$ 当且仅当 $x’$ 是 $x$ 的祖先结点，那么不断跳父节点就可以得到 $x’$ 了，而跳父节点的操作，在树状数组上就是 $+lowbit(x)$。</p>
-<p>每一次 $+lowbit(x)$ 都会变成下一个 $1$ 更高的第一个 $0$ 的位。所以时间复杂度同样是 $O(\log n)$ 的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">BIT</span>&#123;</span><br><span class="line">    <span class="type">int</span> tr[N],n;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lowbit</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x&amp;(-x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(;x&lt;=n;x+=<span class="built_in">lowbit</span>(x)) tr[x]+=v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(;x;x-=<span class="built_in">lowbit</span>(x)) res+=tr[x];</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Bit;</span><br></pre></td></tr></table></figure>
-
-<h2 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h2><h3 id="前缀-min-max-："><a href="#前缀-min-max-：" class="headerlink" title="前缀 $\min&#x2F;\max$："></a>前缀 $\min&#x2F;\max$：</h3><p>若能理解树状数组的原理，便不难解决这个问题。</p>
-<p>树状数组将前缀询问分成了 $O(\log n)$ 个独立的区间，那么只要是能够通过合并两个区间信息得到的大区间信息，都可以可以维护的。</p>
-<p>单点修改则用修改后的信息更新 $O(\log)$ 个区间，那么是否支持修改为任意数呢？</p>
-<p>答案是否定的。对于前缀 $\min$ 只能支持单点减的修改；对于前缀 $\max$ 只能支持单点加的修改。</p>
-<p>因为树状数组修改是基于旧最值和新修改的值进行的更新，而最值不能依附于旧值，因为无法确定这个最值是否恰好是被修改的数。</p>
-<h3 id="区间询问："><a href="#区间询问：" class="headerlink" title="区间询问："></a>区间询问：</h3><p>树状数组本身维护的为前缀区间信息。然而若维护的信息是可差分的，即 $[l,r]$ 的信息可以通过 $[1,r]-[1,l-1]$ 得到，那么就可以利用树状数组支持区间询问。</p>
-<h3 id="区间修改："><a href="#区间修改：" class="headerlink" title="区间修改："></a>区间修改：</h3><p>同样的，若维护的信息是可差分的，那么将区间修改转化成单点加和单点减，即可实现区间修改。</p>
-<h3 id="区间询问-区间修改："><a href="#区间询问-区间修改：" class="headerlink" title="区间询问+区间修改："></a>区间询问+区间修改：</h3><p>使用上述差分的方法，也只能仅支持区间询问或仅支持区间修改，不能同时支持区间询问和区间修改。</p>
-<p>那么是否能使用树状数组同时支持区间询问和区间修改呢？</p>
-<p>也是有可能可以的。</p>
-<p>牢牢把握树状数组的本质：单点修改和前缀询问。树状数组本质是不能改变的，但是具体的询问和修改却可以依题目而变，所以可以尝试从修改和询问的性质入手。</p>
-<p>以区间加和区间求和为例：</p>
-<p>令 $b_i&#x3D;a_i-a_{i-1}，$$\sum\limits_{i&#x3D;l}^r a_i&#x3D;\sum\limits_{i&#x3D;l}^r\sum\limits_{j&#x3D;1}^i b_j$</p>
-<p>考虑每个 $b_j$ 的贡献，可得：$\sum\limits_{i&#x3D;l}^r(r-i+1)\times b_i&#x3D;(r+1)\times\sum\limits_{i&#x3D;l}^rb_i-\sum\limits_{i&#x3D;l}^rib_i$。</p>
-<p>所以只要维护两个树状数组，一个维护 $b_i$，一个维护 $ib_i$，即可。</p>
-<p>$b_i$ 已经是差分数组了，对 $b_i$ 的修改即为单点修改。</p>
-<h3 id="树状数组维护不可差分信息："><a href="#树状数组维护不可差分信息：" class="headerlink" title="树状数组维护不可差分信息："></a>树状数组维护不可差分信息：</h3><p>此部分数据结构功能对应线段树，但时间复杂度严格劣于线段树，选择性学习。</p>
-<p>树状数组维护不可差分信息，依然是只能支持单点修改和区间询问，但单点修改和区间询问时间复杂度均为 $O(\log^2n)$。</p>
-<h4 id="区间询问：-1"><a href="#区间询问：-1" class="headerlink" title="区间询问："></a>区间询问：</h4><p>对于区间询问 $[l,r]$ 同样是将区间拆分成若干个区间，只是现在不能拆到 $1$ 了，即拆分成的区间的范围不能小于 $l$。</p>
-<p>因此：</p>
-<ul>
-<li>$x-lowbit(x)&lt;l$，将 $a[x]$ 合并即可，然后继续从 $tr[x-1]$ 考虑。直到 $x&#x3D;l$，$a[x]$ 即为原序列，直接在原序列上维护即可。</li>
-<li>$x-lowbit(x)\geq l$，正常考虑。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;=l)&#123;</span><br><span class="line">        ans=<span class="built_in">max</span>(ans,a[r]);</span><br><span class="line">        --r;</span><br><span class="line">        <span class="keyword">for</span>(;r-<span class="built_in">lowbit</span>(r)&gt;=l;r-=<span class="built_in">lowbit</span>(r)) ans=<span class="built_in">max</span>(ans,tr[r]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="单点修改："><a href="#单点修改：" class="headerlink" title="单点修改："></a>单点修改：</h4><p>不可差分信息单点修改同最值（最值本身即为一种不可差分信息）。不能使用旧值更新新值。</p>
-<p>但是，树状数组上，$x$ 的儿子的信息是没有发生变化的（也就依然是新值），所以先用儿子更新 $tr[x]$，再用修改的新值更新 $tr[x]$ 即可。同时，由于 $x$ 的新值会破坏它的所有父节点的信息，所以 $x$ 所有的父节点也都要用儿子更新一遍</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    a[x]=v;</span><br><span class="line">    <span class="keyword">for</span> (;x&lt;=n;x+=<span class="built_in">lowbit</span>(x))&#123;</span><br><span class="line">        tr[x]=a[x];</span><br><span class="line">        <span class="keyword">for</span> (v=<span class="number">1</span>;v&lt;<span class="built_in">lowbit</span>(x);v&lt;&lt;=<span class="number">1</span>) </span><br><span class="line">            tr[x]=<span class="built_in">max</span>(tr[x],tr[x-v]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上述做法虽然是 $O(\log^2n)$ 的，但是很显然，其常数巨小，实际表现不一定会在所有情况下劣于线段树的 $O(\log n)$，而且代码量极短。</p>
-<h3 id="权值树状数组："><a href="#权值树状数组：" class="headerlink" title="权值树状数组："></a>权值树状数组：</h3><p>正常情况下，使用树状数组维护的是一个序列，而权值树状数组维护的则是问题的值域。原理与使用与普通树状数组无异，这里不再赘述。</p>
-<p>这里只是引入这样将树状数组视作“计数器”维护值域的思想。</p>
-<p>通常使用权值树状数组维护逆序对数量与全局第 $k$ 小。</p>
-<h3 id="树状数组二分："><a href="#树状数组二分：" class="headerlink" title="树状数组二分："></a>树状数组二分：</h3><p>例如：在保证 $a_i\geq 0$ 的情况下，求最小的 $x$ 满足 $\sum\limits_{i&#x3D;1}^x a_i&gt;y$。且要求多次询问和单点加。</p>
-<h4 id="树状数组-二分："><a href="#树状数组-二分：" class="headerlink" title="树状数组$+$二分："></a>树状数组$+$二分：</h4><p>更形象的叫法应该是：树状数组套二分。那么就是在外层二分模型下，查询前缀和。同时维护单点加。</p>
-<p>时间复杂度：$O(\log^2n)$。</p>
-<p>虽然是 $O(\log^2n)$，但是实际表现却十分优先，许多情况下，并不比线段树上二分劣。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> l,r,mid;</span><br><span class="line">l=<span class="number">1</span>,r=n;</span><br><span class="line"><span class="keyword">while</span>(r-l&gt;<span class="number">4</span>)&#123;</span><br><span class="line">    mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(Bit.<span class="built_in">query</span>(mid)&gt;v) r=mid;</span><br><span class="line">    <span class="keyword">else</span> l=mid+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(mid=l;mid&lt;=r;mid++) <span class="keyword">if</span>(Bit.<span class="built_in">query</span>(mid)&gt;v) <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="树状数组上二分："><a href="#树状数组上二分：" class="headerlink" title="树状数组上二分："></a>树状数组上二分：</h4><p>更准确地这里应该是树状数组上倍增，但是一般而言倍增和二分可以互相转化，所以也无伤大雅。</p>
-<p>从最高位开始，若这一位的管辖区间和加上已累加的超过了 $y$，则考虑下一位，否则就累加到答案中。最多考虑 $\log n$ 位。</p>
-<p>时间复杂度：$O(\log n)$。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">ask</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> _log=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((<span class="number">1</span>&lt;&lt;_log)&lt;=n)  _log++;</span><br><span class="line">    _log--;</span><br><span class="line">    <span class="type">int</span> i,x=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">FOR</span>(i,_log,<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span>(tr[x+(<span class="number">1</span>&lt;&lt;i)]&lt;=v)&#123;</span><br><span class="line">        v-=tr[x+(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">        x+=(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> v+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-  </entry>
-  <entry>
     <title>数据结构（二）</title>
     <url>/2024/01/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<p>线段树</p>
@@ -475,119 +475,6 @@
 ]]></content>
       <categories>
         <category>数据结构</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>计算几何（一）</title>
-    <url>/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<p> 二维几何基础知识</p>
-<span id="more"></span>
-
-<h2 id="浮点数与精度问题"><a href="#浮点数与精度问题" class="headerlink" title="浮点数与精度问题"></a><font face="楷体">浮点数与精度问题</font></h2><h3 id="特殊值"><a href="#特殊值" class="headerlink" title="特殊值"></a><font face="楷体">特殊值</font></h3><ul>
-<li><font face="楷体">+0.0 -0.0</font></li>
-<li><font face="楷体">1.0&#x2F;0.0&#x3D;+inf，1.0&#x2F;-0.0&#x3D;-inf</font></li>
-<li><font face="楷体">nan，非数字，例如：$\sqrt{-2}$</font><ul>
-<li><font face="楷体">nan 除了 $\neq$ 时返回 <code>true</code> 外，其它比较运算符均返回 <code>false</code></font></li>
-</ul>
-</li>
-</ul>
-<p><font face="楷体">1.若问题能用整数解决则不用浮点数。</font></p>
-<p><font face="楷体">2.除非时限紧张，否则使用 <code>long double</code>。</font></p>
-<p><font face="楷体">3.减少数学库函数的调用。</font></p>
-<p><font face="楷体">4.进行浮点数比较时，加入容限（误差）eps。</font></p>
-<h2 id="点"><a href="#点" class="headerlink" title="点"></a><font face="楷体">点</font></h2><h3 id="using-Point-complex"><a href="#using-Point-complex" class="headerlink" title="using Point=complex&lt;double&gt;"></a><code>using Point=complex&lt;double&gt;</code></h3><ul>
-<li><font face="楷体">横坐标（x）：.real()</font></li>
-<li><font face="楷体">纵坐标（y）：.imag()</font></li>
-</ul>
-<p><font face="楷体">优点：自带各种运算</font></p>
-<p><font face="楷体">缺点：慢</font></p>
-<h3 id="using-Point-pair"><a href="#using-Point-pair" class="headerlink" title="using Point=pair&lt;double,double&gt;"></a><code>using Point=pair&lt;double,double&gt;</code></h3><ul>
-<li><font face="楷体">横坐标（x）：first</font></li>
-<li><font face="楷体">纵坐标（y）：second</font></li>
-</ul>
-<p><font face="楷体">优点：自带比较运算</font></p>
-<p><font face="楷体">缺点：自由度不高</font></p>
-<h3 id="struct-Point-double-x-y"><a href="#struct-Point-double-x-y" class="headerlink" title="struct Point {double x,y;}"></a><code>struct Point &#123;double x,y;&#125;</code></h3><ul>
-<li><font face="楷体">横坐标（x）：x</font></li>
-<li><font face="楷体">纵坐标（y）：y</font></li>
-</ul>
-<p><font face="楷体">优点：自由度高</font></p>
-<p><font face="楷体">缺点：功能为零</font></p>
-<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a><font face="楷体">向量</font></h2><p><font face="楷体">表示上和点一致，因为坐标系中一个点对应一个向量。</font></p>
-<h3 id="点积"><a href="#点积" class="headerlink" title="点积"></a><font face="楷体">点积</font></h3><p>$\vec{a}\cdot \vec b&#x3D;a_xb_x+a_yb_y$</p>
-<p><font face="楷体">几何意义：$\vec a\cdot \vec b&#x3D;|\vec a|\times |\vec b|\times \cos\theta$</font></p>
-<ul>
-<li><font face="楷体">向量的长度：$|\vec a|&#x3D;\sqrt{\vec a\times \vec a}$</font></li>
-<li><font face="楷体">向量的夹角：$\cos \theta&#x3D;\dfrac{\vec a\cdot \vec b}{|\vec a|\times |\vec b|}$</font></li>
-<li><font face="楷体">向量的投影：$|\vec a|\times cos\theta&#x3D;\dfrac{\vec a\cdot \vec b}{|\vec b|}$</font></li>
-<li><font face="楷体">向量垂直：$\vec a\cdot \vec b&#x3D;0$</font></li>
-</ul>
-<h3 id="叉积"><a href="#叉积" class="headerlink" title="叉积"></a><font face="楷体">叉积</font></h3><p>$\vec a\times \vec b&#x3D;(a_xb_y-a_yb_x)\hat k$</p>
-<p><font face="楷体">几何意义：$\vec a\times \vec b&#x3D;|\vec a|\times |\vec b|\times \sin \theta \hat k$</font></p>
-<ul>
-<li><font face="楷体">平行四边形面积：$|\vec a\times \vec b|&#x3D;|\vec a|\times |\vec b|\times |\sin \theta|$</font></li>
-<li><font face="楷体">向量平行：$\vec a\times \vec b&#x3D;\vec 0$</font></li>
-<li><font face="楷体">to-left 测试</font></li>
-</ul>
-<h4 id="to-left-测试"><a href="#to-left-测试" class="headerlink" title="to-left 测试"></a><font face="楷体">to-left 测试</font></h4><p><font face="楷体">判断点 P 在有向直线 AB 左侧&#x2F;右侧上。</font></p>
-<p>$\begin{cases}\overrightarrow {AB}\times \overrightarrow{AP}&gt;0&amp; P\ 在有向直线\ AB\ 左侧\newline \overrightarrow {AB}\times \overrightarrow{AP}&lt;0&amp;P\ 在有向直线\ AB\ 右侧\newline\overrightarrow {AB}\times \overrightarrow{AP}&#x3D;0&amp; P\ 在有向直线\ AB\ 上\end{cases}$</p>
-<h3 id="向量逆时针旋转"><a href="#向量逆时针旋转" class="headerlink" title="向量逆时针旋转"></a><font face="楷体">向量逆时针旋转</font></h3><p><font face="楷体">$\vec a$ 逆时针旋转 $\theta$，$(a_x,a_y)\rightarrow(\cos\theta a_x-\sin\theta a_y,\sin\theta a_x+\cos\theta a_y)$</font></p>
-<h2 id="线段"><a href="#线段" class="headerlink" title="线段"></a><font face="楷体">线段</font></h2><p><code>struct segement&#123;Point a,b;&#125;</code></p>
-<p><font face="楷体">记录左右端点</font></p>
-<h3 id="判断点是否在线段上"><a href="#判断点是否在线段上" class="headerlink" title="判断点是否在线段上"></a><font face="楷体">判断点是否在线段上</font></h3><ul>
-<li><font face="楷体">点 P 在 AB 上：$\overrightarrow {PA}\times \overrightarrow{PB}&#x3D;\vec 0$</font></li>
-<li><font face="楷体">点 P 在 AB 之间：</font><ul>
-<li>$\overrightarrow{PA}\cdot \overrightarrow{PB}\leq 0$</li>
-<li>$\min(A_x,B_x)\leq P_x\leq\max(A_x,B_x)\ \land\ \min(A_y,B_y)\leq P_y\leq\max(A_y,B_y)$</li>
-</ul>
-</li>
-</ul>
-<h3 id="判断两条线段是否相交"><a href="#判断两条线段是否相交" class="headerlink" title="判断两条线段是否相交"></a><font face="楷体">判断两条线段是否相交</font></h3><ul>
-<li><font face="楷体">点 A 和点 B 在直线 CD 的不同侧</font></li>
-<li><font face="楷体">点 C 和点 D 在直线 AB 的不同侧</font></li>
-<li><font face="楷体">三点共线、四点共线特判</font></li>
-</ul>
-<h2 id="直线"><a href="#直线" class="headerlink" title="直线"></a><font face="楷体">直线</font></h2><h3 id="斜截式"><a href="#斜截式" class="headerlink" title="斜截式"></a><font face="楷体">斜截式</font></h3><p>$y&#x3D;kx+b$</p>
-<h3 id="截距式"><a href="#截距式" class="headerlink" title="截距式"></a><font face="楷体">截距式</font></h3><p>$\dfrac{x}{a}+\dfrac{y}{b}&#x3D;1$</p>
-<h3 id="一般式"><a href="#一般式" class="headerlink" title="一般式"></a><font face="楷体">一般式</font></h3><p>$Ax+By+C&#x3D;0$</p>
-<h3 id="点斜式"><a href="#点斜式" class="headerlink" title="点斜式"></a><font face="楷体">点斜式</font></h3><p>$y-y_1&#x3D;k(x-x_1)$</p>
-<h3 id="两点式"><a href="#两点式" class="headerlink" title="两点式"></a><font face="楷体">两点式</font></h3><p>$\dfrac{x-x_1}{x_2-x_1}&#x3D;\dfrac{y-y_1}{y_2-y_1}$</p>
-<h3 id="点向式"><a href="#点向式" class="headerlink" title="点向式"></a><font face="楷体">点向式</font></h3><p><font face="楷体">直线上一点 P + 方向向量 $\vec v$ 表示一条直线。</font></p>
-<h3 id="求直线与点-A-的距离"><a href="#求直线与点-A-的距离" class="headerlink" title="求直线与点 A 的距离"></a><font face="楷体">求直线与点 A 的距离</font></h3><p>$d&#x3D;\dfrac{|\vec v\times \overrightarrow{PA}|}{|\vec v|}$</p>
-<h3 id="求点-A-在直线上的投影点-B"><a href="#求点-A-在直线上的投影点-B" class="headerlink" title="求点 A 在直线上的投影点 B"></a><font face="楷体">求点 A 在直线上的投影点 B</font></h3><p>$\overrightarrow {OB}&#x3D;\overrightarrow{OP}+\overrightarrow{PB}&#x3D;\overrightarrow{OP}+\dfrac{|\overrightarrow{PB}|}{|\vec v|}\vec v&#x3D;\overrightarrow{OP}+\dfrac{\overrightarrow{PA}\cdot\vec v}{\vec v^2}\vec v$</p>
-<h3 id="两直线交点"><a href="#两直线交点" class="headerlink" title="两直线交点"></a><font face="楷体">两直线交点</font></h3><p>$\overrightarrow {OQ}&#x3D;\overrightarrow{OP_1}+\dfrac{|\vec{v_2}\times \overrightarrow{P_2P_1}|}{|\vec{v_1}\times \vec{v_2}|}\vec{v_1}$</p>
-<h2 id="多边形"><a href="#多边形" class="headerlink" title="多边形"></a><font face="楷体">多边形</font></h2><p><font face="楷体">由点集描述。</p>
-<ul>
-<li><font face="楷体">一般按逆时针顺序</font></li>
-<li><font face="楷体">不一定满足凸性</font></li>
-<li><font face="楷体">注意第一个点与最后一个点的处理</font></li>
-</ul>
-<h3 id="多边形的面积"><a href="#多边形的面积" class="headerlink" title="多边形的面积"></a><font face="楷体">多边形的面积</font></h3><p><font face="楷体">三角形的面积：$\dfrac{1}{2}|\vec a\times \vec b|$</font></p>
-<p><font face="楷体">多边形的面积：分解为若干三角形的面积</font></p>
-<p>$S&#x3D;\dfrac{1}{2}|\sum\limits_{i&#x3D;0}^{n-1}\overrightarrow{OP_i}\times \overrightarrow{OP_{(i+1)\bmod n}}|$</p>
-<h3 id="判断点是否在多边形内"><a href="#判断点是否在多边形内" class="headerlink" title="判断点是否在多边形内"></a><font face="楷体">判断点是否在多边形内</font></h3><h4 id="光线投影法"><a href="#光线投影法" class="headerlink" title="光线投影法"></a><font face="楷体">光线投影法</font></h4><p><font face="楷体">从该点引出一条射线，如果这条射线与多边形有奇数个交点，则该点在多边形内部，否则该点在多边形外部。</font></p>
-<h4 id="回转数法"><a href="#回转数法" class="headerlink" title="回转数法"></a><font face="楷体">回转数法</font></h4><p><font face="楷体">回转数：面内闭合曲线逆时针绕过该点的总次数。</font></p>
-<p><font face="楷体">遵循非零规则：当回转次数为 0 时，点在曲线外部。</font></p>
-<ul>
-<li><p><font face="楷体">一种实现方法：计算相邻两边夹角（有方向）的和。</font></p>
-<img src="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/1.png" class="" title="咕咕咕">
-
-<img src="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/2.png" class="" title="咕咕咕"></li>
-<li><p><font face="楷体">另一种实现方法：从该点引出一条射线，每经过一条自上而下穿过该射线的边，贡献 -1；每经过一条自下而上穿过该射线的边，贡献 +1。</font></p>
-<img src="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/3.png" class="" title="咕咕咕">
-
-<img src="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/4.png" class="" title="咕咕咕"></li>
-</ul>
-<p><font face="楷体">边界情况</font></p>
-<ul>
-<li><font face="楷体">点在多边形上，对于每条边特判。</font></li>
-<li><font face="楷体">引出射线交多边形于顶点，视作在在射线上侧（影响自下而上还是自上而下的判断）</font>。</li>
-</ul>
-<h3 id="判断点是否在凸多边形内"><a href="#判断点是否在凸多边形内" class="headerlink" title="判断点是否在凸多边形内"></a><font face="楷体">判断点是否在凸多边形内</font></h3><h4 id="n-次-to-left-测试"><a href="#n-次-to-left-测试" class="headerlink" title="n 次 to-left 测试"></a><font face="楷体">n 次 to-left 测试</font></h4><p>$O(n)$</p>
-<h4 id="二分"><a href="#二分" class="headerlink" title="二分"></a><font face="楷体">二分</font></h4><p>$O(\log n)$</p>
-]]></content>
-      <categories>
-        <category>计算几何</category>
       </categories>
   </entry>
   <entry>
@@ -702,6 +589,119 @@
 <h5 id="法二：轮廓法"><a href="#法二：轮廓法" class="headerlink" title="法二：轮廓法"></a><font face="楷体">法二：轮廓法</font></h5><p><font face="楷体">三角形的并本质上是多边形，如果能找到这个多边形的轮廓，可用直接使用求多边形面积的算法求得面积并。</font></p>
 <p><font face="楷体">对于每一条边，求出它与其它所有三角形的交点，找到没有包含在任何三角形内部的部分。</font></p>
 <p><font face="楷体">时间复杂度：$O(n^2)$</font></p>
+]]></content>
+      <categories>
+        <category>计算几何</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>计算几何（一）</title>
+    <url>/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<p> 二维几何基础知识</p>
+<span id="more"></span>
+
+<h2 id="浮点数与精度问题"><a href="#浮点数与精度问题" class="headerlink" title="浮点数与精度问题"></a><font face="楷体">浮点数与精度问题</font></h2><h3 id="特殊值"><a href="#特殊值" class="headerlink" title="特殊值"></a><font face="楷体">特殊值</font></h3><ul>
+<li><font face="楷体">+0.0 -0.0</font></li>
+<li><font face="楷体">1.0&#x2F;0.0&#x3D;+inf，1.0&#x2F;-0.0&#x3D;-inf</font></li>
+<li><font face="楷体">nan，非数字，例如：$\sqrt{-2}$</font><ul>
+<li><font face="楷体">nan 除了 $\neq$ 时返回 <code>true</code> 外，其它比较运算符均返回 <code>false</code></font></li>
+</ul>
+</li>
+</ul>
+<p><font face="楷体">1.若问题能用整数解决则不用浮点数。</font></p>
+<p><font face="楷体">2.除非时限紧张，否则使用 <code>long double</code>。</font></p>
+<p><font face="楷体">3.减少数学库函数的调用。</font></p>
+<p><font face="楷体">4.进行浮点数比较时，加入容限（误差）eps。</font></p>
+<h2 id="点"><a href="#点" class="headerlink" title="点"></a><font face="楷体">点</font></h2><h3 id="using-Point-complex"><a href="#using-Point-complex" class="headerlink" title="using Point=complex&lt;double&gt;"></a><code>using Point=complex&lt;double&gt;</code></h3><ul>
+<li><font face="楷体">横坐标（x）：.real()</font></li>
+<li><font face="楷体">纵坐标（y）：.imag()</font></li>
+</ul>
+<p><font face="楷体">优点：自带各种运算</font></p>
+<p><font face="楷体">缺点：慢</font></p>
+<h3 id="using-Point-pair"><a href="#using-Point-pair" class="headerlink" title="using Point=pair&lt;double,double&gt;"></a><code>using Point=pair&lt;double,double&gt;</code></h3><ul>
+<li><font face="楷体">横坐标（x）：first</font></li>
+<li><font face="楷体">纵坐标（y）：second</font></li>
+</ul>
+<p><font face="楷体">优点：自带比较运算</font></p>
+<p><font face="楷体">缺点：自由度不高</font></p>
+<h3 id="struct-Point-double-x-y"><a href="#struct-Point-double-x-y" class="headerlink" title="struct Point {double x,y;}"></a><code>struct Point &#123;double x,y;&#125;</code></h3><ul>
+<li><font face="楷体">横坐标（x）：x</font></li>
+<li><font face="楷体">纵坐标（y）：y</font></li>
+</ul>
+<p><font face="楷体">优点：自由度高</font></p>
+<p><font face="楷体">缺点：功能为零</font></p>
+<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a><font face="楷体">向量</font></h2><p><font face="楷体">表示上和点一致，因为坐标系中一个点对应一个向量。</font></p>
+<h3 id="点积"><a href="#点积" class="headerlink" title="点积"></a><font face="楷体">点积</font></h3><p>$\vec{a}\cdot \vec b&#x3D;a_xb_x+a_yb_y$</p>
+<p><font face="楷体">几何意义：$\vec a\cdot \vec b&#x3D;|\vec a|\times |\vec b|\times \cos\theta$</font></p>
+<ul>
+<li><font face="楷体">向量的长度：$|\vec a|&#x3D;\sqrt{\vec a\times \vec a}$</font></li>
+<li><font face="楷体">向量的夹角：$\cos \theta&#x3D;\dfrac{\vec a\cdot \vec b}{|\vec a|\times |\vec b|}$</font></li>
+<li><font face="楷体">向量的投影：$|\vec a|\times cos\theta&#x3D;\dfrac{\vec a\cdot \vec b}{|\vec b|}$</font></li>
+<li><font face="楷体">向量垂直：$\vec a\cdot \vec b&#x3D;0$</font></li>
+</ul>
+<h3 id="叉积"><a href="#叉积" class="headerlink" title="叉积"></a><font face="楷体">叉积</font></h3><p>$\vec a\times \vec b&#x3D;(a_xb_y-a_yb_x)\hat k$</p>
+<p><font face="楷体">几何意义：$\vec a\times \vec b&#x3D;|\vec a|\times |\vec b|\times \sin \theta \hat k$</font></p>
+<ul>
+<li><font face="楷体">平行四边形面积：$|\vec a\times \vec b|&#x3D;|\vec a|\times |\vec b|\times |\sin \theta|$</font></li>
+<li><font face="楷体">向量平行：$\vec a\times \vec b&#x3D;\vec 0$</font></li>
+<li><font face="楷体">to-left 测试</font></li>
+</ul>
+<h4 id="to-left-测试"><a href="#to-left-测试" class="headerlink" title="to-left 测试"></a><font face="楷体">to-left 测试</font></h4><p><font face="楷体">判断点 P 在有向直线 AB 左侧&#x2F;右侧上。</font></p>
+<p>$\begin{cases}\overrightarrow {AB}\times \overrightarrow{AP}&gt;0&amp; P\ 在有向直线\ AB\ 左侧\newline \overrightarrow {AB}\times \overrightarrow{AP}&lt;0&amp;P\ 在有向直线\ AB\ 右侧\newline\overrightarrow {AB}\times \overrightarrow{AP}&#x3D;0&amp; P\ 在有向直线\ AB\ 上\end{cases}$</p>
+<h3 id="向量逆时针旋转"><a href="#向量逆时针旋转" class="headerlink" title="向量逆时针旋转"></a><font face="楷体">向量逆时针旋转</font></h3><p><font face="楷体">$\vec a$ 逆时针旋转 $\theta$，$(a_x,a_y)\rightarrow(\cos\theta a_x-\sin\theta a_y,\sin\theta a_x+\cos\theta a_y)$</font></p>
+<h2 id="线段"><a href="#线段" class="headerlink" title="线段"></a><font face="楷体">线段</font></h2><p><code>struct segement&#123;Point a,b;&#125;</code></p>
+<p><font face="楷体">记录左右端点</font></p>
+<h3 id="判断点是否在线段上"><a href="#判断点是否在线段上" class="headerlink" title="判断点是否在线段上"></a><font face="楷体">判断点是否在线段上</font></h3><ul>
+<li><font face="楷体">点 P 在 AB 上：$\overrightarrow {PA}\times \overrightarrow{PB}&#x3D;\vec 0$</font></li>
+<li><font face="楷体">点 P 在 AB 之间：</font><ul>
+<li>$\overrightarrow{PA}\cdot \overrightarrow{PB}\leq 0$</li>
+<li>$\min(A_x,B_x)\leq P_x\leq\max(A_x,B_x)\ \land\ \min(A_y,B_y)\leq P_y\leq\max(A_y,B_y)$</li>
+</ul>
+</li>
+</ul>
+<h3 id="判断两条线段是否相交"><a href="#判断两条线段是否相交" class="headerlink" title="判断两条线段是否相交"></a><font face="楷体">判断两条线段是否相交</font></h3><ul>
+<li><font face="楷体">点 A 和点 B 在直线 CD 的不同侧</font></li>
+<li><font face="楷体">点 C 和点 D 在直线 AB 的不同侧</font></li>
+<li><font face="楷体">三点共线、四点共线特判</font></li>
+</ul>
+<h2 id="直线"><a href="#直线" class="headerlink" title="直线"></a><font face="楷体">直线</font></h2><h3 id="斜截式"><a href="#斜截式" class="headerlink" title="斜截式"></a><font face="楷体">斜截式</font></h3><p>$y&#x3D;kx+b$</p>
+<h3 id="截距式"><a href="#截距式" class="headerlink" title="截距式"></a><font face="楷体">截距式</font></h3><p>$\dfrac{x}{a}+\dfrac{y}{b}&#x3D;1$</p>
+<h3 id="一般式"><a href="#一般式" class="headerlink" title="一般式"></a><font face="楷体">一般式</font></h3><p>$Ax+By+C&#x3D;0$</p>
+<h3 id="点斜式"><a href="#点斜式" class="headerlink" title="点斜式"></a><font face="楷体">点斜式</font></h3><p>$y-y_1&#x3D;k(x-x_1)$</p>
+<h3 id="两点式"><a href="#两点式" class="headerlink" title="两点式"></a><font face="楷体">两点式</font></h3><p>$\dfrac{x-x_1}{x_2-x_1}&#x3D;\dfrac{y-y_1}{y_2-y_1}$</p>
+<h3 id="点向式"><a href="#点向式" class="headerlink" title="点向式"></a><font face="楷体">点向式</font></h3><p><font face="楷体">直线上一点 P + 方向向量 $\vec v$ 表示一条直线。</font></p>
+<h3 id="求直线与点-A-的距离"><a href="#求直线与点-A-的距离" class="headerlink" title="求直线与点 A 的距离"></a><font face="楷体">求直线与点 A 的距离</font></h3><p>$d&#x3D;\dfrac{|\vec v\times \overrightarrow{PA}|}{|\vec v|}$</p>
+<h3 id="求点-A-在直线上的投影点-B"><a href="#求点-A-在直线上的投影点-B" class="headerlink" title="求点 A 在直线上的投影点 B"></a><font face="楷体">求点 A 在直线上的投影点 B</font></h3><p>$\overrightarrow {OB}&#x3D;\overrightarrow{OP}+\overrightarrow{PB}&#x3D;\overrightarrow{OP}+\dfrac{|\overrightarrow{PB}|}{|\vec v|}\vec v&#x3D;\overrightarrow{OP}+\dfrac{\overrightarrow{PA}\cdot\vec v}{\vec v^2}\vec v$</p>
+<h3 id="两直线交点"><a href="#两直线交点" class="headerlink" title="两直线交点"></a><font face="楷体">两直线交点</font></h3><p>$\overrightarrow {OQ}&#x3D;\overrightarrow{OP_1}+\dfrac{|\vec{v_2}\times \overrightarrow{P_2P_1}|}{|\vec{v_1}\times \vec{v_2}|}\vec{v_1}$</p>
+<h2 id="多边形"><a href="#多边形" class="headerlink" title="多边形"></a><font face="楷体">多边形</font></h2><p><font face="楷体">由点集描述。</p>
+<ul>
+<li><font face="楷体">一般按逆时针顺序</font></li>
+<li><font face="楷体">不一定满足凸性</font></li>
+<li><font face="楷体">注意第一个点与最后一个点的处理</font></li>
+</ul>
+<h3 id="多边形的面积"><a href="#多边形的面积" class="headerlink" title="多边形的面积"></a><font face="楷体">多边形的面积</font></h3><p><font face="楷体">三角形的面积：$\dfrac{1}{2}|\vec a\times \vec b|$</font></p>
+<p><font face="楷体">多边形的面积：分解为若干三角形的面积</font></p>
+<p>$S&#x3D;\dfrac{1}{2}|\sum\limits_{i&#x3D;0}^{n-1}\overrightarrow{OP_i}\times \overrightarrow{OP_{(i+1)\bmod n}}|$</p>
+<h3 id="判断点是否在多边形内"><a href="#判断点是否在多边形内" class="headerlink" title="判断点是否在多边形内"></a><font face="楷体">判断点是否在多边形内</font></h3><h4 id="光线投影法"><a href="#光线投影法" class="headerlink" title="光线投影法"></a><font face="楷体">光线投影法</font></h4><p><font face="楷体">从该点引出一条射线，如果这条射线与多边形有奇数个交点，则该点在多边形内部，否则该点在多边形外部。</font></p>
+<h4 id="回转数法"><a href="#回转数法" class="headerlink" title="回转数法"></a><font face="楷体">回转数法</font></h4><p><font face="楷体">回转数：面内闭合曲线逆时针绕过该点的总次数。</font></p>
+<p><font face="楷体">遵循非零规则：当回转次数为 0 时，点在曲线外部。</font></p>
+<ul>
+<li><p><font face="楷体">一种实现方法：计算相邻两边夹角（有方向）的和。</font></p>
+<img src="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/1.png" class="" title="咕咕咕">
+
+<img src="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/2.png" class="" title="咕咕咕"></li>
+<li><p><font face="楷体">另一种实现方法：从该点引出一条射线，每经过一条自上而下穿过该射线的边，贡献 -1；每经过一条自下而上穿过该射线的边，贡献 +1。</font></p>
+<img src="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/3.png" class="" title="咕咕咕">
+
+<img src="/2023/12/02/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/4.png" class="" title="咕咕咕"></li>
+</ul>
+<p><font face="楷体">边界情况</font></p>
+<ul>
+<li><font face="楷体">点在多边形上，对于每条边特判。</font></li>
+<li><font face="楷体">引出射线交多边形于顶点，视作在在射线上侧（影响自下而上还是自上而下的判断）</font>。</li>
+</ul>
+<h3 id="判断点是否在凸多边形内"><a href="#判断点是否在凸多边形内" class="headerlink" title="判断点是否在凸多边形内"></a><font face="楷体">判断点是否在凸多边形内</font></h3><h4 id="n-次-to-left-测试"><a href="#n-次-to-left-测试" class="headerlink" title="n 次 to-left 测试"></a><font face="楷体">n 次 to-left 测试</font></h4><p>$O(n)$</p>
+<h4 id="二分"><a href="#二分" class="headerlink" title="二分"></a><font face="楷体">二分</font></h4><p>$O(\log n)$</p>
 ]]></content>
       <categories>
         <category>计算几何</category>
