@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"iceinsky.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="乱我心者，今日之日多烦忧">
+  <meta name="description" content="搜索">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搜索">
 <meta property="og:url" content="http://iceinsky.top/2024/01/17/%E6%90%9C%E7%B4%A2/index.html">
 <meta property="og:site_name" content="咕咕咕">
-<meta property="og:description" content="乱我心者，今日之日多烦忧">
+<meta property="og:description" content="搜索">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-17T11:46:27.000Z">
-<meta property="article:modified_time" content="2024-01-17T12:30:50.000Z">
+<meta property="article:modified_time" content="2024-01-18T09:01:44.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 
@@ -224,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-17 19:46:27 / 修改时间：20:30:50" itemprop="dateCreated datePublished" datetime="2024-01-17T19:46:27+08:00">2024-01-17</time>
+              <time title="创建时间：2024-01-17 19:46:27" itemprop="dateCreated datePublished" datetime="2024-01-17T19:46:27+08:00">2024-01-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-18 17:01:44" itemprop="dateModified" datetime="2024-01-18T17:01:44+08:00">2024-01-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -244,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>3.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -263,7 +269,69 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>搜索</p>
+<span id="more"></span>
+
+<p>也就是对状态空间进行枚举，通过穷尽所有的可能来找到最优解，或者统计合法解的个数。</p>
+<h2 id="搜索的基本概念："><a href="#搜索的基本概念：" class="headerlink" title="搜索的基本概念："></a>搜索的基本概念：</h2><p>状态：定量的描述一个唯一确定的情况。</p>
+<p>状态转移：从一个状态转移到另一个状态的过程，涉及状态上信息的修改。</p>
+<p>搜索树：</p>
+<h2 id="搜索的基本形式："><a href="#搜索的基本形式：" class="headerlink" title="搜索的基本形式："></a>搜索的基本形式：</h2><p>（本文讨论的 DFS 和 BFS 更多地考虑实际问题的搜索，而非图论上的 DFS 和 BFS。对于图论上的 DFS 和 BFS 具有更多更有趣的性质，将在后续中讨论）</p>
+<h3 id="DFS（深度优先搜索）："><a href="#DFS（深度优先搜索）：" class="headerlink" title="DFS（深度优先搜索）："></a>DFS（深度优先搜索）：</h3><p>在搜索中，DFS 表现为使用递归函数枚举所有解空间。以函数参数作为状态。递归至找到解后返回。</p>
+<p>例1：</p>
+<p>给定 $10$ 个数，选出 $3$ 个十进制位各不相同的数且和最大。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> sum)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;<span class="number">3</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">check</span>(b[<span class="number">1</span>],b[<span class="number">2</span>],b[<span class="number">3</span>]))</span><br><span class="line">			ans=<span class="built_in">max</span>(ans,sum);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">For</span>(i,<span class="number">1</span>,<span class="number">10</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[i])&#123;</span><br><span class="line">			b[++cnt]=a[i];</span><br><span class="line">			vis[i]=<span class="number">1</span>;</span><br><span class="line">			<span class="built_in">dfs</span>(x+<span class="number">1</span>,sum+a[i]);</span><br><span class="line">			vis[i]=<span class="number">0</span>;</span><br><span class="line">			cnt--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="BFS（宽度优先搜索）："><a href="#BFS（宽度优先搜索）：" class="headerlink" title="BFS（宽度优先搜索）："></a>BFS（宽度优先搜索）：</h3><p>在搜索中，BFS 表现为使用队列枚举所有解空间。以队列元素作为状态。不断入队出队至找到解后终止。</p>
+<p>同样解决例 1：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	<span class="type">int</span> x,sum;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">4</span>],b[<span class="number">3</span>];</span><br><span class="line">&#125;;</span><br><span class="line">queue&lt;node&gt; q;</span><br><span class="line"><span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">	<span class="keyword">auto</span> now=q.<span class="built_in">front</span>();</span><br><span class="line">	<span class="keyword">if</span>(now.x==<span class="number">3</span>)&#123;</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,now.sum);</span><br><span class="line">		<span class="keyword">continue</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	q.<span class="built_in">pop</span>();</span><br><span class="line">	<span class="built_in">For</span>(i,<span class="number">1</span>,<span class="number">10</span>)&#123;</span><br><span class="line">		<span class="built_in">For</span>(j,<span class="number">1</span>,now.x) <span class="keyword">if</span>(now.a[j]!=i&amp;&amp;<span class="built_in">check</span>(a[i],now.b[j]))&#123;</span><br><span class="line">			<span class="keyword">auto</span> cur=now;</span><br><span class="line">			cur.x++;</span><br><span class="line">			cur.a[cur.x]=i;</span><br><span class="line">			cur.b[cur.x]=a[i];</span><br><span class="line">			cur.sum+=a[i];</span><br><span class="line">			q.<span class="built_in">push</span>(cur);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!now.x)&#123;</span><br><span class="line">			<span class="keyword">auto</span> cur=now;</span><br><span class="line">			cur.x++;</span><br><span class="line">			cur.a[cur.x]=i;</span><br><span class="line">			cur.b[cur.x]=a[i];</span><br><span class="line">			q.<span class="built_in">push</span>(cur);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两种搜索方式在遍历解空间角度，仅仅是实现方式不同，一个使用栈（递归栈）一个使用队列，实现功能完全相同。</p>
+<h2 id="DFS-和-BFS-的比较："><a href="#DFS-和-BFS-的比较：" class="headerlink" title="DFS 和 BFS 的比较："></a>DFS 和 BFS 的比较：</h2><p>在普遍的教学中，一般以迷宫问题作为 DFS 和 BFS 的引入问题。</p>
+<p>那么就来看看迷宫问题：</p>
+<p>例 2：</p>
+<p>给定一个 $n\times m$ 的迷宫，$0$ 表示通路，$1$ 表示障碍求从 $(1,1)$ 到 $(n,m)$ 的最短路径。</p>
+<p>DFS 实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> z)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x==n&amp;&amp;y==m)&#123;</span><br><span class="line">        ans=<span class="built_in">min</span>(ans,z);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">For</span>(i,<span class="number">0</span>,<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="type">int</span> X=dx[i]+x,Y=dy[i]+y;</span><br><span class="line">        <span class="keyword">if</span>(!vis[X][Y]&amp;&amp;maze[x][y]==<span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">            vis[X][Y]=<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(X,Y,z+<span class="number">1</span>);</span><br><span class="line">            vis[X][Y]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>BFS 实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">    <span class="type">int</span> x,y,z;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">()</span></span>&#123;</span><br><span class="line">    queue&lt;node&gt; q;</span><br><span class="line">    <span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">        <span class="keyword">auto</span> now=q.<span class="built_in">front</span>();</span><br><span class="line">        <span class="keyword">if</span>(now.x==n&amp;&amp;now.y==m)&#123;</span><br><span class="line">            ans=now.z;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="built_in">For</span>(i,<span class="number">0</span>,<span class="number">3</span>)&#123;</span><br><span class="line">            <span class="type">int</span> X=now.x+dx[i],Y=now.y+dy[i];</span><br><span class="line">            <span class="keyword">if</span>(maze[X][Y]==<span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">                q.<span class="built_in">push</span>(&#123;X,Y,now.z+<span class="number">1</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>观察两者，比较两者的不同。</p>
+<ul>
+<li>DFS 需要添加 vis，要求递归过程中不能走回头路（走过的路），因为 DFS 代表一条路走到黑是典型的“不撞南墙不回头”。若允许走回头路，最直接的问题就是在两个状态之间来回横跳，陷入死循环。</li>
+<li>BFS 不严格需要添加 vis，且 BFS 过程中终点第一次出队即为最短路径。因为 BFS 过程是将新状态加入队尾，在迷宫问题中满足每次路径只会增加不会减少或不变，且增量相等（都为 $1$）。而初始状态只有一个 $0$，所以 BFS 过程中的任意时候，队列的路径长度中只会有 $2$ 种值且小的在前，大的在后。也就说，出队的路径长度为单调不减且在有限个状态后一定会增。那么就一定会达到最短路径。所以不严格需要添加标记数组，只是会让无用的状态数大量增加。</li>
+</ul>
+<p>根据以上结论，其实可以发现，BFS 在状态转移增量恒为 1 的问题中，第一次找到的解即为最优解。</p>
+<p>对于标记数组，因为迷宫问题中，状态转移增量恒为 $1$，所以走过再走一遍的路只会让答案增大：</p>
+<ul>
+<li>对于 DFS，若是从当前点走到过的点再出发回到当前点，路径增大了，不如不走；若是从当前点走到过的点再走到别的点，那么回溯时本身就能走到。</li>
+<li>对于 BFS，走过点本身就被加入了队列，再加入一遍往后可走的的路是相同的，而到这个点时的路径长度却增加了，显然是不优的。</li>
+</ul>
+<p>再者：</p>
+<ul>
+<li>DFS 的标记数组需要回溯，为单独一条路径服务。</li>
+<li>BFS 的标记数组不需要回溯，为全体路径共用。（注意：此条关于 BFS 标记数组的性质是因为状态转移增量为 $1$（状态转移增量相同也可视为 $1$）。而不是因为转移增量为正。若仅满足转移增量为正，不足以支撑所有点共用一个标记数组）</li>
+</ul>
+<p>DFS 就像一个人独自找答案，不能同时尝试多种方法；BFS 就像一群人分别找答案，在同时尝试不同方法。</p>
+<p>综上，可以发现：BFS 在状态转移增量恒为 $1$ 的问题中，第一次找到的解即为最优解且时间复杂度和空间复杂度均为 $O(nm)$ 因为每个点只会被入队一次。而 DFS 在最坏情况下仍会遍历全体解空间导致时间复杂度呈指数级。</p>
+<p>而增量不恒为 $1$ 的情况下，BFS 就不能体现以上性质，因为队列中的解不呈单调不减的情况了。也就不能体现和 DFS 相比的优越性了。</p>
+<p>所以对于一般情况，普遍采用 DFS。</p>
+<p>虽然普遍采用 DFS，但是实际上对于不同数据，DFS 和 BFS 会有不同表现，不存在谁一定更优。对于不同的数据情况 DFS 和 BFS 也会有不同的应对措施，将在后文中介绍。</p>
+<h2 id="优化："><a href="#优化：" class="headerlink" title="优化："></a>优化：</h2><h3 id="剪枝："><a href="#剪枝：" class="headerlink" title="剪枝："></a>剪枝：</h3><h4 id="可行性剪枝："><a href="#可行性剪枝：" class="headerlink" title="可行性剪枝："></a>可行性剪枝：</h4><p>若当前情况已经不符合题意则可以直接返回，而不需要走到头。</p>
+<p>如例 $1$ 中，若搜索的第二个数已经不满足和第一个数匹配，那就没有必要继续搜索第三个数了。</p>
+<h4 id="最优性剪枝："><a href="#最优性剪枝：" class="headerlink" title="最优性剪枝："></a>最优性剪枝：</h4><p>若当前情况已经劣于已经找到的最优解时，直接返回。</p>
+<p>如例 $2$ 中，若当前搜到的路径已经比 $ans$ 大了，就不用继续搜了。</p>
+<h4 id="搜索顺序剪枝："><a href="#搜索顺序剪枝：" class="headerlink" title="搜索顺序剪枝："></a>搜索顺序剪枝：</h4><p>虽然从某种意义上说，这仅仅是“骗过了数据”。</p>
+<p>但是不可否认的是大多情况下，改变搜索顺序可以优化搜索效率。</p>
+<p>如例 $1$ 中，若从最大的数开始向小的数搜索，那么效率显然更优。</p>
+<h4 id="Alpha-Beta："><a href="#Alpha-Beta：" class="headerlink" title="Alpha-Beta："></a>Alpha-Beta：</h4><h4 id="人类智慧："><a href="#人类智慧：" class="headerlink" title="人类智慧："></a>人类智慧：</h4><p>以上剪枝策略只是形式化的剪枝策略。还可以利用人类智慧来进行剪枝：</p>
+<ul>
+<li>极端法：考虑极端情况，如果最极端的情况都不满足，那一定不满足。</li>
+<li>调整法：通过对子树的对比剪掉重复子树和明显不是最优的子树。</li>
+<li>数学方法：比如在图论中借助连通分量，数论中借助模方程的分析，借助不等式的放缩来估计下界等等。</li>
+</ul>
+<h3 id="记忆化搜索："><a href="#记忆化搜索：" class="headerlink" title="记忆化搜索："></a>记忆化搜索：</h3><h3 id="双向搜索："><a href="#双向搜索：" class="headerlink" title="双向搜索："></a>双向搜索：</h3><h4 id="同时双向搜索："><a href="#同时双向搜索：" class="headerlink" title="同时双向搜索："></a>同时双向搜索：</h4><h4 id="meet-in-middle："><a href="#meet-in-middle：" class="headerlink" title="meet in middle："></a>meet in middle：</h4><h3 id="A-："><a href="#A-：" class="headerlink" title="A*："></a>A*：</h3><h3 id="迭代加深搜索："><a href="#迭代加深搜索：" class="headerlink" title="迭代加深搜索："></a>迭代加深搜索：</h3><h3 id="IDA-："><a href="#IDA-：" class="headerlink" title="IDA*："></a>IDA*：</h3><h3 id="Dancing-Links："><a href="#Dancing-Links：" class="headerlink" title="Dancing Links："></a>Dancing Links：</h3><h3 id="启发式搜索："><a href="#启发式搜索：" class="headerlink" title="启发式搜索："></a>启发式搜索：</h3>
     </div>
 
     
@@ -357,6 +425,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">搜索的基本概念：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BD%A2%E5%BC%8F%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">搜索的基本形式：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS%EF%BC%88%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%89%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">DFS（深度优先搜索）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFS%EF%BC%88%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%89%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">BFS（宽度优先搜索）：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS-%E5%92%8C-BFS-%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">DFS 和 BFS 的比较：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">优化：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">剪枝：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">4.1.1.</span> <span class="nav-text">可行性剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E6%80%A7%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">4.1.2.</span> <span class="nav-text">最优性剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E9%A1%BA%E5%BA%8F%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">4.1.3.</span> <span class="nav-text">搜索顺序剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha-Beta%EF%BC%9A"><span class="nav-number">4.1.4.</span> <span class="nav-text">Alpha-Beta：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%BA%E7%B1%BB%E6%99%BA%E6%85%A7%EF%BC%9A"><span class="nav-number">4.1.5.</span> <span class="nav-text">人类智慧：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.2.</span> <span class="nav-text">记忆化搜索：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%90%91%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.3.</span> <span class="nav-text">双向搜索：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E5%8F%8C%E5%90%91%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.3.1.</span> <span class="nav-text">同时双向搜索：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#meet-in-middle%EF%BC%9A"><span class="nav-number">4.3.2.</span> <span class="nav-text">meet in middle：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%EF%BC%9A"><span class="nav-number">4.4.</span> <span class="nav-text">A*：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%8A%A0%E6%B7%B1%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.5.</span> <span class="nav-text">迭代加深搜索：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-%EF%BC%9A"><span class="nav-number">4.6.</span> <span class="nav-text">IDA*：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dancing-Links%EF%BC%9A"><span class="nav-number">4.7.</span> <span class="nav-text">Dancing Links：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.8.</span> <span class="nav-text">启发式搜索：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -421,12 +490,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">38k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">32 分钟</span>
+    <span title="站点阅读时长">35 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
