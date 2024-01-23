@@ -30,7 +30,7 @@
 <meta property="og:description" content="贪心">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-20T08:14:48.000Z">
-<meta property="article:modified_time" content="2024-01-22T07:36:40.000Z">
+<meta property="article:modified_time" content="2024-01-23T12:55:04.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-22 15:36:40" itemprop="dateModified" datetime="2024-01-22T15:36:40+08:00">2024-01-22</time>
+                <time title="修改时间：2024-01-23 20:55:04" itemprop="dateModified" datetime="2024-01-23T20:55:04+08:00">2024-01-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.7k</span>
+              <span>5.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -275,6 +275,7 @@
 <p>贪心是一种思想，而不是一种具体的算法，没有固定的写法。</p>
 <p>下面介绍几种贪心经典算法来引入贪心的思想。</p>
 <p>贪心的熟练运用需要通过大量的做题自行提高。</p>
+<p>贪心在算法竞赛中具有极广的应用，可以说 $50%$ 的题目都用到了贪心的思想。</p>
 <h2 id="区间选点："><a href="#区间选点：" class="headerlink" title="区间选点："></a>区间选点：</h2><p>给定 $n$ 个区间 $[l_i,r_i]$，选择最少的点，使得每个区间内至少包含一个选出的点。（只关心数量）</p>
 <p>将区间按 $l_i$ 为第一关键字升序，$r_i$ 为第二关键字降序排序。</p>
 <p>考虑排序后的 $n$ 个区间，从第一个区间开始，用一个点覆盖尽可能多的区间，即：$l_i\leq r_1$ 的区间。从第一个满足 $l_i&gt;r_1$ 的区间开始，同样考虑。（实际上选的点就是 $r_1$）</p>
@@ -285,7 +286,7 @@
 <h3 id="证明-2："><a href="#证明-2：" class="headerlink" title="证明 2："></a>证明 2：</h3><p>对于 $n$ 个区间，初始没有任何区间被覆盖，但最终所有点都会被覆盖。因此不妨选择第一个区间 $[l_1,r_1]$ 作为第一个被选的区间，考虑哪些区间是通过在 $[l_1,r_1]$ 中选择一个点就能被覆盖的：和 $[l_1,r_1]$ 有交集的区间：</p>
 <ul>
 <li>$l_i&lt;l_1,r_i\in [l_1,r_1]$</li>
-<li>$[l_i,r_i]\sub [l_1,r_1]$ 覆盖 $[l_i,r_i]$ 一定会覆盖 $[l_1,r_1]$，所以可以去掉 $[l_1,r_1]$。</li>
+<li>$[l_i,r_i]\subset [l_1,r_1]$ 覆盖 $[l_i,r_i]$ 一定会覆盖 $[l_1,r_1]$，所以可以去掉 $[l_1,r_1]$。</li>
 <li>$r_i&gt;r_1,l_i\in[l_1,r_1]$</li>
 </ul>
 <p>第一类和第三类不能仅仅通过一个点覆盖，需要两个点，而区间 $[l_1,r_1]$ 被划为那一个点，是无法确定的。</p>
@@ -334,13 +335,44 @@
 <h2 id="货仓选址："><a href="#货仓选址：" class="headerlink" title="货仓选址："></a>货仓选址：</h2><p>给定 $n$ 个商店的坐标 $a_i$，选定一个货仓 $x$，使得 $\sum\limits_{i&#x3D;1}^n|a_i-x|$ 最小。</p>
 <p>不妨将 $a_i$ 升序，货仓的坐标即为 $a_{\lceil\frac n2\rceil}$。</p>
 <p>引理 $1$：货仓的坐标为某个商店的坐标。</p>
-<p>反证，若 $\forall a_i\neq x$，则 $\exist a_i&lt;x\land a_{i+1}&gt;x$，那么对于 $j&lt;i$ 和 $j&gt;{i+1}$ 答案不变。而对于 $a_i$ 和 $a_{i+1}$，货仓位置设置在哪事实上没有影响。所以不妨设为 $a_i$。因为这样就将待选位置缩小到 $n$ 个 $a_i$ 中。</p>
+<p>反证，若 $\forall a_i\neq x$，则 ${\exist} a_i&lt;x\land a_{i+1}&gt;x$，那么对于 $j&lt;i$ 和 $j&gt;{i+1}$ 答案不变。而对于 $a_i$ 和 $a_{i+1}$，货仓位置设置在哪事实上没有影响。所以不妨设为 $a_i$。因为这样就将待选位置缩小到 $n$ 个 $a_i$ 中。</p>
 <p>此时，考虑特殊情况。</p>
 <p>引理 $2$：$\sum\limits_{i&#x3D;1}^n|a_i-a_1|&gt;\sum\limits_{i&#x3D;1}^n|a_i-a_2|(n&gt;2)$。</p>
 <p>展开：$\sum\limits_{i&#x3D;2}^na_i&gt;\sum\limits_{i&#x3D;3}^na_i-a_1$，易证。</p>
 <p>所以，$x\neq a_1$。而对于 $x&#x3D;a_2$ 的情况，可以和 $x&#x3D;a_1$ 的情况同样考虑（在之后的过程中 $|a_1-x|+|a_n-x|&#x3D;a_n-a_1$ 为定值，所以可以消去）。</p>
 <p>当 $n&#x3D;2$ 时，$x&#x3D;a_1$ 和 $x&#x3D;a_2$ 结果相等；或 $n&#x3D;1$ 时，$x&#x3D;a_1$。（取决于 $n$ 的奇偶性，因为每次去掉 $a_1$ 和 $a_n$ 两个位置）</p>
-<h2 id="国王游戏："><a href="#国王游戏：" class="headerlink" title="国王游戏："></a>国王游戏：</h2><h2 id="反悔贪心："><a href="#反悔贪心：" class="headerlink" title="反悔贪心："></a>反悔贪心：</h2><h3 id="种树："><a href="#种树：" class="headerlink" title="种树："></a>种树：</h3><h3 id="任务安排："><a href="#任务安排：" class="headerlink" title="任务安排："></a>任务安排：</h3><h2 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h2>
+<h2 id="国王游戏："><a href="#国王游戏：" class="headerlink" title="国王游戏："></a>国王游戏：</h2><p>国王有 $n$ 个大臣，每个大臣左手有 $a_i$，右手有 $b_i$。每个大臣的得分是排在他前面的人的左手之积除以他的右手。国王的左手是 $a_0$，右手是 $b_0$，求一种排队顺序使得得分最大值最小。</p>
+<p>考虑两个相邻的人谁在前面更优。$i$ 的得分：$\dfrac{\prod\limits_{j&#x3D;1}^{i-1}a_j}{b_i}$，$i+1$ 的得分：$\dfrac{\prod\limits_{j&#x3D;1}^{i}a_j}{b_{i+1}}$ 。</p>
+<p>两者消去公共部分后分别为 $\dfrac{1}{b_i}$ 和 $\dfrac{a_i}{b_{i+1}}$。</p>
+<p>如果交换，那么消去公共部分后分别为 $\dfrac{1}{b_{i+1}}$ 和 $\dfrac{a_{i+1}}{b_i}$。</p>
+<p>注意到：$\dfrac{a_i}{b_{i+1}}&gt;\dfrac{1}{b_{i+1}},\dfrac{1}{b_i}&lt;\dfrac{a_{i+1}}{b_i}$。</p>
+<p>若 $\dfrac{1}{b_i}&lt;\dfrac{a_i}{b_{i+1}}$，即：$a_i\times b_i&gt;b_{i+1}$，则交换后最大值只能是 $\dfrac{a_{i+1}}{b_i}$。</p>
+<p>而如果交换更优，那么要满足 $\dfrac{a_i}{b_{i+1}}&gt;\dfrac{a_{i+1}}{b_i}$，即：$a_i\times b_i&gt;a_{i+1}\times b_{i+1}$。显然，满足这个条件的一定满足前置条件。</p>
+<p>若 $\dfrac{1}{b_i}&gt;\dfrac{a_i}{b_{i+1}}$，即：$a_i\times b_i&lt;b_{i+1}$，则交换后的最大值就是 $\dfrac{a_{i+1}}{b_i}$ 且不更优。所以不需要交换。</p>
+<p>所以将大臣们按照 $a_i\times b_i$ 的值升序排队即可。</p>
+<p>为什么只要考虑相邻两个？</p>
+<p>因为如果队伍不是按 $a_i\times b_i$ 有序的，那么就一定会有两个相邻的人满足 $a_i\times b_i&gt;a_{i+1}\times b_{i+1}$，而调整它，就会更优。所以一定会调整至 $\forall a_{i}\times b_i&lt;a_{i+1}\times b_{i+1}$。</p>
+<h2 id="反悔贪心："><a href="#反悔贪心：" class="headerlink" title="反悔贪心："></a>反悔贪心：</h2><p>在一般贪心中，通常为得出一个策略，按照策略即可直接得到答案。而有的时候，结合以往的结果去对修正当前的决策也是可以的，但是从宏观上看，还是“贪心”的。对于这种贪心，一般被称为反悔贪心（也有说法细分为反悔堆和反悔自动机）。</p>
+<h3 id="任务安排："><a href="#任务安排：" class="headerlink" title="任务安排："></a>任务安排：</h3><p>给定 $n$ 个任务，对于每个任务都有一个截止日期（$\leq 10^9$）和完成价值。从第一天开始，每天可以选择一个任务完成。求能获得的最大价值。</p>
+<p>对于两个不同截止日期的任务，一定是先完成截止早的，显然。</p>
+<p>对于两个相同截止日期的任务，一定是先完成价值大的，显然。</p>
+<p>所以先将任务按截止日期升序，但是时间范围过大，不允许枚举模拟。</p>
+<p>考虑反悔贪心：</p>
+<p>若在某一天发现一个价值很大没有选择的任务，但是任务安排已经超过这天了。这时，我们反悔了。所以要去掉一个已经选择的中最小的一个，替换成这个价值大即可。</p>
+<p>所以用一个优先队列维护已经选择的任务， 由于任务总数不大，所以最终时间复杂度为：$O(n\log n)$。</p>
+<p>使用堆维护类似的过程，也被部分人称作反悔堆。</p>
+<h3 id="种树："><a href="#种树：" class="headerlink" title="种树："></a>种树：</h3><p>共有 $n$ 个坑可以种树，且每个坑种树后能获利 $a_i$，但要求不能有两棵树相邻。求种 $k$ 棵树最大获利。</p>
+<p>若无不能相邻的限制，则直接选取前 $k$ 大即可。</p>
+<p>考虑有什么区别，不能相邻，每次有两种情况：</p>
+<ul>
+<li>在不相邻的位置中，选择一个最大值，贡献即为 $a_j$。</li>
+<li>选择一个相邻的位置但是要把当前这棵树给挖掉，所以贡献为 $a_{i+1}-a_i$ 或者 $a_{i-1}-a_i$。可是如果 $a_{i+1}-a_i&gt;0$ 或者 $a_{i-1}-a_i&gt;0$ 的话，那么 $a_{i+1}$ 或者 $a_{i-1}$ 会在之前就被考虑，所以不能选择左右之一，只能是 $a_{i+1}+a_{i-1}-a_i&gt;0$ 即相邻的同时选。</li>
+</ul>
+<p>所以，每次贪心在未被选择的 $a_1,..,a_{i-2},a_{i+2},…,a_n$ 和 $a_{i+1}+a_{i-1}-a_i$ 中选择一个最大值。</p>
+<p>若选择的是 $a_{i+1}+a_{i-1}-a_i$，那不能再选的是 $a_{i+2}$ 和 $a_{i-1}$。所以我们用一个新建节点来表示 $a_{i+1}+a_{i-1}-a_i$ 且用它来替代原本 $i$ 的位置，使用双向链表维护相邻元素，并标记相邻元素不能被选（如果同一个点被选三次，那么它本身的贡献会重新变成正的，此时便蕴含着反悔的含义）。</p>
+<p>共选择 $k$ 次最大值。</p>
+<p>上述过程也被部分人称之为反悔自动机。</p>
+
     </div>
 
     
@@ -437,7 +469,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E9%80%89%E7%82%B9%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">区间选点：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-1-%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">证明 $1$：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-2%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">证明 2：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%9A%E4%B8%8D%E7%9B%B8%E4%BA%A4%E5%8C%BA%E9%97%B4%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">最多不相交区间：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-1%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">证明 1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-2%EF%BC%9A-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明 2：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#addition%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">addition：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E5%88%86%E7%BB%84%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">区间分组：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E8%A6%86%E7%9B%96%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">区间覆盖：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">合并果子：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E9%98%9F%E6%8E%A5%E6%B0%B4%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">排队接水：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">货仓选址：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BD%E7%8E%8B%E6%B8%B8%E6%88%8F%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">国王游戏：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83%EF%BC%9A"><span class="nav-number">9.</span> <span class="nav-text">反悔贪心：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%8D%E6%A0%91%EF%BC%9A"><span class="nav-number">9.1.</span> <span class="nav-text">种树：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%AE%89%E6%8E%92%EF%BC%9A"><span class="nav-number">9.2.</span> <span class="nav-text">任务安排：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A"><span class="nav-number">10.</span> <span class="nav-text">例题：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E9%80%89%E7%82%B9%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">区间选点：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-1-%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">证明 $1$：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-2%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">证明 2：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%9A%E4%B8%8D%E7%9B%B8%E4%BA%A4%E5%8C%BA%E9%97%B4%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">最多不相交区间：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-1%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">证明 1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-2%EF%BC%9A-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明 2：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#addition%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">addition：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E5%88%86%E7%BB%84%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">区间分组：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E8%A6%86%E7%9B%96%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">区间覆盖：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">合并果子：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E9%98%9F%E6%8E%A5%E6%B0%B4%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">排队接水：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">货仓选址：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BD%E7%8E%8B%E6%B8%B8%E6%88%8F%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">国王游戏：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83%EF%BC%9A"><span class="nav-number">9.</span> <span class="nav-text">反悔贪心：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%AE%89%E6%8E%92%EF%BC%9A"><span class="nav-number">9.1.</span> <span class="nav-text">任务安排：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%8D%E6%A0%91%EF%BC%9A"><span class="nav-number">9.2.</span> <span class="nav-text">种树：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -502,12 +534,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">53k</span>
+    <span title="站点总字数">55k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">48 分钟</span>
+    <span title="站点阅读时长">50 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
