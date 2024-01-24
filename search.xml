@@ -1,6 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>DP（十六）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（十五）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（十四）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（十三）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（十二）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（十一）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（十）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%8D%81%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（九）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E4%B9%9D%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（八）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%85%AB%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（七）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E4%B8%83%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（六）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%85%AD%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（五）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E4%BA%94%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（四）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（三）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>DP（二）</title>
+    <url>/2024/01/24/DP%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<p>背包 DP</p>
+<span id="more"></span>
+
+<p>背包 DP，正如它的名字，是将问题模型抽象成一个背包，背包有容量，物品拥有体积和价值，要将物品按照一定的限制放入这个背包，从而求解一系列问题。</p>
+<h2 id="01-背包："><a href="#01-背包：" class="headerlink" title="01 背包："></a>01 背包：</h2><p>例 $1$：</p>
+<p>有一个容量为 $V$ 的背包有 $n$ 种物品，每种物品有 $v_i$ 的体积和 $w_i$ 的价值，每种物品最多取一个，求能获得的最大价值。</p>
+<p>状态：</p>
+<p>设 dp$[i][j]$ 表示考虑前 $i$ 个物品，选出物品体积为 $j$ 的最大价值。</p>
+<p>状态转移：</p>
+<p>$(i,j)\leftarrow(i-1,j-v_i),(i-1,j)$</p>
+<p>DP 式子：</p>
+<p><code>For(i,1,n) For(j,v[i],V) dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]+w[i])</code></p>
+<p>最后的解即为：dp$[n][V]$。</p>
+<h3 id="滚动数组优化："><a href="#滚动数组优化：" class="headerlink" title="滚动数组优化："></a>滚动数组优化：</h3><p>观察到，dp$[i]$ 只与 dp$[i-1]$ 有关，而与 dp$[1],,,$dp$[i-2]$ 无关，同时最后的结果只和 dp$[n][V]$ 有关。也就是同时最多只需要用到两组 dp 数组的第二维，所以 dp 第一维只需要存两个即可。</p>
+<p>通常使用 dp$[i\And 1]$ 的方式仅保留 $i$ 和 $i-1$ 的结果。</p>
+<p>最后的解即为：dp$[n\And1][V]$。</p>
+<p>空间复杂度优化至线性。</p>
+<h2 id="完全背包："><a href="#完全背包：" class="headerlink" title="完全背包："></a>完全背包：</h2><p>例 $2$：</p>
+<p>有一个容量为 $V$ 的背包有 $n$ 种物品，每种物品有 $v_i$ 的体积和 $w_i$ 的价值，每种物品取的个数没有限制，求能获得的最大价值。</p>
+<h2 id="多重背包："><a href="#多重背包：" class="headerlink" title="多重背包："></a>多重背包：</h2><h3 id="朴素："><a href="#朴素：" class="headerlink" title="朴素："></a>朴素：</h3><h3 id="二进制拆分优化："><a href="#二进制拆分优化：" class="headerlink" title="二进制拆分优化："></a>二进制拆分优化：</h3><h3 id="单调队列优化："><a href="#单调队列优化：" class="headerlink" title="单调队列优化："></a>单调队列优化：</h3><h2 id="01-背包-完全背包-多重背包："><a href="#01-背包-完全背包-多重背包：" class="headerlink" title="01 背包+完全背包+多重背包："></a>01 背包+完全背包+多重背包：</h2><h2 id="多维背包："><a href="#多维背包：" class="headerlink" title="多维背包："></a>多维背包：</h2><h2 id="分组背包："><a href="#分组背包：" class="headerlink" title="分组背包："></a>分组背包：</h2><h2 id="背包判可行："><a href="#背包判可行：" class="headerlink" title="背包判可行："></a>背包判可行：</h2><h3 id="朴素：-1"><a href="#朴素：-1" class="headerlink" title="朴素："></a>朴素：</h3><h3 id="bitset-优化："><a href="#bitset-优化：" class="headerlink" title="bitset 优化："></a>bitset 优化：</h3><h2 id="背包求方案数："><a href="#背包求方案数：" class="headerlink" title="背包求方案数："></a>背包求方案数：</h2><h3 id="朴素：-2"><a href="#朴素：-2" class="headerlink" title="朴素："></a>朴素：</h3><h3 id="多项式卷积："><a href="#多项式卷积：" class="headerlink" title="多项式卷积："></a>多项式卷积：</h3><h3 id="可撤销性："><a href="#可撤销性：" class="headerlink" title="可撤销性："></a>可撤销性：</h3>]]></content>
+      <categories>
+        <category>DP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>DP（一）</title>
     <url>/2024/01/24/DP%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<p>DP</p>
@@ -14,10 +111,11 @@
 <li>扫表</li>
 </ul>
 <p>三种实现方式各有一定的优劣，将在后文中分析。</p>
-<p>DP 从形式上分为两部分：</p>
+<p>DP 从形式上分为三部分：</p>
 <ul>
 <li>状态</li>
 <li>状态转移</li>
+<li>初始化</li>
 </ul>
 <p>其中实现状态转移的式子常被称为状态转移方程。</p>
 <p>而转移的方式，也在部分场景下被细分为“顺推”和“逆推”。</p>
@@ -28,28 +126,31 @@
 <p>DP 的时间复杂度为 $O(状态数\times 转移时间)$。</p>
 <p>本文将介绍若干 DP 入门例题帮助 DP 思维的建立。</p>
 <h2 id="线性-DP"><a href="#线性-DP" class="headerlink" title="线性 DP"></a>线性 DP</h2><p>线性 DP 是指在线性结构上进行转移。在实际问题中，一般在序列上和矩阵上考虑较多。</p>
-<p>[IOI1994]第一次在算法竞赛引入了动态规划的思想。</p>
-<p>例 1</p>
+<p>$[IOI1994]$ 第一次在算法竞赛引入了动态规划的思想。</p>
+<p>例 $1$：</p>
 <p>给定一个 $n$ 层的数字三角形每次可以从 $(x,y)$ 走到 $(x+1,y),(x+1,y+1)$，求从 $(1,1)$ 出发经过路径上数字之和的最大值。</p>
 <p>状态：</p>
-<p>设 dp[x][y] 为从起点到 $(x,y)$ 的答案。</p>
+<p>设 dp$[x][y]$ 为从起点到 $(x,y)$ 的答案。</p>
 <p>状态转移：</p>
 <p>$(x,y)\rightarrow(x+1,y),(x+1,y+1)$</p>
 <p>$(x,y)\leftarrow(x-1,y),(x-1,y-1)$</p>
 <p>所以写出 DP 式子：</p>
 <ul>
-<li>顺推：dp[x+1][y]&#x3D;max(dp[x][y]+a[x+1][y],dp[x+1][y]),dp[x+1][y+1]&#x3D;max(dp[x][y]+a[x+1][y+1],dp[x+1][y+1])</li>
-<li>逆推：dp[x][y]&#x3D;max(dp[x-1][y],dp[x-1][y-1])+a[x][y];</li>
+<li>顺推：<code>dp[x+1][y]=max(dp[x][y]+a[x+1][y],dp[x+1][y]),dp[x+1][y+1]=max(dp[x][y]+a[x+1][y+1],dp[x+1][y+1])</code></li>
+<li>逆推：<code>dp[x][y]=max(dp[x-1][y],dp[x-1][y-1])+a[x][y]</code></li>
 </ul>
 <p>在一般的 DP 问题中，普遍采用扫表的方式实现 DP。扫表即使用循环枚举状态，所以对于扫表法来说，枚举的顺序很重要。</p>
 <p>此题中因为每一层的状态一定是在相邻的两层之间转移，所以按层枚举，而层内的顺序则不影响。</p>
+<p>初始化：</p>
+<p>从 $(1,1)$ 开始，所以可以将 $(1,1)$ 设为初始状态，初始化 dp$[1][1]&#x3D;a[1][1]$，后从第二层开始枚举。同时因为求的是极大值，所以要将 dp 数组初始化为极小值。</p>
+<p>最后的解即为 dp$[n][n]$。</p>
 <p>时间复杂度：$O(n^2)$。</p>
 <p>空间复杂度：$O(n^2)$。</p>
 <p>DP 空间换时间，所以空间复杂度普遍偏高，内存超限也多出现在 DP 问题中。</p>
 <p>例 2：</p>
 <p>给定一个长度为 $n$ 的序列 $a_i$，求最长上升子序列。</p>
 <p>状态：</p>
-<p>设 dp[i] 为以 $a_i$ 结尾的最长上升子序列长度。</p>
+<p>设 dp$[i]$ 为以 $a_i$ 结尾的最长上升子序列长度。</p>
 <p>状态转移：</p>
 <p>$(i)\rightarrow (j)(a_j&gt;a_i)$</p>
 <p>$(i)\leftarrow(j)(a_j&lt;a_i)$</p>
@@ -59,11 +160,14 @@
 <li>顺推：<code>For(j,i+1,n) if(a[j]&gt;a[i]) dp[j]=max(dp[j],dp[i]+1)</code></li>
 <li>逆推：<code>For(j,1,i-1) if(a[j]&lt;a[i]) dp[i]=max(dp[i],dp[j]+1)</code></li>
 </ul>
+<p>初始化：</p>
+<p>每一个位置本身可以是最长上升子序列的开始，所以可以将 $(1),…,(n)$ 都初始化为 $1$ 以作为初始状态。</p>
 <p>在序列上，每一个位置的答案一定是由它之前的转移过来，所以按顺序枚举即可。</p>
+<p>最后的解即为：dp$[n]$。</p>
 <p>时间复杂度：$O(n^2)$。</p>
 <p>空间复杂度：$O(n)$。</p>
 <p>事实上，此处的 DP 转移可以优化做到 $O(n\log n)$ 的时间复杂度，将在之后的文章提到。</p>
-<p>总结以上两个例子，矩阵中进行 DP，往往设 dp[x][y] 表示从起点到 (x,y) 的答案；序列中进行 DP，往往设 dp[x] 表示从 $1$ 到 $x$ 的答案。在具体的题目中，也会有相应的扩展。</p>
+<p>总结以上两个例子，矩阵中进行 DP，往往设 dp$[x][y]$ 表示从起点到 (x,y) 的答案；序列中进行 DP，往往设 dp$[x]$ 表示从 $1$ 到 $x$ 的答案。在具体的题目中，也会有相应的扩展。</p>
 <h3 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h3><p>DP 和 贪心。</p>
 <p>DP 和贪心都是一种思想，它们之间没有明确的界限。可以说贪心是一种特殊的 DP，也可以认为 DP 是一种特殊的贪心，自行理解即可。</p>
 <p>考虑下面一个问题：</p>
@@ -80,7 +184,7 @@
 <p>此时，贪心显然错误。考虑 $x&#x3D;6$ 时，贪心策略无解。</p>
 <p>考虑 DP。</p>
 <p>状态：</p>
-<p>设 dp[x] 表示支付 $x$ 分钱的最少硬币数量。</p>
+<p>设 dp$[x]$ 表示支付 $x$ 分钱的最少硬币数量。</p>
 <p>状态转移：</p>
 <ul>
 <li>$(x)\rightarrow (x+2),(x+4),(x+5)$</li>
@@ -88,10 +192,14 @@
 </ul>
 <p>所以写出 DP 式子：</p>
 <ul>
-<li>顺推：dp[x+2]&#x3D;max(dp[x+2],dp[x]+1),dp[x+4]&#x3D;max(dp[x+4],dp[x]+1),dp[x+5]&#x3D;max(dp[x+5],dp[x]+1)</li>
-<li>逆推：dp[x]&#x3D;max(dp[x-2],dp[x-4],dp[x-5])+1</li>
+<li>顺推：<code>dp[x+2]=max(dp[x+2],dp[x]+1),dp[x+4]=max(dp[x+4],dp[x]+1),dp[x+5]=max(dp[x+5],dp[x]+1)</code></li>
+<li>逆推：<code>dp[x]=max(dp[x-2],dp[x-4],dp[x-5])+1</code></li>
 </ul>
+<p>初始化：</p>
+<p>初始情况下没有任何硬币，所以应该选择 $(0)$ 作为初始状态并初始化 dp$[0]&#x3D;0$。同时要注意无解的情况。所以要特殊处理无解，一般可以之间置为极大值（求解最小值）或者极小值（求解最大值）。</p>
 <p>容易发现，大金额的状态是由小金额的状态转移的，所以从小到大枚举金额即可。</p>
+<p>最后的解即为：dp$[x]$。</p>
+<p>Tips：在后续的内容，为了避免不必要的内容，除非必要，将统一使用逆推。</p>
 ]]></content>
       <categories>
         <category>DP</category>
