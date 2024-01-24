@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://iceinsky.top/2024/01/17/%E6%90%9C%E7%B4%A2/1.png">
 <meta property="article:published_time" content="2024-01-17T11:46:27.000Z">
-<meta property="article:modified_time" content="2024-01-20T09:25:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T09:21:30.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://iceinsky.top/2024/01/17/%E6%90%9C%E7%B4%A2/1.png">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-20 17:25:00" itemprop="dateModified" datetime="2024-01-20T17:25:00+08:00">2024-01-20</time>
+                <time title="修改时间：2024-01-24 17:21:30" itemprop="dateModified" datetime="2024-01-24T17:21:30+08:00">2024-01-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,14 +252,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>7.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -291,7 +291,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">    <span class="type">int</span> x,sum;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">4</span>],b[<span class="number">3</span>];</span><br><span class="line">&#125;;</span><br><span class="line">queue&lt;node&gt; q;</span><br><span class="line"><span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">    <span class="keyword">auto</span> now=q.<span class="built_in">front</span>();</span><br><span class="line">    <span class="keyword">if</span>(now.x==<span class="number">3</span>)&#123;</span><br><span class="line">        ans=<span class="built_in">max</span>(ans,now.sum);</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    q.<span class="built_in">pop</span>();</span><br><span class="line">    <span class="built_in">For</span>(i,<span class="number">1</span>,<span class="number">10</span>)&#123;</span><br><span class="line">    	<span class="built_in">For</span>(j,<span class="number">1</span>,now.x) <span class="keyword">if</span>(now.a[j]!=i&amp;&amp;<span class="built_in">check</span>(a[i],now.b[j]))&#123;</span><br><span class="line">            <span class="keyword">auto</span> cur=now;</span><br><span class="line">            cur.x++;</span><br><span class="line">            cur.a[cur.x]=i;</span><br><span class="line">            cur.b[cur.x]=a[i];</span><br><span class="line">            cur.sum+=a[i];</span><br><span class="line">            q.<span class="built_in">push</span>(cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!now.x)&#123;</span><br><span class="line">            <span class="keyword">auto</span> cur=now;</span><br><span class="line">            cur.x++;</span><br><span class="line">            cur.a[cur.x]=i;</span><br><span class="line">            cur.b[cur.x]=a[i];</span><br><span class="line">            q.<span class="built_in">push</span>(cur);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>两种搜索方式在遍历解空间角度，仅仅是实现方式不同，一个使用栈（递归栈）一个使用队列，实现功能完全相同。</p>
-<h2 id="DFS-和-BFS-的比较："><a href="#DFS-和-BFS-的比较：" class="headerlink" title="DFS 和 BFS 的比较："></a>DFS 和 BFS 的比较：</h2><p>在普遍的教学中，一般以迷宫问题作为 DFS 和 BFS 的引入问题。</p>
+<h3 id="DFS-和-BFS-的比较："><a href="#DFS-和-BFS-的比较：" class="headerlink" title="DFS 和 BFS 的比较："></a>DFS 和 BFS 的比较：</h3><p>在普遍的教学中，一般以迷宫问题作为 DFS 和 BFS 的引入问题。</p>
 <p>那么就来看看迷宫问题：</p>
 <p>例 2：</p>
 <p>给定一个 $n\times m$ 的迷宫，$0$ 表示通路，$1$ 表示障碍求从 $(1,1)$ 到 $(n,m)$ 的最短路径。</p>
@@ -319,11 +319,13 @@
 <p>DFS 和 BFS 均为搜索算法，仅仅是搜索角度不同。但一般提到搜索，均指 DFS。而 BFS 往往只作为在转移增量恒为 $1$ 的问题中求最小解。</p>
 <p>这就是 BFS 在一般问题中标记数组不能共用导致的，在 BFS 的队列中存着若干状态，而每个状态均需要一个标记数组，那么空间复杂度便达到了状态数的平方，这是许多问题不能接受的。</p>
 <p>而 DFS 不同，在 DFS 递归到某一层考虑当前函数内层，只存在一个状态，vis 仅为当前状态服务，也就只需要一个标记数组，那么空间复杂度便仅仅是状态数。</p>
+<h4 id="addition"><a href="#addition" class="headerlink" title="addition:"></a>addition:</h4><p>在例 $1$ 中，不用添加 vis。因为在例 $1$ 的搜索过程中不会出现走到某一条解路径重复走一个走过的状态，即：无环（DAG）。例 $2$ 却会，即：有环。</p>
 <h4 id="存储路径信息："><a href="#存储路径信息：" class="headerlink" title="存储路径信息："></a>存储路径信息：</h4><p>由于 DFS 采用栈存储既往状态，所以如果要求具体解的方案，只要把栈中状态依次取出即可。</p>
 <p>而 BFS 不存储深度信息，只存储同一宽度的状态，自然就是不能得到到初始状态的方案，若是要求方案，就需要额外储存了。</p>
 <p>这本身就是由深度和宽度而决定的，其实算不上什么优点或缺点，只是恰好实际中往往更需要求方案（即深度信息），而不是宽度信息，如果说现在有一题要求输出比最优解小 1 的状态，那么，DFS 就比不上 BFS 了。</p>
-<h3 id="DFS："><a href="#DFS：" class="headerlink" title="DFS："></a>DFS：</h3><p>按深度递归，某一时刻状态数：$O(depth)$。</p>
-<h3 id="BFS："><a href="#BFS：" class="headerlink" title="BFS："></a>BFS：</h3><p>按宽度递归，某一时刻状态数：$O(weight)$。</p>
+<h4 id="DFS："><a href="#DFS：" class="headerlink" title="DFS："></a>DFS：</h4><p>按深度递归，某一时刻状态数：$O(depth)$。</p>
+<h4 id="BFS："><a href="#BFS：" class="headerlink" title="BFS："></a>BFS：</h4><p>按宽度递归，某一时刻状态数：$O(weight)$。</p>
+<p>一个猜想：因为 DFS 只需使用到函数递归（递归本身便是一种栈），而不用像 BFS 那样用到数据结构 <code>queue</code>，更适合入门学习，所以更多地采用 DFS 写搜索而不是 BFS。</p>
 <h2 id="优化："><a href="#优化：" class="headerlink" title="优化："></a>优化：</h2><h3 id="剪枝："><a href="#剪枝：" class="headerlink" title="剪枝："></a>剪枝：</h3><h4 id="可行性剪枝："><a href="#可行性剪枝：" class="headerlink" title="可行性剪枝："></a>可行性剪枝：</h4><p>若当前情况已经不符合题意则可以直接返回，而不需要走到头。</p>
 <p>如例 $1$ 中，若搜索的第二个数已经不满足和第一个数匹配，那就没有必要继续搜索第三个数了。</p>
 <h4 id="最优性剪枝："><a href="#最优性剪枝：" class="headerlink" title="最优性剪枝："></a>最优性剪枝：</h4><p>若当前情况已经劣于已经找到的最优解时，直接返回。</p>
@@ -338,7 +340,71 @@
 <li>数学方法：比如在图论中借助连通分量，数论中借助模方程的分析，借助不等式的放缩来估计下界等等。</li>
 </ul>
 <p>在实际应用中，往往需要选手自行根据题目发扬剪枝艺术。并没有一个固定的写法。</p>
-<h3 id="记忆化搜索："><a href="#记忆化搜索：" class="headerlink" title="记忆化搜索："></a>记忆化搜索：</h3><h3 id="双向搜索："><a href="#双向搜索：" class="headerlink" title="双向搜索："></a>双向搜索：</h3><h4 id="同时双向搜索："><a href="#同时双向搜索：" class="headerlink" title="同时双向搜索："></a>同时双向搜索：</h4><h4 id="meet-in-middle："><a href="#meet-in-middle：" class="headerlink" title="meet in middle："></a>meet in middle：</h4><h3 id="A-："><a href="#A-：" class="headerlink" title="A*："></a>A*：</h3><h3 id="迭代加深搜索："><a href="#迭代加深搜索：" class="headerlink" title="迭代加深搜索："></a>迭代加深搜索：</h3><h3 id="IDA-："><a href="#IDA-：" class="headerlink" title="IDA*："></a>IDA*：</h3><h3 id="Dancing-Links："><a href="#Dancing-Links：" class="headerlink" title="Dancing Links："></a>Dancing Links：</h3><h3 id="启发式搜索："><a href="#启发式搜索：" class="headerlink" title="启发式搜索："></a>启发式搜索：</h3>
+<h3 id="搜索状态的设计："><a href="#搜索状态的设计：" class="headerlink" title="搜索状态的设计："></a>搜索状态的设计：</h3><p>虽然搜索是遍历所有的解空间。但对于不同的状态设计，会呈现出不同的解空间。</p>
+<p>以例 $1$ 为例，前文中设计是状态为选到第 $x$ 个数，和为 $sum$。将结果直接写在状态中，那么状态总数即为 $3\times sum$ 的所有可能值。而如果换一种状态设计：$\lbrace a_1,a_2,…,a_{10}\rbrace$ 其中 $a_i&#x3D;1&#x2F;0$ 表示第 $i$ 个数是否被选，状态数总数为 $2^{10}$，结果可以通过状态另外求出。</p>
+<p>同时，在实际应用中，根据题目需要，还可以去掉一些无用的状态（剪枝）。</p>
+<p>就如例 $1$，容易得到 $10$ 个数选 $3$ 只有 $\binom{10}{3}$ 种有用的状态。</p>
+<p>不同的状态定义所形成的搜索树也不尽相同。</p>
+<p>通过巧妙的状态定义，也可更好地解决问题。</p>
+<p>同时，虽然搜索是遍历所有解空间，但是时间复杂度并不是解空间大小。也不是状态数大小。因为在的搜索过程中，访问到搜索树上同一个节点时，会继续往下考虑，将搜过的内容再搜一遍。</p>
+<p>仍以例 1 为例。看这样一组数据：</p>
+<p><code>2 3 3 2 1 4</code></p>
+<p>对于 $(3,5)$ 这样的状态，能被多少个状态转移而来：$(2,2),(2,3),(2,1),(2,4)$。</p>
+<p>而 $(3,5)$ 接下去的状态，$(2,2),(2,3),(2,1),(2,4)$ 都会再考虑一遍。</p>
+<h3 id="记忆化搜索："><a href="#记忆化搜索：" class="headerlink" title="记忆化搜索："></a>记忆化搜索：</h3><p>记忆化搜索是一种通过记录已经遍历过的状态的信息，从而避免对同一状态重复遍历的搜索实现方式。</p>
+<p>与其说是记忆化搜索，笔者更愿称之为记忆化递归。通过递归将一个大的问题变成一个个小问题，然后拼接起来。</p>
+<p>例 3：</p>
+<p>给定 $10$ 个数，选出 $3$ 个数的和小于 $1000$ 且最大。</p>
+<p>容易发现仅仅是三个数要满足的限制变了，所以按例 $1$ 的 DFS 写法把 check 函数变一变即可。但是这样无法记忆化的。因为它每一个状态维护的是到起点的结果，而不是到终点。既然是到终点，那么 $sum$ 就不能直接维护，而是要通过函数递归返回值求得：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int dfs(int x)&#123;</span><br><span class="line">    if(x&gt;3) return 0;</span><br><span class="line">    int res=0;</span><br><span class="line">    For(i,1,n)&#123;</span><br><span class="line">    	if(!vis[i])&#123;</span><br><span class="line">    		vis[i]=1;</span><br><span class="line">    		if(dfs(x+1)+a[i]&lt;1000)</span><br><span class="line">    			res=max(res,dfs(x+1)+a[i]);</span><br><span class="line">    		vis[i]=0;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>记忆化搜索因为使用以往搜到是结果，那么就要保证现在到这一步时确确实实能按以往的结果做选择。如果到这一步之前的选择的不同影响了后续的可选择性，那自然是不能用之前的结果的，也就是满足“子问题”。</p>
+<p>所以上述代码中仅仅用 $(x)$ 描述状态并不是一个子问题。所以需要对状态设计进行修改，使得一个状态描述确确实实是一个子问题。</p>
+<p>状态可以修改为 $(i,x)$ 最后选的一个数是第 $i$ 个数，已经选了 $x$ 个数。因为限制死了后续只能选择 $i+1,i+2,…n$ 中的数，那么就保证了遇到 $(i,x)$ 这个状态时，后续的可选择性是一致的。</p>
+<p>因为只需要在一般搜索的基础上进行记录状态结果的行为，所以记忆化搜索算是一种优化思想。体现在代码上也并不复杂。</p>
+<p>核心变为如何存储状态信息：</p>
+<p>一般而言，若状态信息并不复杂（主要是数值不大）那么便可以直接用数组进行存储，将状态信息记录为数组下标。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> _i,<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(_i&gt;n) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">if</span>(x&gt;<span class="number">3</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(vis[_i][x]) <span class="keyword">return</span> mem[_i][x];</span><br><span class="line">    <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">For</span>(i,_i+<span class="number">1</span>,n)</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">dfs</span>(i+<span class="number">1</span>,x+<span class="number">1</span>)+a[i]&lt;<span class="number">1000</span>)</span><br><span class="line">        	res=<span class="built_in">max</span>(res,<span class="built_in">dfs</span>(i+<span class="number">1</span>,x+<span class="number">1</span>)+a[i]);</span><br><span class="line">    vis[_i][x]=<span class="number">1</span>;</span><br><span class="line">    mem[_i][x]=res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>BFS 因为不搜到底，并不能利用已经到过的状态（就算状态是到过的，但是没有它到终点的结果）。所以 BFS 不存在记忆化搜索的写法。</p>
+<p>事实上，问题的 $sum$ 一般都会比较大，不能作为数组下标存储。但是我们可以使用 map 将状态和状态的结果视作一个映射，存起来。</p>
+<p>因为记忆化搜索确保了每个状态只访问一次，它也是一种常见的动态规划实现方式。</p>
+<h4 id="addition："><a href="#addition：" class="headerlink" title="addition："></a>addition：</h4><p>为什么要用例 $3$ 记忆化而不是例 $1$？</p>
+<p>因为例 $1$ 根本无法简单地记忆化，因为例 $1$ 的后续的选择是和前面所有选的具体数字是有关的，而不是仅通过和就可以判断是否能选的（例 $3$ 中的 check 只关心和的大小，不关心具体选的数；例 $1$ 中的 check 需要关心所有选择的数）。同一个状态描述对应的不同实际状态的后续操作不尽相同。比如例 $1$ 中，选择 $2,3$ 或 $1,4$ 都对应 $(3,5)$ 的状态描述，但在选择第三个数时，他们的选择是不一样的。</p>
+<p>所以例 $1$ 中的状态不足以支撑记忆化的过程。</p>
+<p>但是观察会发现，其实不是状态不行，而是状态描述不行。选择的数在例 $1$ 中是要考虑到状态描述中去的，那么在状态描述中加上选择的数即可。但是这样产生的问题就是状态不易存储。</p>
+<p>我们需要更巧妙的状态描述。本文不再赘述。</p>
+<h3 id="双向搜索："><a href="#双向搜索：" class="headerlink" title="双向搜索："></a>双向搜索：</h3><h4 id="同时双向搜索："><a href="#同时双向搜索：" class="headerlink" title="同时双向搜索："></a>同时双向搜索：</h4><p>同时从起点和终点开始搜索。往往采用 BFS 实现。</p>
+<p>把起点和终点都加入初始队列。</p>
+<p>在扩展过程中，把由起点扩展的一系列点标记为 $1$，把由终点扩展的一系列点标记为 $2$。当 $1$ 能扩展到 $2$，或 $2$ 能扩展到 $1$ 时，表示找到解。</p>
+<p>由于起点和终点交题前进，所以对于起点和终点，各自的深度只有原规模的一半，那么状态规模的增长也只有原来的一半。</p>
+<h4 id="meet-in-middle："><a href="#meet-in-middle：" class="headerlink" title="meet in middle："></a>meet in middle：</h4><p>将原问题划分成两部分分别处理，后将两部分的结果合并。meet in middle 往往用于处理序列问题，把序列划分成左右两部分。</p>
+<p>例 4：</p>
+<p>给定 $40$ 个数，求选出若干个数的和不超过 $10^9$ 的方案数。</p>
+<p>直接对 $40$ 个数搜索所有解的时间复杂度为：$O(2^{40})$。</p>
+<p>若将序列划分成两个长度为 $20$ 的序列，首先单独处理的时间复杂度为：$O(2^{20})$。</p>
+<p>之后，对于左半部分的某一个解，在右半部分中找到之和不超过 $10^9$ 的方案数。即为在若干个数中求不超过某值的数的个数，可以使用二分解决（<code>upper_bound</code>）。</p>
+<p>总时间复杂度：$O(20\times 2^{20})$。</p>
+<p>一般而言，决定是否能双向搜索的均为两部分信息是否能合并。</p>
+<p>若原问题状态规模为 $O(a^{k})$，双向搜索状态规模降为 $O(a^{\frac{k}2})$。</p>
+<h3 id="A-："><a href="#A-：" class="headerlink" title="A*："></a>A*：</h3><p>A* 是基于 BFS 的改进。</p>
+<p>定义从 $x$ 到起点的距离为 $g(x)$，从 $x$ 到终点的距离为 $h(x)$，$x$ 的估价函数为 $f(x)$。初始起点入队，每次从队列中取出估价函数最小的一个元素。$h(x)$ 称为启发函数，因为无法直接获取从 $x$ 到终点的距离，所以对 $h(x)$ 采用的往往是一个估价量，要求不超过真实距离，且越接近真实距离，越优。</p>
+<h3 id="迭代加深搜索："><a href="#迭代加深搜索：" class="headerlink" title="迭代加深搜索："></a>迭代加深搜索：</h3><p>每次限制递归层数的 DFS。</p>
+<p>每进行一次 DFS，递归深度限制增大 $1$。</p>
+<p>避免了 DFS 的递归层数过多；也避免了 BFS 在同一时刻状态数过多。</p>
+<p>但存在重复搜索前缀的缺点，不过由于搜索树的规模增长一般为指数，深度增大一层的数据规模可能会超过前面所有层的数据规模之和。所以影响并不是那么大。</p>
+<h3 id="IDA-："><a href="#IDA-：" class="headerlink" title="IDA*："></a>IDA*：</h3><p>A* 和迭代加深的结合。</p>
+<h3 id="01-BFS："><a href="#01-BFS：" class="headerlink" title="01 BFS："></a>01 BFS：</h3><p>在前文中，提到 BFS 主要用于解决边权为 $1$ 的最短路径问题。但是注意到 BFS 过程中队列内是有两个距离值的，队尾比队首大 $1$，边权为 $1$ 时每次扩展加在队尾。如果边权还存在 $0$ 的话，则加在队首。其它部分与 BFS 完全相同。</p>
+<h3 id="优先队列-BFS："><a href="#优先队列-BFS：" class="headerlink" title="优先队列 BFS："></a>优先队列 BFS：</h3><p>在前文中，提到 BFS 如果处理边权不为 $1$ 的问题，那便没有第一次出队即为最小值的性质了。究其本质，是因为队列内元素不呈现单调性了。</p>
+<p>但是可以“强行”让队列内元素呈现单调性。即：采用优先队列替换队列实现。</p>
+<p>但若是边权存在负值，那仍然不满足第一次出队时为最小值（不能使用 vis 数组）</p>
+<p>原因显然。</p>
+<h3 id="Dancing-Links："><a href="#Dancing-Links：" class="headerlink" title="Dancing Links："></a>Dancing Links：</h3><p>解决精确覆盖问题和重复覆盖问题的高效搜索算法。</p>
+<p>采用十字链表加上优秀的剪枝实现。</p>
+<p>略。</p>
+<h3 id="启发式搜索："><a href="#启发式搜索：" class="headerlink" title="启发式搜索："></a>启发式搜索：</h3><h4 id="贪婪最佳优先搜索"><a href="#贪婪最佳优先搜索" class="headerlink" title="贪婪最佳优先搜索"></a>贪婪最佳优先搜索</h4><p>$h(x)&#x3D;0$ 的 A*，也就是优先队列 BFS，也可以说是 Dijkstra。</p>
+<h4 id="模拟退火"><a href="#模拟退火" class="headerlink" title="模拟退火"></a>模拟退火</h4><p>它是一种基于概率的搜索算法，模拟固体物质的退火过程。它以一定的概率接受比当前解更差的解，以避免陷入局部最优。它的估价函数是 $f(n)&#x3D; e^{-\frac{ΔE}{T}}$，其中 $ΔE$ 表示新解和旧解的能量差，$T$ 表示温度参数。它的优点是能够跳出局部最优，缺点是参数的选择比较难，收敛速度慢。</p>
+<h4 id="遗传算法"><a href="#遗传算法" class="headerlink" title="遗传算法"></a>遗传算法</h4><h4 id="蚁群算法"><a href="#蚁群算法" class="headerlink" title="蚁群算法"></a>蚁群算法</h4><h4 id="粒子群优化算法"><a href="#粒子群优化算法" class="headerlink" title="粒子群优化算法"></a>粒子群优化算法</h4>
     </div>
 
     
@@ -435,7 +501,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">搜索的基本概念：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BD%A2%E5%BC%8F%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">搜索的基本形式：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS%EF%BC%88%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%89%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">DFS（深度优先搜索）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFS%EF%BC%88%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%89%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">BFS（宽度优先搜索）：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS-%E5%92%8C-BFS-%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">DFS 和 BFS 的比较：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E8%B7%AF%E5%BE%84%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="nav-number">3.0.1.</span> <span class="nav-text">存储路径信息：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">DFS：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFS%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">BFS：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">优化：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">剪枝：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">4.1.1.</span> <span class="nav-text">可行性剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E6%80%A7%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">4.1.2.</span> <span class="nav-text">最优性剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E9%A1%BA%E5%BA%8F%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">4.1.3.</span> <span class="nav-text">搜索顺序剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha-Beta%EF%BC%9A"><span class="nav-number">4.1.4.</span> <span class="nav-text">Alpha-Beta：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%BA%E7%B1%BB%E6%99%BA%E6%85%A7%EF%BC%9A"><span class="nav-number">4.1.5.</span> <span class="nav-text">人类智慧：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.2.</span> <span class="nav-text">记忆化搜索：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%90%91%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.3.</span> <span class="nav-text">双向搜索：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E5%8F%8C%E5%90%91%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.3.1.</span> <span class="nav-text">同时双向搜索：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#meet-in-middle%EF%BC%9A"><span class="nav-number">4.3.2.</span> <span class="nav-text">meet in middle：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%EF%BC%9A"><span class="nav-number">4.4.</span> <span class="nav-text">A*：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%8A%A0%E6%B7%B1%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.5.</span> <span class="nav-text">迭代加深搜索：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-%EF%BC%9A"><span class="nav-number">4.6.</span> <span class="nav-text">IDA*：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dancing-Links%EF%BC%9A"><span class="nav-number">4.7.</span> <span class="nav-text">Dancing Links：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">4.8.</span> <span class="nav-text">启发式搜索：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">搜索的基本概念：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BD%A2%E5%BC%8F%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">搜索的基本形式：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS%EF%BC%88%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%89%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">DFS（深度优先搜索）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFS%EF%BC%88%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%89%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">BFS（宽度优先搜索）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS-%E5%92%8C-BFS-%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">DFS 和 BFS 的比较：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#addition"><span class="nav-number">2.3.1.</span> <span class="nav-text">addition:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E8%B7%AF%E5%BE%84%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="nav-number">2.3.2.</span> <span class="nav-text">存储路径信息：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DFS%EF%BC%9A"><span class="nav-number">2.3.3.</span> <span class="nav-text">DFS：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BFS%EF%BC%9A"><span class="nav-number">2.3.4.</span> <span class="nav-text">BFS：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">优化：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">剪枝：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">3.1.1.</span> <span class="nav-text">可行性剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E6%80%A7%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">3.1.2.</span> <span class="nav-text">最优性剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E9%A1%BA%E5%BA%8F%E5%89%AA%E6%9E%9D%EF%BC%9A"><span class="nav-number">3.1.3.</span> <span class="nav-text">搜索顺序剪枝：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha-Beta%EF%BC%9A"><span class="nav-number">3.1.4.</span> <span class="nav-text">Alpha-Beta：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%BA%E7%B1%BB%E6%99%BA%E6%85%A7%EF%BC%9A"><span class="nav-number">3.1.5.</span> <span class="nav-text">人类智慧：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%8A%B6%E6%80%81%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">搜索状态的设计：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">记忆化搜索：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#addition%EF%BC%9A"><span class="nav-number">3.3.1.</span> <span class="nav-text">addition：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%90%91%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">3.4.</span> <span class="nav-text">双向搜索：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E5%8F%8C%E5%90%91%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">3.4.1.</span> <span class="nav-text">同时双向搜索：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#meet-in-middle%EF%BC%9A"><span class="nav-number">3.4.2.</span> <span class="nav-text">meet in middle：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%EF%BC%9A"><span class="nav-number">3.5.</span> <span class="nav-text">A*：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%8A%A0%E6%B7%B1%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">3.6.</span> <span class="nav-text">迭代加深搜索：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-%EF%BC%9A"><span class="nav-number">3.7.</span> <span class="nav-text">IDA*：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#01-BFS%EF%BC%9A"><span class="nav-number">3.8.</span> <span class="nav-text">01 BFS：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97-BFS%EF%BC%9A"><span class="nav-number">3.9.</span> <span class="nav-text">优先队列 BFS：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dancing-Links%EF%BC%9A"><span class="nav-number">3.10.</span> <span class="nav-text">Dancing Links：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="nav-number">3.11.</span> <span class="nav-text">启发式搜索：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%AA%E5%A9%AA%E6%9C%80%E4%BD%B3%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-number">3.11.1.</span> <span class="nav-text">贪婪最佳优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB"><span class="nav-number">3.11.2.</span> <span class="nav-text">模拟退火</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">3.11.3.</span> <span class="nav-text">遗传算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%9A%81%E7%BE%A4%E7%AE%97%E6%B3%95"><span class="nav-number">3.11.4.</span> <span class="nav-text">蚁群算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B2%92%E5%AD%90%E7%BE%A4%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95"><span class="nav-number">3.11.5.</span> <span class="nav-text">粒子群优化算法</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -500,12 +566,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">55k</span>
+    <span title="站点总字数">59k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">50 分钟</span>
+    <span title="站点阅读时长">53 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
