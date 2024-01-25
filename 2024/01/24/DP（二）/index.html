@@ -30,7 +30,7 @@
 <meta property="og:description" content="背包 DP">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-24T14:22:26.000Z">
-<meta property="article:modified_time" content="2024-01-24T15:05:34.000Z">
+<meta property="article:modified_time" content="2024-01-25T06:01:44.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 
@@ -224,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-24 22:22:26 / 修改时间：23:05:34" itemprop="dateCreated datePublished" datetime="2024-01-24T22:22:26+08:00">2024-01-24</time>
+              <time title="创建时间：2024-01-24 22:22:26" itemprop="dateCreated datePublished" datetime="2024-01-24T22:22:26+08:00">2024-01-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-25 14:01:44" itemprop="dateModified" datetime="2024-01-25T14:01:44+08:00">2024-01-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -244,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>670</span>
+              <span>5.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -276,13 +282,145 @@
 <p>DP 式子：</p>
 <p><code>For(i,1,n) For(j,v[i],V) dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]+w[i])</code></p>
 <p>最后的解即为：dp$[n][V]$。</p>
-<h3 id="滚动数组优化："><a href="#滚动数组优化：" class="headerlink" title="滚动数组优化："></a>滚动数组优化：</h3><p>观察到，dp$[i]$ 只与 dp$[i-1]$ 有关，而与 dp$[1],,,$dp$[i-2]$ 无关，同时最后的结果只和 dp$[n][V]$ 有关。也就是同时最多只需要用到两组 dp 数组的第二维，所以 dp 第一维只需要存两个即可。</p>
+<p>某一个物品的答案一定是从前面的物品转移来的，而当前的容量之间没有转移关系，所以容量的枚举顺序无影响。</p>
+<p>时间复杂度：$O(nV)$</p>
+<p>空间复杂度：$O(nV)$</p>
+<h3 id="滚动数组优化："><a href="#滚动数组优化：" class="headerlink" title="滚动数组优化："></a>滚动数组优化：</h3><p>观察到，dp$[i]$ 只与 dp$[i-1]$ 有关，而与 dp$[1],…,$dp$[i-2]$ 无关，同时最后的结果只和 dp$[n][V]$ 有关。也就是同时最多只需要用到两组 dp 数组的第二维，所以 dp 第一维只需要存两个即可。</p>
 <p>通常使用 dp$[i\And 1]$ 的方式仅保留 $i$ 和 $i-1$ 的结果。</p>
 <p>最后的解即为：dp$[n\And1][V]$。</p>
 <p>空间复杂度优化至线性。</p>
+<h4 id="在此题的特殊处理："><a href="#在此题的特殊处理：" class="headerlink" title="在此题的特殊处理："></a>在此题的特殊处理：</h4><p>继续观察，dp$[i][j]$ 会继承 dp$[i-1][j]$ 的答案，即：dp$[i][j]\geq$dp$[i-1][j]$。</p>
+<p>所以不妨直接让 dp$[i][j]$ 继承 dp$[i-1][j]$ 的答案（直接共用一个数组）。</p>
+<p>新 DP 式子：</p>
+<p><code>For(i,1,n) For(j,v[i],V) dp[j]=max(dp[j],dp[j-v[i]]+w[i])</code></p>
+<p>但是此时会产生新的问题：dp$[j-v[i]]$ 可能是会被修改的，而原式子中的 dp$[i-1][j-v[i]]$ 是固定的，现在的 dp$[j-v[i]]$ 不一一对应 dp$[i-1][j-v[i]]$，它可以从 $dp[j-2\times v[i]]$ 转移。而 dp$[i][j]$ 只能由 dp$[i-1][j-v[i]]$ 转移而不是 dp$[i-1][j-2\times v[i]]$。</p>
+<p>通过改变枚举顺序可以避免这一点：</p>
+<p><code>For(i,1,n) FOR(j,V,v[i]) dp[j]=max(dp[j],dp[j-v[i]]+w[i])</code></p>
+<p>从后往前枚举容量时，保证了用于转移的状态是上一层循环记录的正确的值。</p>
 <h2 id="完全背包："><a href="#完全背包：" class="headerlink" title="完全背包："></a>完全背包：</h2><p>例 $2$：</p>
 <p>有一个容量为 $V$ 的背包有 $n$ 种物品，每种物品有 $v_i$ 的体积和 $w_i$ 的价值，每种物品取的个数没有限制，求能获得的最大价值。</p>
-<h2 id="多重背包："><a href="#多重背包：" class="headerlink" title="多重背包："></a>多重背包：</h2><h3 id="朴素："><a href="#朴素：" class="headerlink" title="朴素："></a>朴素：</h3><h3 id="二进制拆分优化："><a href="#二进制拆分优化：" class="headerlink" title="二进制拆分优化："></a>二进制拆分优化：</h3><h3 id="单调队列优化："><a href="#单调队列优化：" class="headerlink" title="单调队列优化："></a>单调队列优化：</h3><h2 id="01-背包-完全背包-多重背包："><a href="#01-背包-完全背包-多重背包：" class="headerlink" title="01 背包+完全背包+多重背包："></a>01 背包+完全背包+多重背包：</h2><h2 id="多维背包："><a href="#多维背包：" class="headerlink" title="多维背包："></a>多维背包：</h2><h2 id="分组背包："><a href="#分组背包：" class="headerlink" title="分组背包："></a>分组背包：</h2><h2 id="背包判可行："><a href="#背包判可行：" class="headerlink" title="背包判可行："></a>背包判可行：</h2><h3 id="朴素：-1"><a href="#朴素：-1" class="headerlink" title="朴素："></a>朴素：</h3><h3 id="bitset-优化："><a href="#bitset-优化：" class="headerlink" title="bitset 优化："></a>bitset 优化：</h3><h2 id="背包求方案数："><a href="#背包求方案数：" class="headerlink" title="背包求方案数："></a>背包求方案数：</h2><h3 id="朴素：-2"><a href="#朴素：-2" class="headerlink" title="朴素："></a>朴素：</h3><h3 id="多项式卷积："><a href="#多项式卷积：" class="headerlink" title="多项式卷积："></a>多项式卷积：</h3><h3 id="可撤销性："><a href="#可撤销性：" class="headerlink" title="可撤销性："></a>可撤销性：</h3>
+<p>状态：</p>
+<p>设 dp$[j]$ 表示选出物品体积为 $j$ 的最大价值。</p>
+<p>状态转移：</p>
+<p>$(j)\leftarrow(j-\lfloor\frac{j}{v_i}\rfloor\times v_i),…,(j-v_i),(j)$</p>
+<p>DP 式子：</p>
+<p><code>For(i,1,n) FOR(j,V,1) For(k,0,j/v[i]) dp[j]=max(dp[j],dp[j-k*v[i]]+k*w[i])</code></p>
+<p>最后的解即为：dp$[V]$。</p>
+<p>枚举顺序与 01 背包一致，仅仅是转移的状态数不同，转移关系一致。</p>
+<p>时间复杂度：$O(nV^2)$。</p>
+<p>空间复杂度：$O(V)$</p>
+<h4 id="优化："><a href="#优化：" class="headerlink" title="优化："></a>优化：</h4><p>显然，$O(nV^2)$ 是不够优秀的，回顾 01 背包中遇到的问题，从前往后枚举容量时，更新的状态不对应：dp$[j-v[i]]$ 不一一对应 dp$[i-1][j-v[i]]$，它可以从 $dp[j-2\times v[i]]$ 转移。而如果将这个结果递归下去，可以发现，dp$[j]$ 正是从 $(j-\lfloor\frac{j}{v_i}\rfloor\times v_i),…,(j-v_i),(j)$ 这样状态转移，这恰好地符合完全背包的要求。</p>
+<p>所以，从后往前枚举容量即可实现完全背包的要求，而不用枚举使用量。</p>
+<p>新 DP 式子：</p>
+<p><code>For(i,1,n) For(j,v[i],V) dp[j]=max(dp[j],dp[j-v[i]]+w[i])</code></p>
+<p>时间复杂度：$O(nV)$。</p>
+<h2 id="多重背包："><a href="#多重背包：" class="headerlink" title="多重背包："></a>多重背包：</h2><p>例 3：</p>
+<p>有一个容量为 $V$ 的背包有 $n$ 种物品，每种物品有 $v_i$ 的体积和 $w_i$ 的价值，每种物品取的个数为 $a_i$，求能获得的最大价值。</p>
+<p>状态：</p>
+<p>设 dp$[j]$ 表示选出物品体积为 $j$ 的最大价值。</p>
+<p>状态转移：</p>
+<p>$(j)\leftarrow(j-a_i\times v_i),…,(j-v_i),(j)$</p>
+<p>DP 式子：</p>
+<p><code>For(i,1,n) FOR(j,V,1) For(k,0,min(j/v[i],a[i])) dp[j]=max(dp[j],dp[j-k*v[i]]+k*w[i])</code></p>
+<p>时间复杂度：$O(nVa_i)$。</p>
+<p>空间复杂度：$O(n)$。</p>
+<h3 id="二进制拆分优化："><a href="#二进制拆分优化：" class="headerlink" title="二进制拆分优化："></a>二进制拆分优化：</h3><p>考虑最后的最优的方案中某物品的选取个数，设为 $x$。若这个物品取 $x$ 是最优，那么只要这个物品能取 $x$ 个就能保证最后解正确。那么，就算这个物品原本是可以取 $2x$ 个的，现在把它取的个数限制成 $x$ 个即可。</p>
+<p>可是并无法获知每个物品在最终的答案里是被取几次的。</p>
+<p>考虑 $a_i&#x3D;2^0+2^1+…+2^p+(a_i-2^{p+1}+1)$，将原本可以取 $[0,a_i]$ 次的第 $i$ 个物品，拆分成 $\log{a_i}$ 个固定取 $2^0,2^1,..,2^p,(a_i-2^{p+1}+1)$ 的物品。</p>
+<p>引理：用 $2^0,2^1,..,2^p,(a_i-2^{p+1}+1)$ 可以组成 $[1,a_i]$ 之间的任何数。</p>
+<p>证明：</p>
+<p>用 $2^0,2^1,…,2^p$ 可以组成 $[1,2^{p+1}-1]$ 的任何数。</p>
+<p>$[2^{p+1},a_i]$ 之间的数可以用 $a_i-2^{p+1}+1$ 和 $[1,2^{p+1}-1]$ 对应组成。</p>
+<p>所以原本一个物品有 $O(a_i)$ 的转移量，而现在只有 $O(\log a_i)$ 的转移量。</p>
+<p>时间复杂度：$O(nV\log a_i)$。</p>
+<h3 id="单调队列优化："><a href="#单调队列优化：" class="headerlink" title="单调队列优化："></a>单调队列优化：</h3><p>对于一个转移，其转移个数是确定是 $a_i$ 个。在容量从小到大枚举的过程中，转移的下界也在增大，且转移的个数是确定的，前后两次容量的转移区间仅有头尾不同。这是一种特殊的“滑动窗口”，可以套用单调队列优化 DP 的方式优化多重背包。</p>
+<p>$(j)\leftarrow(j-a_i\times v_i),…,(j-v_i),(j)$</p>
+<p>$(j+v_i)\leftarrow(j-(a_i-1)\times v_i),…,(j),(j+v_i)$</p>
+<p>对于 $(j-(a_i-1)\times v_i),…,(j)$ 部分是一样的，只有 $(j-a_i\times v_i)$ 和 $(j+v_i)$ 是不一样的。</p>
+<p>具体不作展开。</p>
+<p>时间复杂度：$O(nV)$。</p>
+<h2 id="01-背包-完全背包-多重背包："><a href="#01-背包-完全背包-多重背包：" class="headerlink" title="01 背包+完全背包+多重背包："></a>01 背包+完全背包+多重背包：</h2><p>例 4：</p>
+<p>有一个容量为 $V$ 的背包有 $n$ 种物品，每种物品有 $v_i$ 的体积和 $w_i$ 的价值，每种物品有一个类型 $op$，$op&#x3D;1$ 表示最多取 $1$ 次；$op&#x3D;2$ 表示可以取无限次；$op&#x3D;3$ 表示最多取 $a_i$ 次，求能获得的最大价值。</p>
+<p>事实上，注意到它们之间仅仅是转移的时候，用到的状态数不太一样。所以只需要根据不同的物品的类型，进行不同的处理转移即可。</p>
+<p>时间复杂度：$O(nV)$。</p>
+<p>空间复杂度：$O(V)$。</p>
+<p>addition：</p>
+<p>注意到，上述 DP 过程均使用的是“逆推”，优化也基本基于“逆推”才能进行，如果使用“顺推”不易优化。</p>
+<p>原因就是“逆推”给定了“从哪来”的范围，每次只更新当前的状态。如果能比较快地在“从哪来”选择出那个最优的，就可以加快运算速度。对于“顺推”，需要用当前状态去更新多个状态，对于区间修改，是不易维护的（可以，较复杂，对应数据结构的区间修改）。</p>
+<h2 id="多维背包："><a href="#多维背包：" class="headerlink" title="多维背包："></a>多维背包：</h2><p>例 5：</p>
+<p>有 $n$ 个任务需要完成，完成第 $i$ 个任务需要花费 $t_i$ 分钟，$c_i$ 的支出。共有 $T$ 的时间和 $C$ 的资金，求最多完成多少任务。</p>
+<p>与前文中的背包相比，此背包具有二维代价，而不是一维。</p>
+<p>因此需要两层循环枚举容量，其它地方并无二致。</p>
+<p><code>For(i,1,n) FOR(j,T,t[i]) FOR(k,C,c[i]) dp[j][k]=max(dp[j][k],dp[j-t[i]][k-c[i]]+1)</code></p>
+<p>时间复杂度：$O(nTC)$。</p>
+<p>空间复杂度：$O(TC)$。</p>
+<h2 id="分组背包："><a href="#分组背包：" class="headerlink" title="分组背包："></a>分组背包：</h2><p>例 6：</p>
+<p>有一个容量为 $V$ 的背包有 $n$ 种物品，每种物品有 $v_i$ 的体积和 $w_i$ 的价值，每种物品最多取一个，同时每个物品都属于一个组 $c_i$，一个组内只能选择一个物品。求能获得的最大价值。</p>
+<p>同样是转移的方式不同。因为现在的物品是组内选一个，而组间无关。</p>
+<p>转移：</p>
+<p>$(j)\leftarrow(j-a_{p_1}),(j-a_{p_2}),…,(j-a_{p_c}),(j)$</p>
+<p>由组内的任意一个转移。</p>
+<p>DP 式子：</p>
+<p><code>For(i,1,n) FOR(j,V,1) For(j,1,cnt[c[i]]) dp[j]=max(dp[j],dp[j-v[p[j]]]+w[p[j]])</code></p>
+<p>因为所有组内的物品数之和还是 $n$，所以时间复杂度不变。</p>
+<p>时间复杂度：$O(nV)$。</p>
+<p>空间复杂度：$O(V)$。</p>
+<h2 id="背包判可行："><a href="#背包判可行：" class="headerlink" title="背包判可行："></a>背包判可行：</h2><p>例 7：</p>
+<p>有一个容量为 $V$ 的背包有 $n$ 种物品，每种物品有 $v_i$ 的体积，每种物品最多取一个，求是否能取出体积之和为 $m$ 的物品。</p>
+<p>状态转移与 01 背包一致，需要修改维护的内容。</p>
+<p>状态：</p>
+<p>设 dp$[x]$ 表示是否能取出体积之和为 $x$ 的物品。</p>
+<p>状态转移：</p>
+<p>$(x)\leftarrow(x-v_i)$</p>
+<p>DP 式子：</p>
+<p><code>For(i,1,n) FOR(j,V,v[i]) dp[j]|=dp[j-v[i]]</code></p>
+<p>初始化：</p>
+<p>初始只有 $0$，dp$[0]&#x3D;1$ 即可。</p>
+<p>时间复杂度：$O(nV)$。</p>
+<p>空间复杂度：$O(V)$</p>
+<h3 id="bitset-优化："><a href="#bitset-优化：" class="headerlink" title="bitset 优化："></a>bitset 优化：</h3><p>因为结果只含 $0&#x2F;1$，容易联想到 bitset。</p>
+<p>每一层物品的循环，$v_i$ 是固定的，所以相当于把 dp$[x]$ 整体右移了 $v_i$。</p>
+<p>新 DP 式子：</p>
+<p><code>For(i,1,n) temp=dp&lt;&lt;v[i],dp|=temp</code></p>
+<p>对 bitset 整体操作的时间复杂度为 $O(\frac{n}{\omega})$。</p>
+<p>时间复杂度：$O(\frac{nV}{\omega})$。</p>
+<p>空间复杂度：$O(\frac{V}{\omega})$。</p>
+<h2 id="背包求方案数："><a href="#背包求方案数：" class="headerlink" title="背包求方案数："></a>背包求方案数：</h2><p>例 8：</p>
+<p>有一个容量为 $V$ 的背包有 $n$ 种物品，每种物品有 $v_i$ 的体积，每种物品最多取一个，求取出体积之和为 $m$ 的物品的方案数。</p>
+<p>同样是状态转移与 01 背包一致，需要修改维护的内容。</p>
+<p>状态：</p>
+<p>设 dp$[x]$ 表示取出体积之和为 $x$ 的物品的方案数。</p>
+<p>状态转移：</p>
+<p>$(j)\leftarrow(j-v_i)$</p>
+<p>DP 式子：</p>
+<p><code>For(i,1,n) FOR(j,V,v[i]) dp[j]+=dp[j-v[i]]</code></p>
+<p>时间复杂度：$O(nV)$。</p>
+<p>空间复杂度：$O(V)$。</p>
+<h3 id="多项式卷积："><a href="#多项式卷积：" class="headerlink" title="多项式卷积："></a>多项式卷积：</h3><p>每一个物品都可以视作一个形式幂级数，$n$ 个物品求方案数等价于 $n$ 个形式幂级数的卷积。</p>
+<p>利用形式幂级数的封闭形式，可以做到 $O(V\log V)$。</p>
+<p>此处不过多展开。</p>
+<h3 id="可撤销性："><a href="#可撤销性：" class="headerlink" title="可撤销性："></a>可撤销性：</h3><p>背包求方案数的过程具有可撤销性。</p>
+<p>例 9：</p>
+<p>有一个容量为 $V$ 的背包，每次新加一个物品体积为 $v_i$，或每次删去一个已添加的物品，对于每次操作都求取出物品体积之和为 $m$ 的方案数。</p>
+<p>新加物品的操作与前文一致。考虑如何删去一个物品。</p>
+<p>实际上，若从多项式卷积的角度，“可撤销性”是容易解释的。</p>
+<p>因为撤销一个物品相当于在若干个形式幂级数的卷积里去掉一个，等价于卷积的逆操作，或者称“多项式除法”。是可行的，但是每次的时间复杂度均为：$O(V\log V)$。</p>
+<p>考虑 DP。</p>
+<p>状态：</p>
+<p>设 dp$[x]$ 表示取出体积之和为 $x$ 的物品的方案数。</p>
+<p>状态转移：</p>
+<p>$(j)\leftarrow(j-v_i)$</p>
+<p>DP 式子：</p>
+<ul>
+<li>添加：<code>FOR(j,V,v[i]) dp[j]+=dp[j-v[i]]</code></li>
+<li>删除：<code>For(j,v[i],V) dp[j]-=dp[j-v[i]]</code></li>
+</ul>
+<p>删除时，同样要保证 dp$[j]$ 减去的是不考虑 v$[i]$ 的方案数，所以 dp$[j-v[i]]$ 要先把 dp$[j-2\times v[i]]$ 的部分减去。因此，删除需要从小到大枚举容量。</p>
+<p>单次时间复杂度：$O(V)$。</p>
+<h2 id="addition："><a href="#addition：" class="headerlink" title="addition："></a>addition：</h2><p>先枚举容量和先枚举物品。</p>
+<p>实际上，这个问题在于 01 背包和完全背包的比较。</p>
+<p>在 01 背包中，每个物品只能选择 $1$ 次或者 $0$ 次，若是先枚举容量，每一次都枚举物品，那么无法确定某一个物品是否在前面的枚举中使用过。而完全背包对选择的次数没有限制，所以也就不用确定是否在前面的枚举中使用过。所以，对于完全背包，是可以先枚举容量，再枚举物品的；对于 01 背包，是不可以先枚举容量，再枚举物品的。其它背包过程同理，若物品的使用次数有限制，则不能先枚举容量。而需要先枚举物品，使得物品之间的选择相互独立且考虑完备。</p>
+
     </div>
 
     
@@ -379,7 +517,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">01 背包：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E6%95%B0%E7%BB%84%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">滚动数组优化：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">完全背包：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">多重背包：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">朴素：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8B%86%E5%88%86%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">二进制拆分优化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">单调队列优化：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E8%83%8C%E5%8C%85-%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85-%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">01 背包+完全背包+多重背包：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">多维背包：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">分组背包：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E5%88%A4%E5%8F%AF%E8%A1%8C%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">背包判可行：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%EF%BC%9A-1"><span class="nav-number">7.1.</span> <span class="nav-text">朴素：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bitset-%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">7.2.</span> <span class="nav-text">bitset 优化：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E6%B1%82%E6%96%B9%E6%A1%88%E6%95%B0%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">背包求方案数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%EF%BC%9A-2"><span class="nav-number">8.1.</span> <span class="nav-text">朴素：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8D%B7%E7%A7%AF%EF%BC%9A"><span class="nav-number">8.2.</span> <span class="nav-text">多项式卷积：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%92%A4%E9%94%80%E6%80%A7%EF%BC%9A"><span class="nav-number">8.3.</span> <span class="nav-text">可撤销性：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">01 背包：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E6%95%B0%E7%BB%84%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">滚动数组优化：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%AD%A4%E9%A2%98%E7%9A%84%E7%89%B9%E6%AE%8A%E5%A4%84%E7%90%86%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">在此题的特殊处理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">完全背包：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">优化：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">多重背包：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8B%86%E5%88%86%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">二进制拆分优化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">单调队列优化：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E8%83%8C%E5%8C%85-%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85-%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">01 背包+完全背包+多重背包：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">多维背包：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">分组背包：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E5%88%A4%E5%8F%AF%E8%A1%8C%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">背包判可行：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bitset-%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">7.1.</span> <span class="nav-text">bitset 优化：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E6%B1%82%E6%96%B9%E6%A1%88%E6%95%B0%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">背包求方案数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8D%B7%E7%A7%AF%EF%BC%9A"><span class="nav-number">8.1.</span> <span class="nav-text">多项式卷积：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%92%A4%E9%94%80%E6%80%A7%EF%BC%9A"><span class="nav-number">8.2.</span> <span class="nav-text">可撤销性：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addition%EF%BC%9A"><span class="nav-number">9.</span> <span class="nav-text">addition：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -444,12 +582,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">62k</span>
+    <span title="站点总字数">67k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">56 分钟</span>
+    <span title="站点阅读时长">1:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
