@@ -13,12 +13,71 @@
   <entry>
     <title>图（三）</title>
     <url>/2024/01/26/%E5%9B%BE%EF%BC%88%E4%B8%89%EF%BC%89/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>最短路</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
   </entry>
   <entry>
     <title>图（二）</title>
     <url>/2024/01/26/%E5%9B%BE%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>拓扑排序</p>
+<span id="more"></span>
+
+<p>拓扑排序不是一般意义上的“排序”。</p>
+<h2 id="引入："><a href="#引入：" class="headerlink" title="引入："></a>引入：</h2><p>例 1：</p>
+<p>对于一个家族，给出每个人的孩子的序号，输出一个序列，使得每个人的祖先都比他先列出。</p>
+<p>将每个人视作图中的一个节点，若 $v$ 是 $u$ 的孩子，则视作边 $(u,v)$，那么形成的图一定是一个有向无环图，拓扑排序就是针对有向无环图的算法。</p>
+<p>第一个输出的点一定是不存在祖先的节点，体现在图上即：入度为 $0$ 的节点。每输出一个点，就在图上取下这个点。当一个节点的祖先全部输出后，这个点便可以被输出，因为满足了它的祖先都比它先输出了。</p>
+<p>通常使用队列模拟上述过程，此算法被称为 Kahn 算法。通常来说，拓扑排序均指 Kahn 算法。（使用队列模拟即 BFS 实现，也可以使用 DFS 实现，但通常不这么做）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,n) <span class="keyword">if</span>(!in[i]) q.<span class="built_in">push</span>(i);</span><br><span class="line"><span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">	<span class="keyword">auto</span> now=q.<span class="built_in">front</span>();</span><br><span class="line">	seq.<span class="built_in">push_back</span>(now);</span><br><span class="line">	q.<span class="built_in">pop</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> u:p[now])&#123;</span><br><span class="line">		in[u]--;</span><br><span class="line">		<span class="keyword">if</span>(!in[u]) q.<span class="built_in">push</span>(u);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：$O(|V|+|E|)$。</p>
+<h2 id="拓扑排序实现-DP："><a href="#拓扑排序实现-DP：" class="headerlink" title="拓扑排序实现 DP："></a>拓扑排序实现 DP：</h2><p>回顾记忆化搜索中提到的子结构，其维护的是从当前状态到终点的信息，而扫表对应的是从起点到当前状态的信息，拓扑排序同样维护的是起点到当前状态的信息。</p>
+<p>其一，考虑搜索树，容易发现，若为树上的边赋予一个“方向”，那么树就是一个有向无环图。所以记忆化搜索的状态之间即为一个有向无环图，这便满足了可以进行拓扑排序的前置条件。</p>
+<p>其二、对于扫表而言，其保证了用一个状态的值去转移另一个状态时，它的值是正确（不会再被转移）所以，对应到图上，也就是没有入度了。同样是一个有向无环图。</p>
+<p>例 2：</p>
+<p>给定一个食物网，用 $(u,v)$ 描述 $u$ 吃 $v$，求食物网中存在多少条最大食物链，最大食物链即最左端不存在吃的，最右端不存在被吃的。</p>
+<p>状态：</p>
+<p>设 dp$[x]$ 表示以 x 为最右端的最大食物链数。</p>
+<p>转移：</p>
+<p>$(v)\leftarrow(u)$</p>
+<p>此时，枚举的顺序就不容易确定了，因为要保证用于转移的状态是正确的，所以并不能直接从小到大枚举生物。此时就可以用拓扑排序实现。</p>
+<p>DP 式子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,n) <span class="keyword">if</span>(!in[i]) q.<span class="built_in">push</span>(i),dp[i]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">    <span class="keyword">auto</span> now=q.<span class="built_in">front</span>();</span><br><span class="line">    q.<span class="built_in">pop</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> u:p[now])&#123;</span><br><span class="line">        dp[u]+=dp[now];</span><br><span class="line">        in[u]--;</span><br><span class="line">        <span class="keyword">if</span>(!in[u])</span><br><span class="line">            q.<span class="built_in">push</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="拓扑排序判环："><a href="#拓扑排序判环：" class="headerlink" title="拓扑排序判环："></a>拓扑排序判环：</h2><p>有向图中判环拓扑排序的一个简单小应用。</p>
+<p>（理论上有环不是有向无环图，那自然算不得拓扑排序，所以其实叫 Kahn 判环会更合适）</p>
+<p>对于一个环，其没有入度为 $0$ 的点，也就无法进入循环，同时无法去掉环上的点。</p>
+<p>所以跑一遍拓扑排序后，入度不为 $0$ 的点就是在环上的点。</p>
+<h2 id="番外："><a href="#番外：" class="headerlink" title="番外："></a>番外：</h2><p>记忆化搜索、扫表、拓扑排序的对比：</p>
+<h3 id="记忆化搜索："><a href="#记忆化搜索：" class="headerlink" title="记忆化搜索："></a>记忆化搜索：</h3><p>维护的是从当前状态到终点的信息。</p>
+<p>优点：</p>
+<p>在处理容易视作“子结构”的问题中，会更好理解。</p>
+<p>因为其“子结构”性质，不会访问到无用状态。</p>
+<p>缺点：</p>
+<p>需要记录所有用到的状态，不能滚动数组优化空间，且不容易使用数据结构优化时间。</p>
+<h3 id="扫表："><a href="#扫表：" class="headerlink" title="扫表："></a>扫表：</h3><p>维护的是从起点到当前状态的信息。</p>
+<p>优点：</p>
+<p>在处理小规模到大规模明确的问题中更好写。</p>
+<p>相比记忆化搜索不用记录状态，所以在部分情况下可以使用滚动数组优化空间，可以使用数据结构优化时间。</p>
+<p>缺点：</p>
+<p>需要枚举所有状态，会遇到无用的状态。</p>
+<p>在枚举顺序不容易确定的情况，比较难写（转移关系顺序难确定）。</p>
+<h3 id="拓扑排序："><a href="#拓扑排序：" class="headerlink" title="拓扑排序："></a>拓扑排序：</h3><p>维护的是从起点到当前状态的信息。</p>
+<p>优点：</p>
+<p>处理图论模型，不用考虑枚举顺序，在有向无环图上“自动”解决枚举顺序。在状态之间关系明确的情况下容易建图实现。</p>
+<p>和扫表同样可以滚动数组优化空间和数据结构优化空间（因为本质是 BFS，可以预处理深度后按层处理）</p>
+<p>同时不需要枚举所有状态空间，也能避免遇到无用的状态。</p>
+<p>缺点：</p>
+<p>需要建图。</p>
+<p>代码相对复杂。</p>
+]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
   </entry>
   <entry>
     <title>图（一）</title>
@@ -32,6 +91,7 @@
 <p>常简化用 $G&#x3D;(V,E)$ 表示图。</p>
 <h3 id="无向图："><a href="#无向图：" class="headerlink" title="无向图："></a>无向图：</h3><p>若 $G$ 为无向图，则 $E$ 中每一个元素为一个无序二元组 $(u,v)$，称作无向边。$u,v$ 称作端点。</p>
 <h3 id="有向图："><a href="#有向图：" class="headerlink" title="有向图："></a>有向图：</h3><p>若 G 为有向图，则 E 中每一个元素为一个有序二元组 $(u,v)$，有时也称作 $u\rightarrow v$。$u$ 称作起点，$v$ 称作终点。称 $u$ 是 $v$ 的直接前驱，$v$ 是 $u$ 的直接后继。</p>
+<h3 id="有权图："><a href="#有权图：" class="headerlink" title="有权图："></a>有权图：</h3><p>若图为有权图，则用 $(u,v,w)$ 描述一条边。</p>
 <h3 id="简单图："><a href="#简单图：" class="headerlink" title="简单图："></a>简单图：</h3><p>若一个图中没有自环和重边，则被称为简单图。</p>
 <h4 id="自环："><a href="#自环：" class="headerlink" title="自环："></a>自环：</h4><p>对 $E$ 中的边 $e&#x3D;(u,v)$，若 $u&#x3D;v$，则 $e$ 被称作一个自环。</p>
 <h4 id="重边："><a href="#重边：" class="headerlink" title="重边："></a>重边：</h4><p>若 $E$ 中存在两个完全相同的元素 $e_1&#x3D;e_2$，则它们被称作一组重边。</p>
@@ -105,6 +165,15 @@
 </ul>
 <p><img src="https://oi-wiki.org/graph/images/tree-binary-proper.svg"></p>
 <p>注：满二叉树和完整二叉树定义有歧义，不同教材定义不一致。有的教材，将满二叉树定义成完整二叉树。</p>
+<h2 id="图的存储："><a href="#图的存储：" class="headerlink" title="图的存储："></a>图的存储：</h2><h3 id="直接存："><a href="#直接存：" class="headerlink" title="直接存："></a>直接存：</h3><p>用一个结构体存储 $(u,v,w)$。</p>
+<h3 id="邻接矩阵："><a href="#邻接矩阵：" class="headerlink" title="邻接矩阵："></a>邻接矩阵：</h3><p>用 $c[x][y]$ 表示 $(x,y,c[x][y])$。</p>
+<h3 id="邻接表："><a href="#邻接表：" class="headerlink" title="邻接表："></a>邻接表：</h3><p>把以一个点为起点的边存在这个点所对应的集合中。</p>
+<p>有向图只存在起点，无向图两个端点都要存。</p>
+<h4 id="vector："><a href="#vector：" class="headerlink" title="vector："></a>vector：</h4><p>采用 vector 实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;edge&gt; p[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w)</span></span>&#123;</span><br><span class="line">    p[u].<span class="built_in">push_back</span>(&#123;v,w&#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,n)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> u:p[i])</span><br><span class="line">        cout&lt;&lt;u&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;u.v&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;u.w&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="链式前向星："><a href="#链式前向星：" class="headerlink" title="链式前向星："></a>链式前向星：</h4><p>采用链表实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w)</span></span>&#123;</span><br><span class="line">    to[idx]=v,edge[idx]=w,nex[idx]=head[u],head[u]=idx++; </span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,n)</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> u=head[i];~u;u=nex[u])</span><br><span class="line">        cout&lt;&lt;i&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;to[u]&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;edge[u]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>图论</category>
