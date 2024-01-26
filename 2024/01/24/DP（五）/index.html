@@ -30,7 +30,7 @@
 <meta property="og:description" content="数位 DP">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-24T15:10:31.000Z">
-<meta property="article:modified_time" content="2024-01-25T15:37:46.000Z">
+<meta property="article:modified_time" content="2024-01-26T03:46:02.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-25 23:37:46" itemprop="dateModified" datetime="2024-01-25T23:37:46+08:00">2024-01-25</time>
+                <time title="修改时间：2024-01-26 11:46:02" itemprop="dateModified" datetime="2024-01-26T11:46:02+08:00">2024-01-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -272,6 +272,55 @@
         <p>数位 DP</p>
 <span id="more"></span>
 
+<p>数位是指把一个数字按照个、十、百、千等等一位一位地拆开，关注它每一位上的数字。如果拆的是十进制数，那么每一位数字都是 $0,..,9$，其他进制可类比十进制。</p>
+<h2 id="引入："><a href="#引入：" class="headerlink" title="引入："></a>引入：</h2><p>例 1：</p>
+<p>求 $[a,b]$ 之间有多少个数满足：从高位到低位，各位上的数非递减。</p>
+<p>对于数位 DP，普遍是利用差分，用 $[1,b]$ 的答案减去 $[1,a-1]$ 的答案得到 $[a,b]$ 的答案。</p>
+<p>先来考虑一个大数比较的策略：</p>
+<p>对于两个大整数 $a,b(a,b\leq 10^{10^6})$ 比较大小。</p>
+<p>先比较 $a,b$ 的长度：</p>
+<ul>
+<li>$lena&gt;lenb$，$a&gt;b$。</li>
+<li>$lena&lt;lenb$，$a&lt;b$。</li>
+</ul>
+<p>对于 $lena&#x3D;lenb$ 的情况，继续讨论。从最高位开始，找到第一个 $a[i]\neq b[i]$：</p>
+<ul>
+<li>$a[i]&gt;b[i]$，$a&gt;b$。</li>
+<li>$a[i]&lt;b[i]$，$a&lt;b$。</li>
+</ul>
+<p>若没有 $a[i]\neq b[i]$ 的位置，则 $a&#x3D;b$。</p>
+<p>这个过程启发，只要第一个不等的位置满足大小关系，那么后面的数位就可以取任意值。</p>
+<p>所以对于例 $1$，可以枚举前缀相同的数位个数（前缀长度确定后数位固定）后枚举考虑那个满足小于关系的数位，对于后面的数位则可以取 $[0,9]$ 的任意数字。</p>
+<p>状态：</p>
+<p>设 dp$[x][y][0&#x2F;1]$ 表示从高到低第 $x$ 位，第 $x$ 位为 $y$ 且最高位到第 $x$ 位是&#x2F;不是前缀的合法数量。</p>
+<p>转移：</p>
+<p>$(x,a[x],0)\leftarrow(x-1,a[x-1],0)$ $a[x]\geq a[x-1]$</p>
+<p>$(x,y,1)\leftarrow(x-1,a[x-1],0),…(x-1,1,1),(x-1,0,1)$ 且数位不递减</p>
+<p>DP 式子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">    <span class="built_in">For</span>(j,<span class="number">0</span>,<span class="number">9</span>) dp[i][j][<span class="number">0</span>]=dp[i][j][<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">For</span>(j,<span class="number">0</span>,<span class="number">9</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(j==a[i]-<span class="string">&#x27;0&#x27;</span>&amp;&amp;a[i]&gt;=a[i<span class="number">-1</span>]) dp[i][j][<span class="number">0</span>]=dp[i<span class="number">-1</span>][a[i<span class="number">-1</span>]-<span class="string">&#x27;0&#x27;</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="built_in">For</span>(k,<span class="number">0</span>,j)&#123;</span><br><span class="line">            dp[i][j][<span class="number">1</span>]+=dp[i<span class="number">-1</span>][k][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(j&lt;a[i]-<span class="string">&#x27;0&#x27;</span>) dp[i][j][<span class="number">1</span>]+=dp[i<span class="number">-1</span>][k][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后的答案为 dp$[lena][a[lena]][0]+…+$dp$[lena][0][1]$。</p>
+<p>时间复杂度：$O(c\log^2_ca)$。</p>
+<p>空间复杂度：$O(c\log_ca)$。</p>
+<p>$c$ 表示进制数。</p>
+<p>空间易得滚动数组优化。</p>
+<h3 id="addition："><a href="#addition：" class="headerlink" title="addition："></a>addition：</h3><p>在上文中，“第一个不等关系的数位后可以取任意数字”。在这里注意到可以将后面视作一个子结构，因为“任意”说明此时的后续状态并不关心前半部分的内容。</p>
+<p>而在之前的内容中，学习过“记忆化搜索”。若将这个“子结构”用递归的方式处理并记忆化，同样可以实现 DP 的过程。并且笔者看来相较扫表更容易理解。</p>
+<p>新 DP 式子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dp</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> z)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i,res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(x==n) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(vis[x][y][z]) <span class="keyword">return</span> mem[x][y][z];</span><br><span class="line">    <span class="built_in">For</span>(i,y,<span class="number">9</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(z==<span class="number">0</span>&amp;&amp;i&gt;a[x+<span class="number">1</span>]-<span class="string">&#x27;0&#x27;</span>) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(z==<span class="number">0</span>&amp;&amp;i==a[x+<span class="number">1</span>]-<span class="string">&#x27;0&#x27;</span>) res+=<span class="built_in">dp</span>(x+<span class="number">1</span>,i,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">else</span> res+=<span class="built_in">dp</span>(x+<span class="number">1</span>,i,<span class="number">1</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    vis[x][y][z]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> mem[x][y][z]=res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对比两种实现方式："><a href="#对比两种实现方式：" class="headerlink" title="对比两种实现方式："></a>对比两种实现方式：</h2><p>扫表和记忆化搜索。</p>
+<p>其实可以发现，扫表记录是从起点到当前状态的结果，记忆化搜索记录的是当前状态到终点的结果。</p>
+<p>若目标问题更容易解决的是到终点的结果（或是更容易视作子结构）那么更适合记忆化搜索实现。反之，若是更容易解决到起点的结果，那么更适合扫表方式解决。</p>
+<p>同时，容易发现，记忆化搜索无法进行滚动数组优化，因为它需要反复访问不同状态记录的结果，而不是像扫表仅依附于上一轮的值。</p>
+<p>对应的，记忆化也并非毫无优势。记忆化搜索确保了状态都是有用的，不会访问到一些无用状态，而扫表是通过循环枚举，会覆盖整个 DP 数组空间。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>数位 DP 整体是比较套路化的一种 DP，整体框架确定：</p>
+<ul>
+<li>枚举前缀，标记是否前缀</li>
+<li>枚举数位</li>
+<li>根据题目要求修改转移的状态</li>
+</ul>
+<p>当然，难的题目也可以比较困难，而难的核心往往就是“根据题目要求修改转移的状态”，这需要结合实际题目考虑，但普遍较“套路”。</p>
 
     </div>
 
@@ -369,6 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">引入：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#addition%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">addition：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E4%B8%A4%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">对比两种实现方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">总结：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -384,7 +434,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -433,12 +483,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">71k</span>
+    <span title="站点总字数">73k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:04</span>
+    <span title="站点阅读时长">1:06</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
