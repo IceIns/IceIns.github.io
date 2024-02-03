@@ -1199,9 +1199,8 @@
 <p>观察两者，比较两者的不同。</p>
 <ul>
 <li>DFS 需要添加 vis，要求递归过程中不能走回头路（走过的路），因为 DFS 代表一条路走到黑是典型的“不撞南墙不回头”。若允许走回头路，最直接的问题就是在两个状态之间来回横跳，陷入死循环。</li>
-<li>BFS 不严格需要添加 vis，且 BFS 过程中终点第一次出队即为最短路径。因为 BFS 过程是将新状态加入队尾，在迷宫问题中满足每次路径只会增加不会减少或不变，且增量相等（都为 $1$）。而初始状态只有一个 $0$，所以 BFS 过程中的任意时候，队列的路径长度中只会有 $2$ 种值且小的在前，大的在后。也就说，出队的路径长度为单调不减且在有限个状态后一定会增。那么就一定会达到最短路径。所以不严格需要添加标记数组，只是会让无用的状态数大量增加。</li>
+<li>BFS 不严格需要添加 vis，且 BFS 过程中终点第一次出队即为最短路径。因为 BFS 过程是将新状态加入队尾，在迷宫问题中满足每次路径只会增加不会减少或不变，且增量相等（都为 $1$）。而初始状态只有一个 $0$，所以 BFS 过程中的任意时候，队列的路径长度中只会有 $2$ 种值且小的在前，大的在后。也就说，出队的路径长度为单调不减且在有限个状态后一定会增。那么就一定会达到最短路径。所以不严格需要添加标记数组，只是会让无用的状态数大量增加。根据以上结论，其实可以发现，BFS 在状态转移增量恒为 $1$ 的问题中，第一次找到的解即为最优解。</li>
 </ul>
-<p>根据以上结论，其实可以发现，BFS 在状态转移增量恒为 1 的问题中，第一次找到的解即为最优解。</p>
 <p>对于标记数组，因为迷宫问题中，状态转移增量恒为 $1$，所以走过再走一遍的路只会让答案增大。</p>
 <p>同时：</p>
 <ul>
@@ -1300,9 +1299,9 @@
 <h3 id="Dancing-Links："><a href="#Dancing-Links：" class="headerlink" title="Dancing Links："></a>Dancing Links：</h3><p>解决精确覆盖问题和重复覆盖问题的高效搜索算法。</p>
 <p>采用十字链表加上优秀的剪枝实现。</p>
 <p>略。</p>
-<h3 id="启发式搜索："><a href="#启发式搜索：" class="headerlink" title="启发式搜索："></a>启发式搜索：</h3><h4 id="贪婪最佳优先搜索"><a href="#贪婪最佳优先搜索" class="headerlink" title="贪婪最佳优先搜索"></a>贪婪最佳优先搜索</h4><p>$h(x)&#x3D;0$ 的 A*，也就是优先队列 BFS，也可以说是 Dijkstra。</p>
-<h4 id="模拟退火"><a href="#模拟退火" class="headerlink" title="模拟退火"></a>模拟退火</h4><p>它是一种基于概率的搜索算法，模拟固体物质的退火过程。它以一定的概率接受比当前解更差的解，以避免陷入局部最优。它的估价函数是 $f(n)&#x3D; e^{-\frac{ΔE}{T}}$，其中 $ΔE$ 表示新解和旧解的能量差，$T$ 表示温度参数。它的优点是能够跳出局部最优，缺点是参数的选择比较难，收敛速度慢。</p>
-<h4 id="遗传算法"><a href="#遗传算法" class="headerlink" title="遗传算法"></a>遗传算法</h4><h4 id="蚁群算法"><a href="#蚁群算法" class="headerlink" title="蚁群算法"></a>蚁群算法</h4><h4 id="粒子群优化算法"><a href="#粒子群优化算法" class="headerlink" title="粒子群优化算法"></a>粒子群优化算法</h4><h2 id="番外："><a href="#番外：" class="headerlink" title="番外："></a>番外：</h2><h3 id="对抗搜索："><a href="#对抗搜索：" class="headerlink" title="对抗搜索："></a>对抗搜索：</h3><p>这里的对抗搜索是指双人进行对抗博弈。</p>
+<h3 id="启发式搜索："><a href="#启发式搜索：" class="headerlink" title="启发式搜索："></a>启发式搜索：</h3><h4 id="贪婪最佳优先搜索："><a href="#贪婪最佳优先搜索：" class="headerlink" title="贪婪最佳优先搜索："></a>贪婪最佳优先搜索：</h4><p>$h(x)&#x3D;0$ 的 A*，也就是优先队列 BFS，也可以说是 Dijkstra。</p>
+<h4 id="模拟退火："><a href="#模拟退火：" class="headerlink" title="模拟退火："></a>模拟退火：</h4><p>它是一种基于概率的搜索算法，模拟固体物质的退火过程。它以一定的概率接受比当前解更差的解，以避免陷入局部最优。它的估价函数是 $f(n)&#x3D; e^{-\frac{ΔE}{T}}$，其中 $ΔE$ 表示新解和旧解的能量差，$T$ 表示温度参数。它的优点是能够跳出局部最优，缺点是参数的选择比较难，收敛速度慢。</p>
+<h4 id="遗传算法："><a href="#遗传算法：" class="headerlink" title="遗传算法："></a>遗传算法：</h4><h4 id="蚁群算法："><a href="#蚁群算法：" class="headerlink" title="蚁群算法："></a>蚁群算法：</h4><h4 id="粒子群优化算法："><a href="#粒子群优化算法：" class="headerlink" title="粒子群优化算法："></a>粒子群优化算法：</h4><h2 id="番外："><a href="#番外：" class="headerlink" title="番外："></a>番外：</h2><h3 id="对抗搜索："><a href="#对抗搜索：" class="headerlink" title="对抗搜索："></a>对抗搜索：</h3><p>这里的对抗搜索是指双人进行对抗博弈。</p>
 <p>博弈原理：</p>
 <ul>
 <li>存在先手必胜策略，当且仅当存在一种策略使得不存在后手必胜策略。</li>
@@ -1313,6 +1312,7 @@
 <li>dfs$(x,…,1)&#x3D;$dfs$(x\oplus 1,…0)$ 与之和。</li>
 <li>dfs$(x,…,0)&#x3D;$dfs$(x\oplus 1,…1)$ 或之和。</li>
 </ul>
+<h2 id="Attention："><a href="#Attention：" class="headerlink" title="Attention："></a>Attention：</h2><p>因为搜索其本身时间复杂度上界很高，以及剪枝没有严格时间复杂度证明，所以近年来的算法竞赛中搜索相关问题的出现次数大大减少，除非题目本身明确上界也能通过，否则不会是搜索问题。</p>
 ]]></content>
       <categories>
         <category>搜索</category>
@@ -1381,9 +1381,7 @@
 <li>vector<int> v1(v2)创建一个 v2 的拷贝 v1。</li>
 <li>v.front() v 的首元素。</li>
 <li>v.back() v 的尾元素。</li>
-<li>v.begin() 指向 v 的首元素的迭代器。</li>
-<li>v.end() 指向 v 的尾元素后继的迭代器。</li>
-<li>v.rbegin()  指向 v 逆向的首元素的迭代器。</li>
+<li>v.rbegin() 指向 v 逆向的首元素的迭代器。</li>
 <li>v.rend()指向 v 逆向的尾元素后继的迭代器。</li>
 <li>v.push_back(x)在 v 的末尾加入 x。</li>
 <li>v.pop_back()删除 v 的末尾元素。</li>
@@ -1503,7 +1501,7 @@
 <p>注意：</p>
 <ul>
 <li>a&#x3D;a+b，时间复杂度为 $O(|a+b|)$。</li>
-<li>a+&#x3D;b，时间复杂度为 $O(b)$。</li>
+<li>a+&#x3D;b，时间复杂度为 $O(|b|)$。</li>
 </ul>
 <p>string 基于字典序重载比较运算符。</p>
 <p>string 转 char：</p>
@@ -1592,9 +1590,9 @@
 <li>upper_bound(s.first,s.last,v)返回容器 s 中迭代器 [first,last) 范围内找到第一个大于&#x2F;小于（取决于范围内元素是升序还是降序，若范围内元素为无序，不会报错，但结果不一定正确） v 的迭代器，找不到返回 s.last。</li>
 <li>merge(v1.first,v1.last,v2.first,v2.last,back_inserter(v3))把容器 v1 中迭代器 [first,last] 范围元素和容器 v2 中迭代器 [first,last) 范围内元素有序合并后插入到 v3 后。（要求 v1 v2 对应范围内均升序）线性时间复杂度。</li>
 <li>inplace_merge(v.first,v.middle,v.last)将容器 v 中迭代器 [first,middle) 和 [middle,last) 范围内的元素有序合并（要求 [first,middle) 和 [middle,last) 均升序）。线性时间复杂度。</li>
-<li>next_permutation(s.first,s.last) 将容器 s 中迭代器 [first,last)范围的排序更改为全排列中的下一个排列。</li>
-<li>prev_premutation(s.firts,s.last) 将容器 s 中迭代器 [first,last)范围的排序更改为全排列中的下一个排列。</li>
-<li>partial_sum(v.first,v.last)求容器 s 中迭代器 [first,last)范围的前缀和。线性时间复杂度。</li>
+<li>next_permutation(s.first,s.last) 将容器 s 中迭代器 [first,last) 范围的排列更改为全排列中的下一个排列。</li>
+<li>prev_premutation(s.firts,s.last) 将容器 s 中迭代器 [first,last) 范围的排列更改为全排列中的下一个排列。</li>
+<li>partial_sum(v.first,v.last)求容器 s 中迭代器 [first,last) 范围的前缀和。线性时间复杂度。</li>
 </ul>
 <h2 id="pb-ds："><a href="#pb-ds：" class="headerlink" title="pb_ds："></a>pb_ds：</h2><p>pb_ds 库全称 Policy-Based Data Structures。</p>
 <p>pb_ds 库封装了很多数据结构，比如哈希（Hash）表，平衡二叉树，字典树（Trie 树），堆（优先队列）等。</p>
@@ -1905,7 +1903,7 @@
 <p>初始情况下没有任何硬币，所以应该选择 $(0)$ 作为初始状态并初始化 dp$[0]&#x3D;0$。同时要注意无解的情况。所以要特殊处理无解，一般可以之间置为极大值（求解最小值）或者极小值（求解最大值）。</p>
 <p>容易发现，大金额的状态是由小金额的状态转移的，所以从小到大枚举金额即可。</p>
 <p>最后的解即为：dp$[x]$。</p>
-<p>Tips：在后续的内容，为了避免不必要的内容，除非必要，将统一使用逆推。</p>
+<p>Tips：在后续的内容，为了避免不必要的内容，除非必要，将统一使用逆推。 </p>
 ]]></content>
       <categories>
         <category>DP</category>
@@ -2123,7 +2121,7 @@
 <p>初始化：</p>
 <p>初始只有 $0$，dp$[0]&#x3D;1$ 即可。</p>
 <p>时间复杂度：$O(nV)$。</p>
-<p>空间复杂度：$O(V)$</p>
+<p>空间复杂度：$O(V)$。</p>
 <h3 id="bitset-优化："><a href="#bitset-优化：" class="headerlink" title="bitset 优化："></a>bitset 优化：</h3><p>因为结果只含 $0&#x2F;1$，容易联想到 bitset。</p>
 <p>每一层物品的循环，$v_i$ 是固定的，所以相当于把 dp$[x]$ 整体右移了 $v_i$。</p>
 <p>新 DP 式子：</p>
@@ -2504,7 +2502,60 @@
   <entry>
     <title>数据结构（五）</title>
     <url>/2024/01/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%94%EF%BC%89/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>平衡树</p>
+<span id="more"></span>
+
+<p>平衡树是一种特殊的二叉搜索树。</p>
+<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>二叉搜索树是一种二叉树的树形结构，其定义如下：</p>
+<ul>
+<li>空树是二叉搜索树。</li>
+<li>若二叉搜索树的左子树不为空，则其左子树上所有点的附加权值小于其根节点的值。</li>
+<li>若二叉搜索树的右子树不为空，则其右子树上所有点的附加权值大于其根节点的值。</li>
+<li>二叉搜索树的左右子树均为二叉搜索树。</li>
+</ul>
+<p>二叉搜索树上的基本操作所花费的时间与这棵树的高度成正比。</p>
+<img src="/2024/01/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%94%EF%BC%89/1.jpg" class="" title="咕咕咕">
+
+<h2 id="查找最值："><a href="#查找最值：" class="headerlink" title="查找最值："></a>查找最值：</h2><p>二叉搜索树上的最小值为二叉搜索树左链的顶点，最大值为二叉搜索树右的顶点。</p>
+<h2 id="查找元素："><a href="#查找元素：" class="headerlink" title="查找元素："></a>查找元素：</h2><p>设当前二叉搜索树子树的根为 root。</p>
+<ul>
+<li>若 root 为空，返回 <code>false</code>。</li>
+<li>若 root 的权值等于 <code>value</code>，返回 <code>true</code>。</li>
+<li>若 root 的权值大于 <code>value</code>，递归左子树。</li>
+<li>若 root 的权值小于 <code>value</code>，递归右子树。</li>
+</ul>
+<h2 id="插入元素："><a href="#插入元素：" class="headerlink" title="插入元素："></a>插入元素：</h2><p>设当前二叉搜索树子树的根为 root。</p>
+<ul>
+<li>若 root 为空，创建一个新节点插入元素。</li>
+<li>若 root 的权值等于 <code>value</code>，该节点的权值对应的计数数组加 $1$。</li>
+<li>若 root 的权值大于 <code>value</code>，递归左子树。</li>
+<li>若 root 的权值小于 <code>value</code>，递归右子树。</li>
+</ul>
+<h2 id="删除元素："><a href="#删除元素：" class="headerlink" title="删除元素："></a>删除元素：</h2><p>先查找元素，若存在元素，设对应节点为 root。</p>
+<ul>
+<li>若 root 权值对应的计数数组大于 $1$，则减 $1$。</li>
+<li>若 root 为叶子节点，直接删除。</li>
+<li>若 root 只有一个儿子的节点，返回这个儿子。</li>
+<li>若 root 有两个非空子节点，用左子树的最大值替代它（swap 即可），再删除该节点。</li>
+</ul>
+<h2 id="求元素的排名："><a href="#求元素的排名：" class="headerlink" title="求元素的排名："></a>求元素的排名：</h2><p>排名的一个等价定义：比 $x$ 小的数的个数&#x2F;比 $x$ 大的数的个数 $+1$（具体题目具体分析）。</p>
+<p>在查找元素的过程中累加左子树的大小之和（同时累加节点的计数数组）即可。</p>
+<h2 id="查找排名为-k-的元素："><a href="#查找排名为-k-的元素：" class="headerlink" title="查找排名为 k 的元素："></a>查找排名为 k 的元素：</h2><p>比 $x$ 小的元素个数为 $k-1$。设 $count$ 为当前节点对应的计数数组的值。</p>
+<ul>
+<li>若左子树的大小大于等于 $k$，递归左子树。</li>
+<li>若左子树的大小小于 $k-count$，则该元素在右子树中。</li>
+<li>若其左子树的大小在区间 $[k-count,k-1]$ 中，则该元素为子树的根节点。</li>
+</ul>
+<h2 id="平衡树："><a href="#平衡树：" class="headerlink" title="平衡树："></a>平衡树：</h2><p>朴素二叉搜索树的时间复杂度均为 $O(h)$，在极限数据下，为 $O(n)$。</p>
+<p>但是二叉搜索树树形态不唯一，这也就使得寻求一种 $h$ 更小更稳定的二叉搜索树成为了优化的核心道路。</p>
+<p>平衡树即1是指树高平衡的二叉搜索树，平衡树同样不唯一，根据不同的平衡策略可得不同的平衡树。</p>
+<p>根据平衡方式可分为：旋转平衡、重构平衡、自平衡等。</p>
+<p>在算法竞赛中使用较广的平衡树有：Treap（分为无旋 Treap（FHQ-Treap） 和带旋 Treap，通常 Treap 单指带旋 Treap，但无定论，还是要结合上下文）、Splay、替罪羊树、笛卡尔树。</p>
+<p>其中 Splay 更多地被应用于 LCT（一种动态树）以及用于维护序列而不是值。替罪羊树和笛卡尔树相对使用较少，替罪羊树是一种基于重构的平衡树，笛卡尔树作为一种特殊形态的平衡树（本质是特殊的 Treap）其具有唯一性，在部分题目中对理解更加形象，但由于和单调栈没有本质区别，所有笛卡尔树具有可替代性。</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
   </entry>
   <entry>
     <title>图（四）</title>
