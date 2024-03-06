@@ -30,7 +30,7 @@
 <meta property="og:description" content="最小生成树">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-26T04:36:30.000Z">
-<meta property="article:modified_time" content="2024-01-26T13:07:44.000Z">
+<meta property="article:modified_time" content="2024-02-04T04:08:12.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 
@@ -224,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-26 12:36:30 / 修改时间：21:07:44" itemprop="dateCreated datePublished" datetime="2024-01-26T12:36:30+08:00">2024-01-26</time>
+              <time title="创建时间：2024-01-26 12:36:30" itemprop="dateCreated datePublished" datetime="2024-01-26T12:36:30+08:00">2024-01-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-04 12:08:12" itemprop="dateModified" datetime="2024-02-04T12:08:12+08:00">2024-02-04</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -244,7 +250,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>80</span>
+              <span>626</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -267,7 +273,30 @@
 <span id="more"></span>
 
 <p>无向连通图才有最小生成树，最小生成树即为边权和最小的生成树。</p>
-<h2 id="Kruskal："><a href="#Kruskal：" class="headerlink" title="Kruskal："></a>Kruskal：</h2><h2 id="Prim："><a href="#Prim：" class="headerlink" title="Prim："></a>Prim：</h2><h2 id="Boruvka："><a href="#Boruvka：" class="headerlink" title="Boruvka："></a>Boruvka：</h2><h2 id="次小生成树："><a href="#次小生成树：" class="headerlink" title="次小生成树："></a>次小生成树：</h2><h2 id="瓶颈生成树（Kruskal重构树）："><a href="#瓶颈生成树（Kruskal重构树）：" class="headerlink" title="瓶颈生成树（Kruskal重构树）："></a>瓶颈生成树（Kruskal重构树）：</h2>
+<h2 id="Kruskal："><a href="#Kruskal：" class="headerlink" title="Kruskal："></a>Kruskal：</h2><h3 id="过程："><a href="#过程：" class="headerlink" title="过程："></a>过程：</h3><p>将 $m$ 条边按照权值升序，每次连接权值最小的顶点不在同一个连通块中的边。</p>
+<p>使用并查集维护连通块，算法时间复杂度瓶颈为排序，时间复杂度：$O(m\log m)$。</p>
+<h2 id="Prim："><a href="#Prim：" class="headerlink" title="Prim："></a>Prim：</h2><p>过程：</p>
+<p>类似于 Dijkstra。</p>
+<p>将点集划分成两部分：</p>
+<ul>
+<li>不在已生成的“最小生成树”子集中的点。（T）</li>
+<li>在已生成的“最小生成树”子集中的点。（S）</li>
+</ul>
+<p>每次在 S 中选择一个最小的连接 S 和 T 集合的边连接即可。</p>
+<p>根据选取边的时间复杂度不同，可得不同的时间复杂度：</p>
+<ul>
+<li>暴力选取：$O(n^2+m)$。</li>
+<li>二叉堆（优先队列）：$O(n\log n+m\log n)$，因为不用删除了，所以时间复杂度一致。</li>
+<li>其它。</li>
+</ul>
+<h2 id="Boruvka："><a href="#Boruvka：" class="headerlink" title="Boruvka："></a>Boruvka：</h2><p>基本思路为，从一个集合连出一条最短边，合并两个集合。每一轮操作，每个集合都会被合并，集合个数至少减小一半，初始共有 $n$ 个集合，时间复杂度：$O(m\log n)$。</p>
+<p>本质上，Boruvka 用于求给定图的最小生成森林，当图连通时，即为求最小生成树。</p>
+<h2 id="次小生成树："><a href="#次小生成树：" class="headerlink" title="次小生成树："></a>次小生成树：</h2><p>结论：次小生成树和最小生成树只有一条边不同。</p>
+<h2 id="瓶颈生成树（Kruskal重构树）："><a href="#瓶颈生成树（Kruskal重构树）：" class="headerlink" title="瓶颈生成树（Kruskal重构树）："></a>瓶颈生成树（Kruskal重构树）：</h2><p>将在 Kruskal 过程中连接的两点，视作生成树上两叶子，建立一个新节点作为两点的父节点。最后形成的树即为 Kruskal 重构树。</p>
+<p>结论：</p>
+<p>原图中，两点之间的瓶颈路的瓶颈即为 Kruskal 重构树上 LCA 的权值。</p>
+<p>瓶颈路：路径上最小边权最大的路径&#x2F;路径上最大边权最小的路径。</p>
+
     </div>
 
     
@@ -364,7 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kruskal%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">Kruskal：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prim%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">Prim：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boruvka%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">Boruvka：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A1%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">次小生成树：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%93%B6%E9%A2%88%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%88Kruskal%E9%87%8D%E6%9E%84%E6%A0%91%EF%BC%89%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">瓶颈生成树（Kruskal重构树）：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kruskal%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">Kruskal：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">过程：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prim%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">Prim：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boruvka%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">Boruvka：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A1%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">次小生成树：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%93%B6%E9%A2%88%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%88Kruskal%E9%87%8D%E6%9E%84%E6%A0%91%EF%BC%89%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">瓶颈生成树（Kruskal重构树）：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -380,14 +409,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -429,12 +458,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">97k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:12</span>
+    <span title="站点阅读时长">1:28</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

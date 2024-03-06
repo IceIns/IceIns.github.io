@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"iceinsky.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="质数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学（三）">
+<meta property="og:url" content="http://iceinsky.top/2024/03/06/%E6%95%B0%E5%AD%A6%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="咕咕咕">
+<meta property="og:description" content="质数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-06T13:21:18.000Z">
+<meta property="article:modified_time" content="2024-03-06T13:24:04.000Z">
+<meta property="article:author" content="ice_in_sky">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://iceinsky.top/2024/03/06/%E6%95%B0%E5%AD%A6%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数学（三） | 咕咕咕</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕咕咕</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://iceinsky.top/2024/03/06/%E6%95%B0%E5%AD%A6%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ice_in_sky">
+      <meta itemprop="description" content="乱我心者，今日之日多烦忧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕咕咕">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数学（三）
+        </h1>
+
+        <div class="post-meta">
+	  
+ 	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-06 21:21:18 / 修改时间：21:24:04" itemprop="dateCreated datePublished" datetime="2024-03-06T21:21:18+08:00">2024-03-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="质数"><a href="#质数" class="headerlink" title="质数"></a>质数</h1><span id="more"></span>
+
+<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>若正整数 $a$ 的约数只有 $1$ 和 $a$，则称 $a$ 是质数。特殊地，$1$ 不是质数。</p>
+<p>质数又称素数。</p>
+<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><h3 id="互质："><a href="#互质：" class="headerlink" title="互质："></a>互质：</h3><p>质数和除它倍数外的任意整数互质。</p>
+<h3 id="哥德巴赫猜想："><a href="#哥德巴赫猜想：" class="headerlink" title="哥德巴赫猜想："></a>哥德巴赫猜想：</h3><p>任一大于 $2$ 的偶数都可写成两个质数之和。</p>
+<h3 id="费马小定理："><a href="#费马小定理：" class="headerlink" title="费马小定理："></a>费马小定理：</h3><p>对于质数 $p$ 和任意满足 $p\not\mid a$ 的整数 $a$，$a^{p-1}\equiv 1\pmod p$。</p>
+<p>费马小定理最大的应用是求逆元，对于满足费马小定理的整数 $a,p$，$a\times a^{p-2}\equiv 1\pmod p$，所以 $a$ 的逆元就是 $a^{p-2}$，通常结合快速幂即可在 $O(\log n)$ 的时间内解决。</p>
+<h3 id="质数密度："><a href="#质数密度：" class="headerlink" title="质数密度："></a>质数密度：</h3><p>用 $\pi(n)$ 表示 $[1,n]$ 中的质数个数。</p>
+<p>$\pi(n)\approx \dfrac{n}{\ln n}$，即：通常认为质数个数为 $O(\dfrac{n}{\log n})$ 级别的。</p>
+<h3 id="质数距离："><a href="#质数距离：" class="headerlink" title="质数距离："></a>质数距离：</h3><p>由质数密度容易猜想，任意两个质数之间的非质数数量不会特别多。</p>
+<p>事实也确实如此，所以若要寻找比 $x$ 大的最小质数，可以暴力向后枚举判断是否是质数。</p>
+<h3 id="唯一分解定理："><a href="#唯一分解定理：" class="headerlink" title="唯一分解定理："></a>唯一分解定理：</h3><p>任意整数均可唯一分解成若干质数幂次之积的形式：$x&#x3D;p_1^{a_1}p_2^{a_2}…p_n^{a_n}$，其中 $p_i$ 表示从 $2$ 开始第 $i$ 个质数。</p>
+<h2 id="质数检测："><a href="#质数检测：" class="headerlink" title="质数检测："></a>质数检测：</h2><p>即判断一个数是否是质数。</p>
+<h3 id="暴力："><a href="#暴力：" class="headerlink" title="暴力："></a>暴力：</h3><p>求出 $[1,n]$ 内的所有整除 $n$ 的数。</p>
+<p>时间复杂度：$O(n)$。</p>
+<h3 id="根号均衡："><a href="#根号均衡：" class="headerlink" title="根号均衡："></a>根号均衡：</h3><p>$a\times b&#x3D;n,\min\lbrace a,b\rbrace\leq \sqrt n$。</p>
+<p>对于一个数的约数，它们是成对出现的。确定了其中之一，那么另一个也就确定了。</p>
+<p>而根据上述不等式，启发我们，如果只枚举 $\min\lbrace a,b\rbrace$，那么只需要枚举到 $\sqrt n$ 即可。</p>
+<p>时间复杂度：$O(\sqrt n)$。</p>
+<h3 id="质数优化："><a href="#质数优化：" class="headerlink" title="质数优化："></a>质数优化：</h3><p>引理：若 $a\mid b,b\mid c$，则 $a\mid c$。</p>
+<p>同时，质数是不存在大于 $1$ 的真因子的，所以可以只判断 $[1,\sqrt n]$ 的质数是否是 $n$ 的约数即可。</p>
+<p>或者根据唯一分解定理，也可以得知只要判断质因子即可。</p>
+<p>根据质数密度，可得时间复杂度：$O(\dfrac{\sqrt n}{\log\sqrt n})$，一般可直接写作 $O(\dfrac{\sqrt n}{\log n})$。</p>
+<h3 id="Miller-Rabin："><a href="#Miller-Rabin：" class="headerlink" title="Miller-Rabin："></a>Miller-Rabin：</h3><p>根据费马小定理，若 $p$ 是质数，则 $a^{p-1}\equiv 1\pmod p$，所以如果要检测 $p$ 是不是质数，可以尝试判断 $a^{p-1} \bmod p$ 的结果是否为 $1$。若不为 $1$ 则 $p$ 一定不是质数，但是反之不然。</p>
+<p>所以仅仅判断 $a^{p-1}\bmod p$ 的结果是不够的。</p>
+<p>注意到，若 $a^{\frac{p-1}{2}}\bmod p$ 的结果不是 $1$ 或 $p-1$，而 $a^{p-1}\bmod p$ 的结果是 $1$，那么 $p$ 一定不是质数。所以不断对指数除以 $2$ 判断即可。</p>
+<p>同时，$\dfrac{p-1}{2}$ 可能就已经不是偶数了，所以一个底数可能还是不够，因此可以多选几个底数。一般选前 $9$ 个质数即可，或者随机生成几个数也行。</p>
+<p>由上可以发现，这是一个随机化算法，其正确性和哈希冲突类似，同样是生日悖论模型，只要出现一次不是 $1$ 或 $p-1$，即可认为不是质数，在多次检测过后还是错误的概率会非常小。</p>
+<p>一个小细节是因为指数按 $2$ 倍递增，所以可以每次按 $2$ 倍增，总的时间复杂度为 $O(c\log n)$，其中 $c$ 为选择用于检测的底数个数。</p>
+<h2 id="分解质因数："><a href="#分解质因数：" class="headerlink" title="分解质因数："></a>分解质因数：</h2><p>即求出一个数的所有质因数（一般认为也需要求出对应指数）。</p>
+<h3 id="暴力分解："><a href="#暴力分解：" class="headerlink" title="暴力分解："></a>暴力分解：</h3><p>此处暴力分解指根号均衡时的暴力分解，根号均衡质数检测时，若某质数是 $x$ 的因子，则不断将 $x$ 除以此质数，因为根据唯一分解定理，将某质因子从 $x$ 中除去后，并不影响后续别的质因子的分解。</p>
+<p>时间复杂度：$O(\dfrac{\sqrt n}{\log n})$。</p>
+<p>若在分解除以质因子的同时判断当前枚举的质数$\leq \sqrt x$，则对于实际运行中的平均效率而言，普遍跑不满这个 $O(\dfrac{\sqrt n}{\log n})$。当然，最坏情况还是会跑满的（即：$x&#x3D;p_i^2$ 时）。</p>
+<h3 id="枚举倍数："><a href="#枚举倍数：" class="headerlink" title="枚举倍数："></a>枚举倍数：</h3><p>若枚举 $i$，同时枚举 $i$ 的倍数，将 $i$ 作为因子放到 $i$ 的倍数的因子集合中。则可以处理出 $[1,n]$ 所有数的所有约数。时间复杂度：$O(n\log n)$。</p>
+<p>因为调和级数：$\dfrac11+\dfrac12+…+\dfrac1n\approx\ln n$。</p>
+<p>若仅仅需要质因子，也容易，因为质数的约数只有 $1$ 和它本身，所以当从小到大枚举到 $i$ 时，$i$ 对于的约数集合只有 $1$，那么它就是质数。</p>
+<p>（所以，使用此方法也可以筛质数。或者说，这本质上和埃氏筛的基本思想是一致的）</p>
+<h3 id="Pollard-rho："><a href="#Pollard-rho：" class="headerlink" title="Pollard-rho："></a>Pollard-rho：</h3><p>Pollard-rho 同样是一种随机化算法。</p>
+<p>考虑一个数列：$x_n&#x3D;(x_{n-1}^2+c)\bmod p$，期望经过多少项后会有两项值相等。</p>
+<p>同样是“生日悖论”模型，大约 $O(\sqrt p)$ 项后会出现相同的两项。</p>
+<p>引理：若 $p&#x3D;p_1\times p_2$，则 $x_n&#x3D;(x_{n-1}^2+c)\bmod p$ 的循环节是 $x_n&#x3D;(x_{n-1}^2+c)\bmod p_1$ 和 $x_n&#x3D;(x_{n-1}^2+c)\bmod p_2$ 的倍数。</p>
+<p>根据引理可得，$p$ 对于数列的循环节一定是 $p_1,p_2$ 的循环节。</p>
+<p>但是无法确定，所以第 $n$ 项和前 $[1,n-1]$ 项都做差，那么其中一定会有一个 $p_1$ 或 $p_2$ 的循环节。根据前文内容，可得这个 $n$ 是期望 $O(\sqrt{p_1}),O(\sqrt{p_2})$ 的。</p>
+<p>引理：$\gcd(a,b)\mid b$。</p>
+<p>求 $\gcd(a,b)$，是容易的，通过辗转相除法可以 $O(\log n)$ 求得，所以若 $\gcd(a,b)\neq 1\land\gcd(a,b)\neq b$，则我们就得到了 $b$ 的一个非平凡因子。</p>
+<p>（所以也就是说，最理想状态下，随机一个数，然后用它和 $n$ 求 $\gcd$ 就得到了 n 的一个因子，然后不断递归，可以 $O(\log n)$ 分解质因数。同时，一个数的质因数规模最大就是 $O(\log n)$ 的，所以分解质因数的理论时间复杂度不应该比 $O(\log n)$ 还快）</p>
+<p>所以，判断 $n$ 是否是循环节的方式就是作差后求 $\gcd$ 然后判断是否是 $1$。</p>
+<p>综上：即可在单次期望 $O(\sqrt p_1\log p)$ 的时间复杂度内得到 $p$ 的一个因数（算上求 $\gcd$ 的时间复杂度）。</p>
+<p>引理：$\exist\ i\in[1,m],\gcd(a_i,n)\neq 1$，则 $\gcd(a_1\times a_2\times…\times a_m,n)\neq 1$。</p>
+<p>引理：$p&#x3D;p_1\times p_2$，若 $p_1\mid a$，那么满足 $a\mid b$ 的 $b$ 对 $p$ 取模后的结果还是 $p_1$ 的倍数。</p>
+<p>根据引理，结合 Pollard-rho 期望的是找到那个不等于 $1$ 的 $\gcd$，所以可以将 $\log n$ 次差的结果乘起来作 $\gcd$，这样均摊后的时间复杂度就能做到 $O(\sqrt p)$。</p>
+<p>而根据前文的根号均衡 $\min\lbrace p_1,p_2\rbrace\leq \sqrt p$，所以一般认为 Pollard-rho 的时间复杂度为 $O(\sqrt{\sqrt n})&#x3D;O(n^{\frac14})$。</p>
+<p>而要完全质因数分解一个数，则需要分解 $O(\log n)$ 次因子。</p>
+<p>（上述时间复杂度模型相当于每次划分指数集合，每次划分后的集合大小都会变小，划分到 $1$ 为止，最后的划分次数就是初始集合大小，而质因数分解后的指数大小为 $O(\log n)$，那么即分解 $O(\log n)$ 次因子）</p>
+<p>综上：Pollard-rho 分解质因数的总时间复杂度为：$O(n^{\frac14}\log n)$。</p>
+<p>tips：</p>
+<p>实际上，Pollard-rho 分解到质数后，不存在非平凡因子了，时间复杂度就失效了，所以还要特判当前递归状态是否是质数。（根据质数检测的时间复杂度不同，时间复杂度不同，但是由于质因子只有 $O(\log n)$，所以只要进行 $O(\log n)$ 次质数检测，使用 Miller-Rabin 的话不会影响时间复杂度瓶颈）</p>
+<h2 id="筛质数："><a href="#筛质数：" class="headerlink" title="筛质数："></a>筛质数：</h2><p>筛质数是指预处理 $[1,n]$ 的所有质数。</p>
+<h3 id="埃氏筛："><a href="#埃氏筛：" class="headerlink" title="埃氏筛："></a>埃氏筛：</h3><p>基本思想是一个大于 $1$ 的整数的不为自身的倍数不会是质数。</p>
+<p>所以从小到大枚举 $i$，然后标记它的所有倍数即可。若枚举到 $i$ 的时候，$i$ 没有被标记过，则 $i$ 是一个质数。</p>
+<p>根据调和级数，时间复杂度：$O(n\log n)$。</p>
+<p>埃氏筛优化：</p>
+<p>根据根号均衡的思路，枚举倍数时，另一个乘数，可以从 $i$ 开始枚举，而不是 $2$。</p>
+<p>通过此优化，时间复杂度优化至：$O(n\log\log n)$。</p>
+<h3 id="欧拉筛（线性筛）："><a href="#欧拉筛（线性筛）：" class="headerlink" title="欧拉筛（线性筛）："></a>欧拉筛（线性筛）：</h3><p>基本思想同样是标记每一个非质数，但是用 $x$ 最小的质因数标记它。保证了每个数最多被标记一次，所以时间复杂度为 $O(n)$。$O(n)$ 时间复杂度即线性，所以欧拉筛也通常被称为线性筛。</p>
+<p>具体流程，仍然从小到大枚举 $i$，然后枚举 $[1,i]$ 处理好的质数，标记 $i\times p_j$，若 $i\equiv 0\pmod {p_j}$，则停止标记过程，继续枚举 $i$。当枚举到的 $i$ 未被标记时，$i$ 就是质数。</p>
+<h3 id="其它筛："><a href="#其它筛：" class="headerlink" title="其它筛："></a>其它筛：</h3><p>还有许多其它的筛法。但是算法竞赛中以上两种筛法足以应付几乎所有情况了。</p>
+<p>因为质数密度为 $O(\dfrac{n}{\log n})$ 的，所以任何筛法的时间复杂度都不会低于这个阈值。</p>
+<h3 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h3><p>欧拉筛也常用作预处理积性函数。事实上 $prime(i)&#x3D;\begin{cases}1&amp; i\ is\<br>a\ prime\0&amp;else\end{cases}$ 也是一个积性函数。</p>
+<p>addition：</p>
+<p>由于质数筛的标记数组只存在 $0&#x2F;1$，所以若使用 bitset 存储，其效率会得到不小的提升。相较 bool 数组，空间也能得到优化。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ice_in_sky
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://iceinsky.top/2024/03/06/%E6%95%B0%E5%AD%A6%EF%BC%88%E4%B8%89%EF%BC%89/" title="数学（三）">http://iceinsky.top/2024/03/06/数学（三）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/06/%E6%95%B0%E5%AD%A6%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="数学（二）">
+      <i class="fa fa-chevron-left"></i> 数学（二）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/06/%E6%95%B0%E5%AD%A6%EF%BC%88%E5%9B%9B%EF%BC%89/" rel="next" title="数学（四）">
+      数学（四） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">质数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">性质：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E8%B4%A8%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">互质：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">哥德巴赫猜想：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86%EF%BC%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">费马小定理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0%E5%AF%86%E5%BA%A6%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">质数密度：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0%E8%B7%9D%E7%A6%BB%EF%BC%9A"><span class="nav-number">1.2.5.</span> <span class="nav-text">质数距离：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%94%AF%E4%B8%80%E5%88%86%E8%A7%A3%E5%AE%9A%E7%90%86%EF%BC%9A"><span class="nav-number">1.2.6.</span> <span class="nav-text">唯一分解定理：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0%E6%A3%80%E6%B5%8B%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">质数检测：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">暴力：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E5%8F%B7%E5%9D%87%E8%A1%A1%EF%BC%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">根号均衡：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0%E4%BC%98%E5%8C%96%EF%BC%9A"><span class="nav-number">1.3.3.</span> <span class="nav-text">质数优化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Miller-Rabin%EF%BC%9A"><span class="nav-number">1.3.4.</span> <span class="nav-text">Miller-Rabin：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A7%A3%E8%B4%A8%E5%9B%A0%E6%95%B0%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">分解质因数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E5%88%86%E8%A7%A3%EF%BC%9A"><span class="nav-number">1.4.1.</span> <span class="nav-text">暴力分解：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E5%80%8D%E6%95%B0%EF%BC%9A"><span class="nav-number">1.4.2.</span> <span class="nav-text">枚举倍数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pollard-rho%EF%BC%9A"><span class="nav-number">1.4.3.</span> <span class="nav-text">Pollard-rho：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%9B%E8%B4%A8%E6%95%B0%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">筛质数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%83%E6%B0%8F%E7%AD%9B%EF%BC%9A"><span class="nav-number">1.5.1.</span> <span class="nav-text">埃氏筛：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E7%AD%9B%EF%BC%88%E7%BA%BF%E6%80%A7%E7%AD%9B%EF%BC%89%EF%BC%9A"><span class="nav-number">1.5.2.</span> <span class="nav-text">欧拉筛（线性筛）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E7%AD%9B%EF%BC%9A"><span class="nav-number">1.5.3.</span> <span class="nav-text">其它筛：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A"><span class="nav-number">1.5.4.</span> <span class="nav-text">扩展：</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ice_in_sky"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ice_in_sky</p>
+  <div class="site-description" itemprop="description">乱我心者，今日之日多烦忧</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Thu Nov 30 2023 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ice_in_sky</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">97k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:28</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

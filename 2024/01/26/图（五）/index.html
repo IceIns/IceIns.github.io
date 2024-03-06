@@ -30,7 +30,7 @@
 <meta property="og:description" content="LCA 的 $n$ 种求法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-26T04:36:40.000Z">
-<meta property="article:modified_time" content="2024-01-26T13:15:38.000Z">
+<meta property="article:modified_time" content="2024-02-04T05:06:08.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
 
@@ -224,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-26 12:36:40 / 修改时间：21:15:38" itemprop="dateCreated datePublished" datetime="2024-01-26T12:36:40+08:00">2024-01-26</time>
+              <time title="创建时间：2024-01-26 12:36:40" itemprop="dateCreated datePublished" datetime="2024-01-26T12:36:40+08:00">2024-01-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-04 13:06:08" itemprop="dateModified" datetime="2024-02-04T13:06:08+08:00">2024-02-04</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -244,7 +250,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>77</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -268,7 +274,41 @@
 
 <p>LCA 是许多树上问题的基础。</p>
 <p>本文将介绍 LCA 的 $5$ 种求法。</p>
-<h2 id="倍增："><a href="#倍增：" class="headerlink" title="倍增："></a>倍增：</h2><h2 id="Tarjan："><a href="#Tarjan：" class="headerlink" title="Tarjan："></a>Tarjan：</h2><h2 id="欧拉序求-LCA："><a href="#欧拉序求-LCA：" class="headerlink" title="欧拉序求 LCA："></a>欧拉序求 LCA：</h2><h2 id="dfs-序求-LCA："><a href="#dfs-序求-LCA：" class="headerlink" title="dfs 序求 LCA："></a>dfs 序求 LCA：</h2><h2 id="树链剖分求-LCA："><a href="#树链剖分求-LCA：" class="headerlink" title="树链剖分求 LCA："></a>树链剖分求 LCA：</h2>
+<h2 id="倍增："><a href="#倍增：" class="headerlink" title="倍增："></a>倍增：</h2><p>先考虑什么是倍增。</p>
+<p>对于一个 $x$，其一定能被拆分成若干个 $2$ 的整数幂次之和（二进制描述），同时一个拆分策略就是每次减去不超过 $x$ 的最大 $2$ 的整数幂次。</p>
+<p>考虑在一个二分问题上（解序列满足单调性），比 $x$ 大的值均为解。所以每次加上一个最大的无解的 2 的整数幂次，最后一定可以得到 $x$。</p>
+<p>观察到：LCA 的性质是“最近”，而当距离超过这个“最近”后，到根所有的祖先节点均为 $(x,y)$ 的 CA。即：满足二分性。一般在树上问题，二分实现较麻烦，不如倍增。</p>
+<p>设 f$[x][i]$ 表示 $x$ 的 $2^i$ 级祖先。</p>
+<p>先要将 $x,y$ 跳到同一深度，否则相同的 $i$，$x,y$ 的 $2^i$ 祖先不相同无法倍增。解决方法同倍增，对于深度较深的点，若它的 $2^i$ 级祖先的深度已经低于另一个点了，那么就将 $i$ 减小。</p>
+<p>那么从 $x$ 和 $y$ 分别往上跳祖先，当跳到一个相同点时，所以至少是 LCA 的祖先了，那么就可以将 $i$ 减小。</p>
+<p>时间复杂度：$O(\log n)$。</p>
+<p>需要预处理倍增数组和深度数组。</p>
+<p>通常作为最经典、最广的 LCA 求法被使用。</p>
+<h2 id="Tarjan："><a href="#Tarjan：" class="headerlink" title="Tarjan："></a>Tarjan：</h2><p>考虑 $m$ 次询问 LCA$(x,y)$，Tarjan 求 LCA 是一种离线算法，通常使用并查集维护某节点的祖先节点。</p>
+<p>使用并查集的 Tarjan 时间复杂度为：$O(m\alpha(n+m)+n)$，但是存在严格 $O(m+n)$ 时间复杂度的 Tarjan 做法，但是 Tarjan 常数较大。</p>
+<p>时间复杂度：$O(n)-O(1)$。</p>
+<p>不常用。</p>
+<h2 id="欧拉序求-LCA："><a href="#欧拉序求-LCA：" class="headerlink" title="欧拉序求 LCA："></a>欧拉序求 LCA：</h2><p>引理 1：树上 $(x,y)$ 的路径在树的欧拉序中是连续的一部分。</p>
+<p>引理 2：树上 $(x,y)$ 不在 $(x,y)$ 路径上的祖先不在 $(x,y)$ 欧拉序中。</p>
+<p>所以求 $(x,y)$ 的 LCA 等价于求 $(x,y)$ 欧拉序（并不关心 $x,y$ 欧拉序第几次出现的位置，只要保证之间不存在 LCA 的祖先即可）上深度最小的点。</p>
+<p>转换成了静态区间询问最小值位置的问题，使用任何喜欢的方式维护即可。</p>
+<p>因为是静态的，所以一般使用 ST 表维护。</p>
+<p>时间复杂度：$O(n\log n)-O(1)$。</p>
+<h2 id="dfs-序求-LCA："><a href="#dfs-序求-LCA：" class="headerlink" title="dfs 序求 LCA："></a>dfs 序求 LCA：</h2><p>引理：树上的某子树的点在 dfs 序中是连续的一部分。</p>
+<p>所以 $x,y$ 的子树 dfs 序一定是在 LCA 的子树中，且在从 x&#x2F;y 回溯到 y&#x2F;x（取决于谁在 dfs 序中位置更靠前）的过程中，一定会经过 LCA 的某个儿子。</p>
+<p>所以求出 $x,y$ 的 dfs 序中的深度最小值，LCA 即为该点的父节点。</p>
+<p>时间复杂度同欧拉序求 LCA。</p>
+<p>dfs 序求 LCA 相比欧拉序求 LCA 而言，优势在于 dfs 序点数更少（dfs 序记录 $n$ 个点，欧拉序记录 $2n-1$ 个点）dfs 序扩展性相对更强，在题目中同时需要求其它内容时，具有兼容性。</p>
+<h2 id="树链剖分求-LCA："><a href="#树链剖分求-LCA：" class="headerlink" title="树链剖分求 LCA："></a>树链剖分求 LCA：</h2><p>此处指重链剖分。</p>
+<p>与倍增相似，每次把 $x,y$ 向上跳到链顶位置，跳到相同的点时，说明找到了。因为链是连续的一段，所以最后的 LCA 就是不在链内的另一条链的链顶的父节点。</p>
+<p>根据重链剖分性质，易得从 $x$ 到根节点最多经过 $O(\log n)$ 条链。</p>
+<p>时间复杂度：$O(n)-O(\log n)$。且常数较小。</p>
+<h2 id="番外："><a href="#番外：" class="headerlink" title="番外："></a>番外：</h2><h3 id="LCA-与-RMQ-问题。"><a href="#LCA-与-RMQ-问题。" class="headerlink" title="LCA 与 RMQ 问题。"></a>LCA 与 RMQ 问题。</h3><p>RMQ 即：静态区间最值问题。</p>
+<p>LCA 转换成 dfs 序&#x2F;欧拉序上最值后，时间复杂度瓶颈为区间最值的瓶颈，而实际上 RMQ 存在 $O(n)$ 预处理 $O(1)$ 询问的算法。</p>
+<p>同时，RMQ 问题也可转换为笛卡尔树上 LCA 问题。</p>
+<h3 id="树上-k-级祖先："><a href="#树上-k-级祖先：" class="headerlink" title="树上 k 级祖先："></a>树上 k 级祖先：</h3><p>倍增、重链剖分均可在 $O(\log n)$ 的时间复杂度内解决。</p>
+<p>使用长链剖分，可以在 $O(n)$ 的时间复杂度内解决。</p>
+
     </div>
 
     
@@ -365,7 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%8D%E5%A2%9E%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">倍增：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarjan%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">Tarjan：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%BA%8F%E6%B1%82-LCA%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">欧拉序求 LCA：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dfs-%E5%BA%8F%E6%B1%82-LCA%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">dfs 序求 LCA：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E6%B1%82-LCA%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">树链剖分求 LCA：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%8D%E5%A2%9E%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">倍增：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarjan%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">Tarjan：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%BA%8F%E6%B1%82-LCA%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">欧拉序求 LCA：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dfs-%E5%BA%8F%E6%B1%82-LCA%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">dfs 序求 LCA：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E6%B1%82-LCA%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">树链剖分求 LCA：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">番外：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LCA-%E4%B8%8E-RMQ-%E9%97%AE%E9%A2%98%E3%80%82"><span class="nav-number">6.1.</span> <span class="nav-text">LCA 与 RMQ 问题。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E4%B8%8A-k-%E7%BA%A7%E7%A5%96%E5%85%88%EF%BC%9A"><span class="nav-number">6.2.</span> <span class="nav-text">树上 k 级祖先：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -381,14 +421,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -430,12 +470,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">97k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:12</span>
+    <span title="站点阅读时长">1:28</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
