@@ -10,7 +10,8 @@
 <h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><p>感觉题目意思有点不明确，实际上无论顺时针还是逆时针都并不一定会走完整圈吧。</p>
 <p>大概是题目将未走完的一圈也视作一圈，也就是走的角度$&#x2F;360$向上取整。</p>
 <p>因为最后会回到起点，所以顺时针走的角度 $-$ 逆时针走的角度一定是 $360$ 的倍数。</p>
-<p>所以如果有没走完的圈，那顺时针和逆时针都会有没走完的圈，所以并且一定抵消。</p>
+<p>所以如果有没走完的圈，那顺时针和逆时针都会有没走完的圈，所以并且一定抵消。 </p>
+<p>（不过实际上应该是单独的顺时针和逆时针不一定是一个整圈，但是顺时针和逆时针加起来一定是一个整圈，也就是点在圈外的情况） </p>
 <p>所以只要考虑整圈即可。</p>
 <p>并且，如果这个极点不在这个整圈（多边形）内，那么顺时针和逆时针一定是抵消的。</p>
 <p>所以只要考虑极点在圈内。</p>
@@ -25,11 +26,33 @@
 <p>若一个点在多边形内部，则顺时针和逆时针经过的角度一个为 $0$，另一个为 $360$。</p>
 <h2 id="Mr-Main-and-Windmills"><a href="#Mr-Main-and-Windmills" class="headerlink" title="Mr. Main and Windmills"></a><a href="https://ac.nowcoder.com/acm/contest/27249/C">Mr. Main and Windmills</a></h2><h3 id="题意简化：-1"><a href="#题意简化：-1" class="headerlink" title="题意简化："></a>题意简化：</h3><p>给定 $n$ 个点，一个人从起点到终点的过程中，任意一对点之间关于人的位置会发生变化。m 次询问第 $x$ 个点第 $y$ 次与某个点相对位置发生更改时人的位置。</p>
 <h3 id="知识点：-1"><a href="#知识点：-1" class="headerlink" title="知识点："></a>知识点：</h3><p>直线与线段的交点。</p>
-<h3 id="解法：-1"><a href="#解法：-1" class="headerlink" title="解法："></a>解法：</h3><p>容易发现：相对位置发生变化时，即为在过程中两点与人共线的时候。所以对于每次询问，求出其它点和第 $x$ 个点形成的直线与路径的交点，第 $k$ 个交点即为答案。</p>
+<h3 id="解法：-1"><a href="#解法：-1" class="headerlink" title="解法："></a>解法：</h3><p>容易发现：相对位置发生变化时，即为在过程中两点与人共线的时候。所以对于每次询问，求出其它点和第 $x$ 个点形成的直线与路径的交点，第 $y$ 个交点即为答案。</p>
 <p>是否预处理差别不大。</p>
 <p>时间复杂度：$O(nm)&#x2F;O(n^2)$。</p>
 <h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h3><p>在求直线&#x2F;线段与直线&#x2F;线段交点的问题中，通常为求出对应直线与直线的交点。若是线段，需要额外判断线段与直线&#x2F;线段是否有交。这个可以使用 to_left 测试实现，无精度误差。若是求出交点后判断是否在直线&#x2F;线段上，会有精度误差。</p>
-]]></content>
+<h2 id="2017WF-Airport-Construction"><a href="#2017WF-Airport-Construction" class="headerlink" title="[2017WF]Airport Construction"></a><a href="https://ac.nowcoder.com/acm/contest/27249/D">[2017WF]Airport Construction</a></h2><h3 id="题意简化：-2"><a href="#题意简化：-2" class="headerlink" title="题意简化："></a>题意简化：</h3><p>按逆时针顺序给出多边形 $n$ 个点，求能完全落在多边形内的线段的长度。</p>
+<h3 id="知识点：-2"><a href="#知识点：-2" class="headerlink" title="知识点："></a>知识点：</h3><p>判断点在多边形内。</p>
+<h3 id="解法：-2"><a href="#解法：-2" class="headerlink" title="解法："></a>解法：</h3><p>一般多边形的直径一定经过多边形某两个顶点。</p>
+<p>所以枚举这两个顶点，判断线段是否在多边形内即可。</p>
+<p>考虑这样一个情况：线段上有一部分在多边形外部。那么这一部分的左部分和右部分会在多边形内部，也就是考虑在多边形外部的这部分的两个端点一定落在多边形的边上。</p>
+<p>所以对于枚举的两个顶点确定的直线，求出与多边形的所有交点后，按 $x$ 坐标升序排序，考虑相邻两点的线段是否在多边形内即可。因为是连续的一段，所以等价于任取一点判断，一般取中点即可。</p>
+<p>对于一般多边形判断点是否落在多边形内，使用光线回转法判断，无精度误差。</p>
+<p>时间复杂度：$O(n^3)$。</p>
+<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h3><p>一般多边形的直径一定经过多边形某两个顶点。</p>
+<p>判断一条线段是否完全落在多边形内，判断中点是否落在多边形内即可。</p>
+<h2 id="Operation-Love"><a href="#Operation-Love" class="headerlink" title="Operation Love"></a><a href="https://ac.nowcoder.com/acm/contest/27249/E">Operation Love</a></h2><h3 id="题意简化：-3"><a href="#题意简化：-3" class="headerlink" title="题意简化："></a>题意简化：</h3><p>以顺时针或逆时针（需要自行判断）给定一只“右手”的大小、形态描述，在可翻转、旋转的情况下，判断是左手还是右手。</p>
+<h3 id="知识点：-3"><a href="#知识点：-3" class="headerlink" title="知识点："></a>知识点：</h3><p>to_left 测试。</p>
+<h3 id="解法：-3"><a href="#解法：-3" class="headerlink" title="解法："></a>解法：</h3><p>因为形态和大小是确定的，所以可以通过边长来确定某条边是“手”的哪一部分。</p>
+<p>长度最长为 $9$ 的是底边，和底边相邻的是大拇指和小拇指。长度为 $6$ 的是大拇指，长度为 $8$ 的是小拇指。（所以其实只靠长度也是可以判断出大拇指和小拇指的，但是单靠大拇指或小拇指并没有什么用）</p>
+<p>无论给出的点是按顺时针还是逆时针，只要大拇指在底边的右边，那么就是右手，反之就是左手。</p>
+<p>所以找到底边和大拇指后进行一次 to_left 测试即可。</p>
+<p>同时，因为起点不确定，所以需要“断环成链”。</p>
+<p>时间复杂度：$O(n)$</p>
+<h3 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a>总结：</h3><p>通过长度找到指定边。</p>
+<p>通过 to_left 确定描述点集的顺逆时针顺序。</p>
+<h2 id="三角碰撞-Triangle-Collision"><a href="#三角碰撞-Triangle-Collision" class="headerlink" title="三角碰撞(Triangle Collision)"></a><a href="https://ac.nowcoder.com/acm/contest/27249/F">三角碰撞(Triangle Collision)</a></h2><h3 id="题意简化：-4"><a href="#题意简化：-4" class="headerlink" title="题意简化："></a>题意简化：</h3><p>给定三角形和三角形内一个点，该点以一定的速度发射，碰到三角形边时会进行弹射，询问第 $k$ 次弹射的时间是多少。</p>
+<h3 id="知识点：-4"><a href="#知识点：-4" class="headerlink" title="知识点："></a>知识点：</h3><p>弹射问题转换成直线相交问题。</p>
+<h3 id="解法：-4"><a href="#解法：-4" class="headerlink" title="解法："></a>解法：</h3><h3 id="总结：-4"><a href="#总结：-4" class="headerlink" title="总结："></a>总结：</h3>]]></content>
       <categories>
         <category>计算几何</category>
       </categories>
