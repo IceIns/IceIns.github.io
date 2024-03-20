@@ -230,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-12 09:46:34" itemprop="dateModified" datetime="2024-03-12T09:46:34+08:00">2024-03-12</time>
+                <time title="修改时间：2024-03-12 12:30:56" itemprop="dateModified" datetime="2024-03-12T12:30:56+08:00">2024-03-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,14 +248,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -267,56 +267,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-
-<h2 id="Winding-Number"><a href="#Winding-Number" class="headerlink" title="Winding Number"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27249/B">Winding Number</a></h2><h3 id="题意简化："><a href="#题意简化：" class="headerlink" title="题意简化："></a>题意简化：</h3><p>以任意顺序给定 $n$ 个点，$m$ 次询问，每次询问一个点为极点，按给定顺序遍历 $n$ 个点顺时针经过的圈数 $-$ 逆时针经过的圈数的值。</p>
-<h3 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h3><p>to_left 测试；</p>
-<h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><p>感觉题目意思有点不明确，实际上无论顺时针还是逆时针都并不一定会走完整圈吧。</p>
-<p>大概是题目将未走完的一圈也视作一圈，也就是走的角度$&#x2F;360$向上取整。</p>
-<p>因为最后会回到起点，所以顺时针走的角度 $-$ 逆时针走的角度一定是 $360$ 的倍数。</p>
-<p>所以如果有没走完的圈，那顺时针和逆时针都会有没走完的圈，所以并且一定抵消。 </p>
-<p>（不过实际上应该是单独的顺时针和逆时针不一定是一个整圈，但是顺时针和逆时针加起来一定是一个整圈，也就是点在圈外的情况） </p>
-<p>所以只要考虑整圈即可。</p>
-<p>并且，如果这个极点不在这个整圈（多边形）内，那么顺时针和逆时针一定是抵消的。</p>
-<p>所以只要考虑极点在圈内。</p>
-<p>既然是一个整圈，那么必然有且仅有一条边，走过它的时候，经过了过极点的水平的直线。且因为是一个整圈，所以左右各有一条边，我们只考虑右侧的一条边。</p>
-<p>所以只要考虑有多少边经过过极点的水平的直线即可，并且如果过极点的水平的直线过边的端点，那么只应该考虑一次，所以如果经过端点，只考虑先经过的一个。</p>
-<p>如果是顺时针经过，那么顺时针走过的圈数就加一；逆时针同理。</p>
-<p>特判经过边的情况。</p>
-<p>设当前边为 $(u,v)$，若 $u_y&lt;v_y$ 则是顺时针；反之是逆时针（$u_y&#x3D;v_y$ 的情况可以跳过）。</p>
-<p>使用 to_left 测试判断点在边的左侧。</p>
-<p>时间复杂度：$O(nm)$。</p>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>若一个点在多边形外部，则顺时针和逆时针经过的角度相互抵消。</p>
-<p>若一个点在多边形内部，则顺时针和逆时针经过的角度一个为 $0$，另一个为 $360$。</p>
-<h2 id="Mr-Main-and-Windmills"><a href="#Mr-Main-and-Windmills" class="headerlink" title="Mr. Main and Windmills"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27249/C">Mr. Main and Windmills</a></h2><h3 id="题意简化：-1"><a href="#题意简化：-1" class="headerlink" title="题意简化："></a>题意简化：</h3><p>给定 $n$ 个点，一个人从起点到终点的过程中，任意一对点之间关于人的位置会发生变化。m 次询问第 $x$ 个点第 $y$ 次与某个点相对位置发生更改时人的位置。</p>
-<h3 id="知识点：-1"><a href="#知识点：-1" class="headerlink" title="知识点："></a>知识点：</h3><p>直线与线段的交点。</p>
-<h3 id="解法：-1"><a href="#解法：-1" class="headerlink" title="解法："></a>解法：</h3><p>容易发现：相对位置发生变化时，即为在过程中两点与人共线的时候。所以对于每次询问，求出其它点和第 $x$ 个点形成的直线与路径的交点，第 $y$ 个交点即为答案。</p>
-<p>是否预处理差别不大。</p>
-<p>时间复杂度：$O(nm)&#x2F;O(n^2)$。</p>
-<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h3><p>在求直线&#x2F;线段与直线&#x2F;线段交点的问题中，通常为求出对应直线与直线的交点。若是线段，需要额外判断线段与直线&#x2F;线段是否有交。这个可以使用 to_left 测试实现，无精度误差。若是求出交点后判断是否在直线&#x2F;线段上，会有精度误差。</p>
-<h2 id="2017WF-Airport-Construction"><a href="#2017WF-Airport-Construction" class="headerlink" title="[2017WF]Airport Construction"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27249/D">[2017WF]Airport Construction</a></h2><h3 id="题意简化：-2"><a href="#题意简化：-2" class="headerlink" title="题意简化："></a>题意简化：</h3><p>按逆时针顺序给出多边形 $n$ 个点，求能完全落在多边形内的线段的长度。</p>
-<h3 id="知识点：-2"><a href="#知识点：-2" class="headerlink" title="知识点："></a>知识点：</h3><p>判断点在多边形内。</p>
-<h3 id="解法：-2"><a href="#解法：-2" class="headerlink" title="解法："></a>解法：</h3><p>一般多边形的直径一定经过多边形某两个顶点。</p>
-<p>所以枚举这两个顶点，判断线段是否在多边形内即可。</p>
-<p>考虑这样一个情况：线段上有一部分在多边形外部。那么这一部分的左部分和右部分会在多边形内部，也就是考虑在多边形外部的这部分的两个端点一定落在多边形的边上。</p>
-<p>所以对于枚举的两个顶点确定的直线，求出与多边形的所有交点后，按 $x$ 坐标升序排序，考虑相邻两点的线段是否在多边形内即可。因为是连续的一段，所以等价于任取一点判断，一般取中点即可。</p>
-<p>对于一般多边形判断点是否落在多边形内，使用光线回转法判断，无精度误差。</p>
-<p>时间复杂度：$O(n^3)$。</p>
-<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h3><p>一般多边形的直径一定经过多边形某两个顶点。</p>
-<p>判断一条线段是否完全落在多边形内，判断中点是否落在多边形内即可。</p>
-<h2 id="Operation-Love"><a href="#Operation-Love" class="headerlink" title="Operation Love"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27249/E">Operation Love</a></h2><h3 id="题意简化：-3"><a href="#题意简化：-3" class="headerlink" title="题意简化："></a>题意简化：</h3><p>以顺时针或逆时针（需要自行判断）给定一只“右手”的大小、形态描述，在可翻转、旋转的情况下，判断是左手还是右手。</p>
-<h3 id="知识点：-3"><a href="#知识点：-3" class="headerlink" title="知识点："></a>知识点：</h3><p>to_left 测试。</p>
-<h3 id="解法：-3"><a href="#解法：-3" class="headerlink" title="解法："></a>解法：</h3><p>因为形态和大小是确定的，所以可以通过边长来确定某条边是“手”的哪一部分。</p>
-<p>长度最长为 $9$ 的是底边，和底边相邻的是大拇指和小拇指。长度为 $6$ 的是大拇指，长度为 $8$ 的是小拇指。（所以其实只靠长度也是可以判断出大拇指和小拇指的，但是单靠大拇指或小拇指并没有什么用）</p>
-<p>无论给出的点是按顺时针还是逆时针，只要大拇指在底边的右边，那么就是右手，反之就是左手。</p>
-<p>所以找到底边和大拇指后进行一次 to_left 测试即可。</p>
-<p>同时，因为起点不确定，所以需要“断环成链”。</p>
-<p>时间复杂度：$O(n)$</p>
-<h3 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a>总结：</h3><p>通过长度找到指定边。</p>
-<p>通过 to_left 确定描述点集的顺逆时针顺序。</p>
-<h2 id="三角碰撞-Triangle-Collision"><a href="#三角碰撞-Triangle-Collision" class="headerlink" title="三角碰撞(Triangle Collision)"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27249/F">三角碰撞(Triangle Collision)</a></h2><h3 id="题意简化：-4"><a href="#题意简化：-4" class="headerlink" title="题意简化："></a>题意简化：</h3><p>给定三角形和三角形内一个点，该点以一定的速度发射，碰到三角形边时会进行弹射，询问第 $k$ 次弹射的时间是多少。</p>
-<h3 id="知识点：-4"><a href="#知识点：-4" class="headerlink" title="知识点："></a>知识点：</h3><p>弹射问题转换成直线相交问题。</p>
-<h3 id="解法：-4"><a href="#解法：-4" class="headerlink" title="解法："></a>解法：</h3><h3 id="总结：-4"><a href="#总结：-4" class="headerlink" title="总结："></a>总结：</h3>
+          <p>牛客计算几何课程</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/03/11/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95-%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1294,12 +1253,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">101k</span>
+    <span title="站点总字数">102k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:32</span>
+    <span title="站点阅读时长">1:33</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
