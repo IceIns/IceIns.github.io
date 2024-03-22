@@ -197,6 +197,175 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://iceinsky.top/2024/03/20/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95-%E5%AE%9E%E6%88%98%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ice_in_sky">
+      <meta itemprop="description" content="乱我心者，今日之日多烦忧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕咕咕">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/03/20/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95-%E5%AE%9E%E6%88%98%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">计算几何-实战（二）</a>
+        </h2>
+
+        <div class="post-meta">
+	  
+ 	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-20 08:39:52" itemprop="dateCreated datePublished" datetime="2024-03-20T08:39:52+08:00">2024-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-22 17:19:18" itemprop="dateModified" datetime="2024-03-22T17:19:18+08:00">2024-03-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" itemprop="url" rel="index"><span itemprop="name">计算几何</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>牛客计算几何课程</p>
+<h2 id="2016WF-Oil"><a href="#2016WF-Oil" class="headerlink" title="[2016WF]Oil"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27675/B">[2016WF]Oil</a></h2><h3 id="题意简化："><a href="#题意简化：" class="headerlink" title="题意简化："></a>题意简化：</h3><p>给定若干条平行于 $x$ 轴的线段，求通过一条直线最多能经过几条线段。</p>
+<h3 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h3><p>极角序扫描。</p>
+<h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><p>引理：任意一条穿过若干线段的直线，一定可以在不减少穿过线段数的前提下平移、旋转到至少经过两个线段的点。</p>
+<p>假设当前直线没有经过任意一个线段的端点。则对该直线进行平移一定可以移到一个点上。如果此时还是只经过了一个点，那么将直线绕着这个唯一经过的点旋转，也一定会碰到另一个线段的端点。</p>
+<p>综上，一个最显然的做法是枚举经过的这两个点，再计算穿过了几条线段。</p>
+<p>时间复杂度：$O(n^3)$。</p>
+<p>考虑上述过程中，确定经过的一个点，通过旋转移到另一个点，容易发现一条线段在这个过程中是随着旋转被直线连续穿过的。</p>
+<p>所以，可以尝试枚举一个点，另一个点通过极角序扫描的过程判断确定。</p>
+<p>具体而言，假设逆时针旋转，当扫描线扫到线段右端点时，穿过线段数$+1$；当扫描线扫到线段左端点时，穿过线段数$-1$。</p>
+<p>注意，平面内线段端点可能会重合，而对于重合的这个端点，要先考虑右端点。</p>
+<p>同时，极角序扫描的过程中，扫描的实际上是一条射线而不是一条直线，所以要把下半平面的线段以原点为中心，中心对称到上半平面中，然后扫上半平面即可。</p>
+<p>时间复杂度：$O(n^2\log n)$。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>极角序扫描线，与序列扫描线类似。</p>
+<h2 id="POI2008-Tro"><a href="#POI2008-Tro" class="headerlink" title="[POI2008]Tro"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27675/C">[POI2008]Tro</a></h2><h3 id="题意简化：-1"><a href="#题意简化：-1" class="headerlink" title="题意简化："></a>题意简化：</h3><p>求平面上 $n$ 个点构成三角形的面积之和。</p>
+<h3 id="知识点：-1"><a href="#知识点：-1" class="headerlink" title="知识点："></a>知识点：</h3><p>叉积的分配率。</p>
+<h3 id="解法：-1"><a href="#解法：-1" class="headerlink" title="解法："></a>解法：</h3><p>三角形的面积等于以其一顶点为极点，另外两边的叉积的绝对值的一半。</p>
+<p>若固定三角形的两点，枚举另一个点，那么这些三角形的面积之和可以表示为：</p>
+<p>$\overrightarrow{OA}\times \overrightarrow {OP_1}+\overrightarrow {OA}\times \overrightarrow {OP_2}+\overrightarrow {OA}\times \overrightarrow {OP_3}+…+\overrightarrow {OA}\times \overrightarrow {OP_n}$</p>
+<p>叉积满足分配律，上式 $&#x3D;\overrightarrow {OA}\times (\sum\overrightarrow{OP_i})$。</p>
+<p>具体而言，枚举一条边极角为 $\theta$，那另一条边的范围 $[\theta,\theta+\pi]$。</p>
+<p>指针的终止可以通过叉积确定，另一条边的极角在 $[\theta,\theta+\pi]$ 中时，$\vec a\times \vec b\geq 0$。</p>
+<h4 id="实现一："><a href="#实现一：" class="headerlink" title="实现一："></a>实现一：</h4><p>随着枚举极边的旋转，另一条边的极角上界不断增大，使用双指针维护区间向量和即可。</p>
+<p>每个三角形的面积会被三条边计算三次，所以最后的结果要再 $\times \dfrac{1}{3}$。</p>
+<h4 id="实现二："><a href="#实现二：" class="headerlink" title="实现二："></a>实现二：</h4><p>对于每个三角形的面积计算，只考虑最右侧点的贡献。</p>
+<p>所有三角形，最右侧的顶点的两边一定朝向 $x$ 轴负半轴。</p>
+<p>所以对于最右侧的点，直接扫描 $[\frac{\pi}{2},\frac{3\pi}{2}]$ 的点，维护后缀向量和即可。</p>
+<p>时间复杂度：$O(n^2\log n)$。</p>
+<h2 id="两个人的星座"><a href="#两个人的星座" class="headerlink" title="两个人的星座"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27675/D">两个人的星座</a></h2><h3 id="题意简化：-2"><a href="#题意简化：-2" class="headerlink" title="题意简化："></a>题意简化：</h3><p>给定二维平面上的 $n$ 个点，每个点都有一个颜色，共有三种，求满足三点颜色互不相同的不相交的三角形对数。</p>
+<h3 id="知识点：-2"><a href="#知识点：-2" class="headerlink" title="知识点："></a>知识点：</h3><p>极角序扫描。</p>
+<h3 id="解法：-2"><a href="#解法：-2" class="headerlink" title="解法："></a>解法：</h3><p>引理：对于两个相离的凸多边形，有且仅有两条内公切线与两条外公切线。</p>
+<p>而内公切线将两个凸多边形分成了不相交的，分居内公切线两侧。</p>
+<p>也就是说，枚举这条内公切线，只需要计算两侧能形成的合法三角形个数，相乘累加即可。</p>
+<p>每对三角形会被两条内公切线算两次，所以最后结果 $\times \dfrac{1}{2}$。</p>
+<p>类似于 [2016WF]Oil，扫描线扫的过程中实际是一条射线，所以要把下半平面的点以原点为中心，中心对称到上半平面。</p>
+<p>扫描的过程中统计对应颜色的数量即可。对于一侧的合法三角形个数即为与枚举的顶点颜色不一样的两种颜色数量的乘积。因为题目保证任意三点不共线，所以任意三点均可构成三角形。</p>
+<p>时间复杂度：$O(n^2\log n)$。</p>
+<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h3><p>极角序扫描的过程实际是一个射线在扫描的过程，对于直线情况，需要把下半平面对称到上半平面中去。</p>
+<h2 id="How-Many-Triangles"><a href="#How-Many-Triangles" class="headerlink" title="How Many Triangles"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27675/E">How Many Triangles</a></h2><h3 id="题意简化：-3"><a href="#题意简化：-3" class="headerlink" title="题意简化："></a>题意简化：</h3><p>给定平面上 $n$ 个点，求可以形成多少个锐角三角形。</p>
+<h3 id="知识点：-3"><a href="#知识点：-3" class="headerlink" title="知识点："></a>知识点：</h3><p>极角序双指针。</p>
+<h3 id="解法：-3"><a href="#解法：-3" class="headerlink" title="解法："></a>解法：</h3><p>锐角三角形有三个锐角，而有锐角的不一定是锐角三角形。所以不容易直接对锐角统计。</p>
+<p>但是观察到钝角三角形和直角三角形只有一个钝角和一个直角，所以可以统计直角和钝角的个数。</p>
+<p>容斥得到锐角三角形的个数。</p>
+<p>由于题目没有保证任意三点不共线，所以还要减去平角（三点共线）的数量。</p>
+<p>考虑枚举一个顶点，以极角序扫描边，对于当前扫到的边极角为 $\theta$，则直角到平角的范围在 $[\theta+\frac{\pi}{2},\theta+\pi]$。因为这个答案的范围和扫描的边不连续，所以一个做法是先将所有边逆时针旋转 $\frac{\pi}{2}$，然后以旋转后的边作逆时针 $\frac{\pi}{2}$ 的范围。</p>
+<p>可以使用叉积和点积根据范围移动指针，$[0,\frac{\pi}{2}]$ 的范围下，$\vec a\cdot \vec b\geq 0,\vec a\times \vec b\geq 0$。但是移动的过程不一定存在超过这个范围的边，所以要手动加入 $x$ 轴正方向、$y$ 轴正方向、$x$ 轴负方向、$y$ 轴负方向四条边。</p>
+<h2 id="Amphiphilic-Carbon-Molecules"><a href="#Amphiphilic-Carbon-Molecules" class="headerlink" title="Amphiphilic Carbon Molecules"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27675/F">Amphiphilic Carbon Molecules</a></h2><h3 id="题意简化：-4"><a href="#题意简化：-4" class="headerlink" title="题意简化："></a>题意简化：</h3><p>在平面上有 $n$ 个点，每个点是黑色或者白色。用一条直线把平面分成两部分，要求直线上的点加上直线左侧白色点和直线右侧黑色点或直线左侧黑色点和直线右侧白色点最多。</p>
+<h3 id="知识点：-4"><a href="#知识点：-4" class="headerlink" title="知识点："></a>知识点：</h3><p>极角序扫描。</p>
+<h3 id="解法：-4"><a href="#解法：-4" class="headerlink" title="解法："></a>解法：</h3><p>和 两个人的星座 一致，枚举极点，极角序扫描维护两侧颜色数量即可。</p>
+<h2 id="2020WF-Ley-Lines"><a href="#2020WF-Ley-Lines" class="headerlink" title="[2020WF]Ley Lines"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27675/G">[2020WF]Ley Lines</a></h2><h3 id="题意简化：-5"><a href="#题意简化：-5" class="headerlink" title="题意简化："></a>题意简化：</h3><p>求用一个宽度为 $t$ 的丝带最多能覆盖多少点。</p>
+<h3 id="知识点：-5"><a href="#知识点：-5" class="headerlink" title="知识点："></a>知识点：</h3><p>平面旋转。</p>
+<h3 id="解法：-5"><a href="#解法：-5" class="headerlink" title="解法："></a>解法：</h3><p>引理：答案丝带一定存在某边经过至少两个点。</p>
+<p>考虑枚举两个点，将所有点投影到垂直于过这两个点的直线的直线上，然后从两条直线的交点开始二分找到最后一个距离不超过 $t$ 的点。（向左向右各做一次）</p>
+<p>时间复杂度：$O(n^3)$。</p>
+<p>但是注意到，初始情况下，所有点在 $x$ 轴上的投影的顺序等价于丝带平行于 $y$ 轴的上述投影结果。</p>
+<p>而对于别的丝带，二分每个丝带只要做一次，区别在于投影之后的顺序不同。考虑整体旋转时，点与点之间的位置交换关系。</p>
+<p>对于点 $A$ 和点 $B$， 当整体旋转极角平行 $\overrightarrow{AB}$ 时，$AB$ 投影之间的相对位置发生变化。</p>
+<p>所以对于所有点对 $\overrightarrow{P_1P_2}$，进行极角排序（从平行初始 $y$ 轴开始作为极角序最小值）扫到边时，每次进行二分后交换 $P_1$ 和 $P_2$，更新答案。因为没有直接维护投影，而是仅维护了投影之后的相对顺序，所以二分时候求距离需要计算点到直线的距离而不是点到点。</p>
+<p>时间复杂度：$O(n^2\log n)$。</p>
+<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h3><p>极角排序有时要注意极角序扫描的开始位置，也就是设定的极角序最小值。</p>
+<h2 id="Nearest-Point"><a href="#Nearest-Point" class="headerlink" title="Nearest Point"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27675/H">Nearest Point</a></h2><h3 id="题意简化：-6"><a href="#题意简化：-6" class="headerlink" title="题意简化："></a>题意简化：</h3><p>平面上 $n$ 个点，平面整体随机旋转一个角度，求点对 $(P_i,P_j)$ 之间，$P_j$ 是横坐标距离 $P_i$ 最小的概率是多大。</p>
+<h3 id="知识点：-6"><a href="#知识点：-6" class="headerlink" title="知识点："></a>知识点：</h3><p>平面旋转。</p>
+<h3 id="解法：-6"><a href="#解法：-6" class="headerlink" title="解法："></a>解法：</h3><p>考虑 $P_j,P_k$ 和 $P_i$ 之间的位置关系：</p>
+<ul>
+<li>当 $y$ 轴平行 $\overrightarrow{P_jP_k}$ 时，$P_i$ 的横坐标和 $P_j,P_k$ 距离相同（同向）。</li>
+<li>当 $y$ 轴平行 $\overrightarrow{OP_i}+\dfrac{\overrightarrow{OP_j}+\overrightarrow{OP_k}}{2}$，时 $P_i$ 的横坐标和 $P_j,P_k$ 距离相同（异向）。</li>
+</ul>
+<p>所以对于任意的三点，存在 $12$ 种影响答案的 $y$ 轴旋转的结果。</p>
+<p>处理出所以可能的 $y$ 轴，按极角排序（此题没有严格的先后顺序，所以不用从原 $y$ 轴开始作为极角序最小的边）后，对于相邻的两条边之间，点和点之间的相对最近点对不会发生变化。</p>
+<p>但是如果单纯使用扫到的边，存在的是多点相等关系，而不是最近。所以要取相邻两边的角平分线作为 $y$ 轴，后将所有点投影到对应的 $x$ 轴上，对于每个投影找最近点更新答案即可（此时保证了不存在距离相同的点，所以按投影 $x$ 坐标排序后按相邻点更新即可）。</p>
+<p>时间复杂度：$O(n^4\log n)$。</p>
+<h3 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a>总结：</h3><p>考虑关键点时，关键点往往是一个边界情况。若题目更关心的是这个边界“下一步”的情况，那么可以选择对两个相邻关键点的“中点”进行考虑。</p>
+<h2 id="Rikka-with-Triangles"><a href="#Rikka-with-Triangles" class="headerlink" title="Rikka with Triangles"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/27675/I">Rikka with Triangles</a></h2><h3 id="题意简化：-7"><a href="#题意简化：-7" class="headerlink" title="题意简化："></a>题意简化：</h3><p>给定一个平面上 $n$ 个点，求这个 n 个点能构成的锐角三角形面积之和。</p>
+<h3 id="知识点：-7"><a href="#知识点：-7" class="headerlink" title="知识点："></a>知识点：</h3><p>极角序扫描</p>
+<h3 id="解法：-7"><a href="#解法：-7" class="headerlink" title="解法："></a>解法：</h3><p>和 How Many Triangles 类似，通过容斥得到锐角三角形面积和。</p>
+<p>所有三角形面积和与 [POI2008]Tro 一致。</p>
+<p>核心在于求钝角三角形面积和直角三角形面积和。</p>
+<p>这部分扫描和 How Many Triangles 类似，因为钝角和直角对应顶点唯一确定了钝角三角形和直角三角形。</p>
+<p>所以此部分和 How Many Triangles 类似，维护 $[\theta+\frac{\pi}2,\theta+\pi]$ 之间的向量和即可。</p>
+<p>时间复杂度：$O(n^2\log n)$。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://iceinsky.top/2024/03/11/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95-%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -230,7 +399,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-12 12:30:56" itemprop="dateModified" datetime="2024-03-12T12:30:56+08:00">2024-03-12</time>
+                <time title="修改时间：2024-03-20 08:39:18" itemprop="dateModified" datetime="2024-03-20T08:39:18+08:00">2024-03-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,7 +417,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
+              <span>3.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1036,103 +1205,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://iceinsky.top/2024/01/26/%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%BA%8C%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="ice_in_sky">
-      <meta itemprop="description" content="乱我心者，今日之日多烦忧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咕咕咕">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/26/%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">字符串（二）</a>
-        </h2>
-
-        <div class="post-meta">
-	  
- 	  
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-01-26 21:17:01" itemprop="dateCreated datePublished" datetime="2024-01-26T21:17:01+08:00">2024-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-05 14:39:06" itemprop="dateModified" datetime="2024-02-05T14:39:06+08:00">2024-02-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%97%E7%AC%A6%E4%B8%B2/" itemprop="url" rel="index"><span itemprop="name">字符串</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>869</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>字符串基础</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/01/26/%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1204,7 +1276,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1253,12 +1325,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">102k</span>
+    <span title="站点总字数">106k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:33</span>
+    <span title="站点阅读时长">1:37</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
