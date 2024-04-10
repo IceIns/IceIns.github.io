@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"iceinsky.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Codeforces Round 938 Div3    写在前面：抛开这场抽象的题面不谈，最喜欢这种题了。一点思维$+$算法，不是纯粹的 Ad-hoc，莽猜结论，代码很短就能过的那种。也不是那种一眼板，还是要找性质的题目。 但是这题面是真的抽象，基本是每题都因为题面被卡了好久，导致最后时间不够，如果多 20 分钟，应该就 AK 了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 938 Div3">
+<meta property="og:url" content="http://iceinsky.top/2024/04/10/Codeforces%20Round%20938%20Div3/index.html">
+<meta property="og:site_name" content="咕咕咕">
+<meta property="og:description" content="Codeforces Round 938 Div3    写在前面：抛开这场抽象的题面不谈，最喜欢这种题了。一点思维$+$算法，不是纯粹的 Ad-hoc，莽猜结论，代码很短就能过的那种。也不是那种一眼板，还是要找性质的题目。 但是这题面是真的抽象，基本是每题都因为题面被卡了好久，导致最后时间不够，如果多 20 分钟，应该就 AK 了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-10T14:52:51.000Z">
+<meta property="article:modified_time" content="2024-04-10T14:53:56.000Z">
+<meta property="article:author" content="ice_in_sky">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://iceinsky.top/2024/04/10/Codeforces%20Round%20938%20Div3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Codeforces Round 938 Div3 | 咕咕咕</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕咕咕</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://iceinsky.top/2024/04/10/Codeforces%20Round%20938%20Div3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ice_in_sky">
+      <meta itemprop="description" content="乱我心者，今日之日多烦忧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕咕咕">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Codeforces Round 938 Div3
+        </h1>
+
+        <div class="post-meta">
+	  
+ 	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-10 22:52:51 / 修改时间：22:53:56" itemprop="dateCreated datePublished" datetime="2024-04-10T22:52:51+08:00">2024-04-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Codeforces/" itemprop="url" rel="index"><span itemprop="name">Codeforces</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>
+    <center>Codeforces Round 938 Div3</center>
+</h1>
+
+
+<h2 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h2><p>抛开这场抽象的题面不谈，最喜欢这种题了。一点思维$+$算法，不是纯粹的 Ad-hoc，莽猜结论，代码很短就能过的那种。也不是那种一眼板，还是要找性质的题目。</p>
+<p>但是这题面是真的抽象，基本是每题都因为题面被卡了好久，导致最后时间不够，如果多 20 分钟，应该就 AK 了。</p>
+<span id="more"></span>
+
+<h2 id="战果："><a href="#战果：" class="headerlink" title="战果："></a>战果：</h2><p>纸面 AK，实际 7 题。</p>
+<h2 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h2><h3 id="A-Yogurt-Sale"><a href="#A-Yogurt-Sale" class="headerlink" title="A. Yogurt Sale"></a>A. Yogurt Sale</h3><h4 id="题意简化："><a href="#题意简化：" class="headerlink" title="题意简化："></a>题意简化：</h4><p>$a$ 元买一个，$b$ 元买两个。求买 $n$ 个的最小花费。</p>
+<h4 id="闲话："><a href="#闲话：" class="headerlink" title="闲话："></a>闲话：</h4><p>这题还好，它特意强调了恰好 $n$ 个。</p>
+<h4 id="sol-1："><a href="#sol-1：" class="headerlink" title="sol.1："></a>sol.1：</h4><p>贪心地买，如果 $2\times a&lt;b$，则直接全买 $a$；反之买 $b$，此时可能会剩一个，用 $a$ 买。</p>
+<h4 id="sol-2："><a href="#sol-2：" class="headerlink" title="sol.2："></a>sol.2：</h4><p>dp。</p>
+<p>$dp(i,j)&#x3D;\min\lbrace dp(i-1,j-1)+a,dp(i-1,j-2)+2\times b\rbrace$。</p>
+<h3 id="B-Progressive-Square"><a href="#B-Progressive-Square" class="headerlink" title="B. Progressive Square"></a>B. Progressive Square</h3><h4 id="题意简化：-1"><a href="#题意简化：-1" class="headerlink" title="题意简化："></a>题意简化：</h4><p>$a_{i+1,j}&#x3D;a_{i,j}+c,a_{i,j+1}&#x3D;a_{i,j}+d$。</p>
+<p>给定 $n,c,d$ 和 $n^2$ 个数，判断是否可能用这 $n^2$ 个数构造成一个合法的 $a$ 矩阵。</p>
+<h4 id="闲话：-1"><a href="#闲话：-1" class="headerlink" title="闲话："></a>闲话：</h4><p>抽象的题面，我光看题面以为 $a_{1,1}$ 默认是 $1$。</p>
+<p>然后这个矩阵第一眼好像是不确定的，因为 $a_{i,j}$ 可以由两个方向加，但实际上贡献是一样的，就是 $(行数-1)\times c+(列数-1)\times d$。</p>
+<h4 id="sol："><a href="#sol：" class="headerlink" title="sol："></a>sol：</h4><p>$1\leq c,d$，所以 $a_{1,1}$ 一定的最小的。然后就可以递推出矩阵了。判断和给出的 $n^2$ 是否一一对应即可（一个简单的实现是全部放到 vector 中去后排序，用 <code>=</code> 运算符直接比较即可）。</p>
+<p>时间复杂度：$O(n^2)$。</p>
+<h3 id="C-Inhabitant-of-the-Deep-Sea"><a href="#C-Inhabitant-of-the-Deep-Sea" class="headerlink" title="C. Inhabitant of the Deep Sea"></a>C. Inhabitant of the Deep Sea</h3><h4 id="题意简化：-2"><a href="#题意简化：-2" class="headerlink" title="题意简化："></a>题意简化：</h4><p>给定一个序列，首尾交替减 $1$，求减 $k$ 次后有几个 $0$。</p>
+<h4 id="闲话：-2"><a href="#闲话：-2" class="headerlink" title="闲话："></a>闲话：</h4><p>最难蚌的一集，抽象模拟题。</p>
+<p>不想写大分讨，想有没有简单做法，发现没有，搞了半天还是回到了大模拟，写的答辩代码结果还 WA 了两发。</p>
+<h4 id="sol：-1"><a href="#sol：-1" class="headerlink" title="sol："></a>sol：</h4><p>使序列少一个数的操作是形式化的，所以用 $l,r$ 维护当前序列减到哪了。</p>
+<p>同时还要一个 flag，表示当前在首还是尾。</p>
+<p>$l&#x3D;r$ 时是 corner，直接和当前 $k$ 比大小。</p>
+<p>维护过程简单来说就是如果 $\min\lbrace a[l],a[r]\rbrace$ 和 flag 位置相同，则减 $2\times \min\lbrace a[l],a[r]\rbrace-1$ 会出现 $0$，反之减 $2\times \min\lbrace a[l],a[r]\rbrace$ 会出现 $0$。</p>
+<p>具体参考代码。</p>
+<h4 id="code"><a href="#code" class="headerlink" title="code:"></a>code:</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="comment">// #pragma GCC optimize (&quot;O2&quot;)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ldb long double </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> For(i,a,b) for(i=a;i&lt;=b;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FOR(i,a,b) for(i=a;i&gt;=b;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">5e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,k;</span><br><span class="line"><span class="type">int</span> a[N],b[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> l=<span class="number">1</span>,r=n,i;</span><br><span class="line">    <span class="type">bool</span> flag=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l&lt;r&amp;&amp;k)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l]&lt;a[r])&#123;</span><br><span class="line">            <span class="keyword">if</span>(!flag)&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">2</span>*a[l]<span class="number">-1</span>&gt;k)&#123;</span><br><span class="line">                    k=<span class="number">-1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    k-=<span class="number">2</span>*a[l]<span class="number">-1</span>;</span><br><span class="line">                    a[r]-=a[l]<span class="number">-1</span>;</span><br><span class="line">                    a[l]=<span class="number">0</span>;</span><br><span class="line">                    l++;</span><br><span class="line">                    flag=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">2</span>*a[l]&gt;k)&#123;</span><br><span class="line">                    k=<span class="number">-1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    k-=<span class="number">2</span>*a[l];</span><br><span class="line">                    a[r]-=a[l];</span><br><span class="line">                    a[l]=<span class="number">0</span>;</span><br><span class="line">                    l++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a[l]&gt;a[r])&#123;</span><br><span class="line">            <span class="keyword">if</span>(!flag)&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">2</span>*a[r]&gt;k)&#123;</span><br><span class="line">                    k=<span class="number">-1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    k-=<span class="number">2</span>*a[r];</span><br><span class="line">                    a[l]-=a[r];</span><br><span class="line">                    a[r]=<span class="number">0</span>;</span><br><span class="line">                    r--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">2</span>*a[r]<span class="number">-1</span>&gt;k)&#123;</span><br><span class="line">                    k=<span class="number">-1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    k-=<span class="number">2</span>*a[r]<span class="number">-1</span>;</span><br><span class="line">                    a[l]-=a[r]<span class="number">-1</span>;</span><br><span class="line">                    a[r]=<span class="number">0</span>;</span><br><span class="line">                    r--;</span><br><span class="line">                    flag=<span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a[l]==a[r])&#123;</span><br><span class="line">            <span class="keyword">if</span>(!flag)&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">2</span>*a[l]<span class="number">-1</span>&gt;k)&#123;</span><br><span class="line">                    k=<span class="number">-1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    k-=<span class="number">2</span>*a[l]<span class="number">-1</span>;</span><br><span class="line">                    a[r]-=a[l]<span class="number">-1</span>;</span><br><span class="line">                    a[l]=<span class="number">0</span>;</span><br><span class="line">                    l++;</span><br><span class="line">                    flag=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">2</span>*a[r]<span class="number">-1</span>&gt;k)&#123;</span><br><span class="line">                    k=<span class="number">-1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    k-=<span class="number">2</span>*a[r]<span class="number">-1</span>;</span><br><span class="line">                    a[l]-=a[r]<span class="number">-1</span>;</span><br><span class="line">                    a[r]=<span class="number">0</span>;</span><br><span class="line">                    r--;</span><br><span class="line">                    flag=<span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(a[l]&lt;=k) a[l]=<span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">For</span>(i,<span class="number">1</span>,n) <span class="keyword">if</span>(!a[i]) ans++;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> i,t;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">        <span class="built_in">For</span>(i,<span class="number">1</span>,n) cin&gt;&gt;a[i];</span><br><span class="line">        <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="D-Inaccurate-Subsequence-Search"><a href="#D-Inaccurate-Subsequence-Search" class="headerlink" title="D. Inaccurate Subsequence Search"></a>D. Inaccurate Subsequence Search</h3><h4 id="题意简化：-3"><a href="#题意简化：-3" class="headerlink" title="题意简化："></a>题意简化：</h4><p>给定长度为 $n$ 的序列 $a$ 和长度为 $m$ 的序列 $b$，判断 $a$ 存在多少个子段使得重新排列这个子段后和 $b$ 至少有 $k$ 个位置相同。</p>
+<h4 id="闲话：-3"><a href="#闲话：-3" class="headerlink" title="闲话："></a>闲话：</h4><p>题意还是有点抽象，我开始没读懂，以为是子段里至少有 $k$ 个数是 $b$ 中出现过的。但是写完发现第四个样例不对。然后我又以为是相同的数只算一次，然后 WA 了。最后，发现 $b$ 元素也可以相同，才意识到它的意思是“重新排列后有至少 $k$ 个位置相同”。</p>
+<h4 id="sol：-2"><a href="#sol：-2" class="headerlink" title="sol："></a>sol：</h4><p>先标记一下 $b$ 的元素并用一个桶计数。</p>
+<p>然后对 $a$ 双指针（滑动窗口），如果区间中某个 $b$ 中标记的元素个数不超过 b 中出现的次数，就表示多一个可以匹配的位置。</p>
+<p>每次判断区间可以匹配的位置是否不小于 $k$ 即可。</p>
+<p>时间复杂度：$O(n)$。</p>
+<h3 id="E-Long-Inversions"><a href="#E-Long-Inversions" class="headerlink" title="E. Long Inversions"></a>E. Long Inversions</h3><h4 id="题意简化：-4"><a href="#题意简化：-4" class="headerlink" title="题意简化："></a>题意简化：</h4><p>给定一个长度为 $n$ 的 $01$ 串，选择一个最大的 $k$，使得每次可以选择任意一段长度为 $k$ 的子串翻转，最后能变成全 $1$ 的 $01$ 串。</p>
+<h4 id="闲话：-4"><a href="#闲话：-4" class="headerlink" title="闲话："></a>闲话：</h4><p>结论有一点点猜，导致不敢写。</p>
+<h4 id="sol：-3"><a href="#sol：-3" class="headerlink" title="sol："></a>sol：</h4><p>如果 $k&#x3D;2$，那是一个很经典的贪心，就是从 $01$ 串首开始的第一个 $0$ 开始贪心往后翻转即可。但是 $k&gt;2$ 的情况，我感觉有一点点不是那么确定。假设是对的。</p>
+<p>那么枚举这个 $k$，每次去循环模拟 check，时间复杂度：$O(n^3)$，如果连续 $k$ 个 $01$ 取反通过循环实现的话。感觉如果用树状数组写也是有可能能过的。</p>
+<p>但是没必要，一个区间异或 $1$，差分一下就可以了。 $[l,r]\oplus 1\Leftrightarrow tag[r+1]\oplus 1,a[l]\oplus 1$，循环的过程中 $tag$ 累异或即可。</p>
+<p>时间复杂度：$O(n^2)$。</p>
+<p>贪心结论的简单证明，感觉就是如果会往回区间异或 $1$，那么把 $1$ 变成了 $0$，最后还是得从最前面的 $0$ 开始把 $0$ 再异或成 $1$，那么这个过程就相当于回撤操作了。</p>
+<h3 id="F-Unfair-Game"><a href="#F-Unfair-Game" class="headerlink" title="F. Unfair Game"></a>F. Unfair Game</h3><h4 id="题意简化：-5"><a href="#题意简化：-5" class="headerlink" title="题意简化："></a>题意简化：</h4><p>有 $a[i]$ 个数字 $i(1\leq i\leq 4)$，对于一种方案，共删 $a_1+a_2+a_3+a_4$ 次数，求删的过程中所有数字异或和为 $0$ 的次数最多的方案的最多次数。</p>
+<h4 id="闲话：-5"><a href="#闲话：-5" class="headerlink" title="闲话："></a>闲话：</h4><p>抽象题。</p>
+<p>我开始以为是只有 $4$ 个数，且它们不超过 $4$，还在想为什么 $1\oplus 1\oplus 1\oplus 0&#x3D;0$，然后看输入描述才发现输入是 $4$ 个数字的个数。</p>
+<p>写到最后不敢交，为什么？因为这个做法它 $p_i$ 完全可以开到 $10^{18}$ 啊。为什么只有 $200$？但是有 global 25 的惨痛教训在这，所以还是交了。然后就过了，当时是真惊了一下。</p>
+<h4 id="sol：-4"><a href="#sol：-4" class="headerlink" title="sol："></a>sol：</h4><p>然后先发现 $4$ 是独立的，因为 $4$ 只能和自己异或成 $0$，所以答案直接先加 $\lfloor\dfrac{p_4}{2}\rfloor$。</p>
+<p>对于 $1,2,3$，因为 $1\oplus 3&#x3D;2$，所以和 $4$ 不一样。</p>
+<p>但是可以贪心地想，如果 $\oplus_{i&#x3D;1}^{a[1]} 1\oplus_{i&#x3D;1}^{a[2]}2\oplus_{i&#x3D;3}^{a[3]}&#x3D;0$，那么只取走一个数时，一定不是 $0$，并且一定可以构造取法使得每取两个数就又可以变成 $0$。答案直接加 $\lfloor\dfrac{a[1]+a[2]+a[3]}{2}\rfloor$ 即可。</p>
+<p>反之 $\oplus_{i&#x3D;1}^{a[1]} 1\oplus_{i&#x3D;1}^{a[2]}2\oplus_{i&#x3D;3}^{a[3]}\neq 0$，先取走一个，然后就和上面一样了。</p>
+<h3 id="G-GCD-on-a-grid"><a href="#G-GCD-on-a-grid" class="headerlink" title="G. GCD on a grid"></a>G. GCD on a grid</h3><h4 id="题意简化：-6"><a href="#题意简化：-6" class="headerlink" title="题意简化："></a>题意简化：</h4><p>每次可以向下向右走，求从 $(1,1)$ 走到 $(n,m)$ 路径上取 $\gcd$ 的最大值。</p>
+<h4 id="闲话：-6"><a href="#闲话：-6" class="headerlink" title="闲话："></a>闲话：</h4><p>没注意只能向下向右，默认是 $4$ 个方向 WA 了一发。</p>
+<h4 id="sol：-5"><a href="#sol：-5" class="headerlink" title="sol："></a>sol：</h4><p>考虑如何判断一个数是一堆数的公约数，</p>
+<p>按照定义 $x| a_1,x|a_2,…,x|a_n$ 即可。</p>
+<p>那么最大的满足是公约数的数即是 $\gcd$。</p>
+<p>而 $ans |\gcd(a[1][1],a[n][m])$。</p>
+<p>所以枚举 $\gcd(a[1][1],a[n][m])$ 的约数 $d$，问题就变成了判断是否存在一条路径使得可以从 $(1,1)$ 到 $(n,m)$，若 $d|a[i][j]$，则 $a[i][j]$ 可走；反之，不可走。</p>
+<p>bfs 一下即可（总之就是一个判连通的问题，怎么写都可以，dfs、并查集都行）。</p>
+<p>时间复杂度：$O(nmd(a_i))$，其中 $d(a_i)$ 表示 $a_i$ 的因子数，$[1,10^6]$ 中最大的 $d(i)&#x3D;240$。</p>
+<h3 id="H-The-Most-Reckless-Defense"><a href="#H-The-Most-Reckless-Defense" class="headerlink" title="H. The Most Reckless Defense"></a>H. The Most Reckless Defense</h3><h4 id="题意简化：-7"><a href="#题意简化：-7" class="headerlink" title="题意简化："></a>题意简化：</h4><p>$n\times m$ 的网格图上有 $k$ 个炮塔，可以给每个炮塔设置一个攻击距离 $r(r&gt;0)$，但是 $r$ 会给 BOSS 加 $3^r$ 的血量。要求每个炮塔设置的射程范围互不相同，求能击败的 BOSS 的最大血量。</p>
+<h4 id="sol：-6"><a href="#sol：-6" class="headerlink" title="sol："></a>sol：</h4><p>因为每个位置只会停留 $1s$，所以每个位置只会被一个炮塔攻击一次，所以一个炮塔能对 BOSS 造成的伤害即为能覆盖的格点数 $\times $ 每次伤害。</p>
+<p>那么一个炮塔的最大伤害即为 $nm\times p_i\leq 2500\times 500&#x3D;1.25\times 10^6$。</p>
+<p>因为 $3^{13}&gt;1.25\times 10^6$，所以 $r\leq 12$。</p>
+<p>那么对于每个炮塔可以 $O(12\times nm)$ 地预处理出每个炮塔设置所有射程所能造成的伤害。但是因为会给 BOSS 加血，不过因为每个炮塔加血是独立的，所以直接减在伤害上即可。</p>
+<p>此时，问题就变成了有 $O(nm)$ 个炮塔，每个炮塔可以选 $[0,12]$ 中的一个，$[1,12]$ 不能重复。也就是 $[1,12]$ 只能选一次。</p>
+<p>用二进制压缩 $[1,12]$，然后使用类似哈密顿回路的状压 dp 即可。</p>
+<p>$0$ 都可以选，所以对 $0$ 求个和，再把每个 $0$ 减到对应炮塔的 $[1,12]$ 上即可。</p>
+<p>时间复杂度：$O(k2^{12}\times 12)$。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ice_in_sky
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://iceinsky.top/2024/04/10/Codeforces%20Round%20938%20Div3/" title="Codeforces Round 938 Div3">http://iceinsky.top/2024/04/10/Codeforces Round 938 Div3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/10/%E6%B5%99%E6%B1%9F%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6-2024-%E5%B9%B4%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%EF%BC%88%E5%AE%98%E6%96%B9%E9%A2%98%E8%A7%A3%EF%BC%89/" rel="prev" title="浙江理工大学 2024 年程序设计竞赛（官方题解）">
+      <i class="fa fa-chevron-left"></i> 浙江理工大学 2024 年程序设计竞赛（官方题解）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="next" title="lemon 使用指南">
+      lemon 使用指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">
+    Codeforces Round 938 Div3
+</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">写在前面：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%98%E6%9E%9C%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">战果：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">题解：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Yogurt-Sale"><span class="nav-number">1.3.1.</span> <span class="nav-text">A. Yogurt Sale</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E5%8C%96%EF%BC%9A"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">题意简化：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B2%E8%AF%9D%EF%BC%9A"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">闲话：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol-1%EF%BC%9A"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">sol.1：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol-2%EF%BC%9A"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">sol.2：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-Progressive-Square"><span class="nav-number">1.3.2.</span> <span class="nav-text">B. Progressive Square</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E5%8C%96%EF%BC%9A-1"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">题意简化：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B2%E8%AF%9D%EF%BC%9A-1"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">闲话：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol%EF%BC%9A"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">sol：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-Inhabitant-of-the-Deep-Sea"><span class="nav-number">1.3.3.</span> <span class="nav-text">C. Inhabitant of the Deep Sea</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E5%8C%96%EF%BC%9A-2"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">题意简化：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B2%E8%AF%9D%EF%BC%9A-2"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">闲话：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol%EF%BC%9A-1"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">sol：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#code"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">code:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-Inaccurate-Subsequence-Search"><span class="nav-number">1.3.4.</span> <span class="nav-text">D. Inaccurate Subsequence Search</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E5%8C%96%EF%BC%9A-3"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">题意简化：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B2%E8%AF%9D%EF%BC%9A-3"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">闲话：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol%EF%BC%9A-2"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">sol：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-Long-Inversions"><span class="nav-number">1.3.5.</span> <span class="nav-text">E. Long Inversions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E5%8C%96%EF%BC%9A-4"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">题意简化：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B2%E8%AF%9D%EF%BC%9A-4"><span class="nav-number">1.3.5.2.</span> <span class="nav-text">闲话：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol%EF%BC%9A-3"><span class="nav-number">1.3.5.3.</span> <span class="nav-text">sol：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-Unfair-Game"><span class="nav-number">1.3.6.</span> <span class="nav-text">F. Unfair Game</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E5%8C%96%EF%BC%9A-5"><span class="nav-number">1.3.6.1.</span> <span class="nav-text">题意简化：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B2%E8%AF%9D%EF%BC%9A-5"><span class="nav-number">1.3.6.2.</span> <span class="nav-text">闲话：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol%EF%BC%9A-4"><span class="nav-number">1.3.6.3.</span> <span class="nav-text">sol：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G-GCD-on-a-grid"><span class="nav-number">1.3.7.</span> <span class="nav-text">G. GCD on a grid</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E5%8C%96%EF%BC%9A-6"><span class="nav-number">1.3.7.1.</span> <span class="nav-text">题意简化：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B2%E8%AF%9D%EF%BC%9A-6"><span class="nav-number">1.3.7.2.</span> <span class="nav-text">闲话：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol%EF%BC%9A-5"><span class="nav-number">1.3.7.3.</span> <span class="nav-text">sol：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#H-The-Most-Reckless-Defense"><span class="nav-number">1.3.8.</span> <span class="nav-text">H. The Most Reckless Defense</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E5%8C%96%EF%BC%9A-7"><span class="nav-number">1.3.8.1.</span> <span class="nav-text">题意简化：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sol%EF%BC%9A-6"><span class="nav-number">1.3.8.2.</span> <span class="nav-text">sol：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ice_in_sky"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ice_in_sky</p>
+  <div class="site-description" itemprop="description">乱我心者，今日之日多烦忧</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Thu Nov 30 2023 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ice_in_sky</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">116k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
