@@ -230,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-12 00:25:00" itemprop="dateModified" datetime="2024-04-12T00:25:00+08:00">2024-04-12</time>
+                <time title="修改时间：2024-04-12 00:33:42" itemprop="dateModified" datetime="2024-04-12T00:33:42+08:00">2024-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,7 +248,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>991</span>
+              <span>1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -267,80 +267,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-
-<h2 id="lemon-介绍"><a href="#lemon-介绍" class="headerlink" title="lemon 介绍"></a>lemon 介绍</h2><h3 id="优势："><a href="#优势：" class="headerlink" title="优势："></a>优势：</h3><p>lemon 是一款离线进行 OI 赛制选手代码评测的软件。</p>
-<p>相较于 OJ，可以为 OI 培训机构&#x2F;学校教练提供更加真实的 OI 赛制比赛环境。</p>
-<p>可以实现让选手完全地断网写代码，并且快速地测评选手的代码，得出选手各题的得分。</p>
-<h3 id="劣势："><a href="#劣势：" class="headerlink" title="劣势："></a>劣势：</h3><p>诸如 lemon 的本地评测工具一个极大的缺陷是“需要本地测试数据”。所以除非是数据公开的赛题，否则就需要自己造数据甚至自己出题。</p>
-<p>感觉不适合小型机构&#x2F;弱校使用。</p>
-<p>应该更适合校内集训互测或者教培模拟赛使用。</p>
-<h2 id="lemon-使用"><a href="#lemon-使用" class="headerlink" title="lemon 使用"></a>lemon 使用</h2><h3 id="打开-lemon-界面如下图："><a href="#打开-lemon-界面如下图：" class="headerlink" title="打开 lemon 界面如下图："></a>打开 lemon 界面如下图：</h3><img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.png" class="" title="咕咕咕">
-
-<h3 id="选择新建比赛："><a href="#选择新建比赛：" class="headerlink" title="选择新建比赛："></a>选择新建比赛：</h3><img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/2.png" class="" title="咕咕咕">
-
-<p>点击 OK。</p>
-<p>在目标目录下会生成 test 文件夹。</p>
-<p>并且其目录下拥有三个子文件</p>
-<ul>
-<li>data 文件夹（用于存储题目测试数据）</li>
-<li>source 文件夹（用于存储选手代码）</li>
-<li>test.cdf 比赛文件（用于在“添加”比赛功能，“添加比赛”添加的就是这个文件）</li>
-</ul>
-<h3 id="添加题目："><a href="#添加题目：" class="headerlink" title="添加题目："></a>添加题目：</h3><p>在 data 文件下第一个子目录新建题目文件夹，用题目名称作为文件名。</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/3.png" class="" title="咕咕咕">
-
-<p>在题目文件夹子目录下存放测试点，用 .in&#x2F;.out 文件按序号一一对应存放。</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/4.png" class="" title="咕咕咕">
-
-<p>返回 lemon，选择控制，自动添加试题。</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/5.png" class="" title="咕咕咕">
-
-<p>lemon 会自动识别对应目录的题目。</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/6.png" class="" title="咕咕咕">
-
-<p>可以设置试题分值、时间限制、空间限制。</p>
-<p>点击 OK 进入题目配置界面：</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/7.png" class="" title="咕咕咕">
-
-<p>一般不需要进行调整。</p>
-<ul>
-<li>源程序名称不要带扩展名。</li>
-<li>若勾选“在子文件夹中寻找”，选手目录需要为每个题单独建一个以源文件命名的文件夹。将源程序放在文件夹内；否则只需要将源程序放在选手目录下即可。</li>
-<li>采用文件读写不用勾选定向到标准输入&#x2F;输出。</li>
-</ul>
-<h3 id="添加选手："><a href="#添加选手：" class="headerlink" title="添加选手："></a>添加选手：</h3><p>以勾选“在子文件中寻找”为例。</p>
-<p>在 sources 子目录下新建以“选手名”命名的文件夹：</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/8.png" class="" title="咕咕咕">
-
-<p>在“选手名”文件夹目录下新建以“源程序名”命名的文件夹：</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/9.png" class="" title="咕咕咕">
-
-<p>在“源程序名”命名的文件夹下放入源程序文件。</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/10.png" class="" title="咕咕咕">
-
-<p>以 A+B 为例，源程序示例如下：</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/11.png" class="" title="咕咕咕">
-
-<p>选手代码要求采用 freopen 进行文件输入输出。</p>
-<h3 id="评测题目："><a href="#评测题目：" class="headerlink" title="评测题目："></a>评测题目：</h3><p>返回 lemon，选择“选手”进入“选手”页面：</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/12.png" class="" title="咕咕咕">
-
-<p>点击刷新，lemon 会自动添加选手。</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/13.png" class="" title="咕咕咕">
-
-<p>点击测试全部，进行测试：</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/14.png" class="" title="咕咕咕">
-
-<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p>测试题目时，可能需要关闭本地杀毒软件。否则可能会出现各种超时错误（编译超时，运行超时）。</p>
-<p>笔者猜测大概是 lemon 需要访问以管理员权限才能访问的 Windows 文件，开了杀毒软件会进行拦截。</p>
-<p>后续添加选手时，进行刷新即可。</p>
-<h2 id="其它："><a href="#其它：" class="headerlink" title="其它："></a>其它：</h2><p>若对其它设置有需求，可以在设置中自行更改：</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/14.png" class="" title="咕咕咕">
-
-<p>还可以在“帮助”，“指南”，“用户手册”中查看更多详细信息。</p>
-<img src="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/13.png" class="" title="咕咕咕">
-
+          <p>本文采用的是 LemonLime，lemon.0.3.2.1。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/10/lemon-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
