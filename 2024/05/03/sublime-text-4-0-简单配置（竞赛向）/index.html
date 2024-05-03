@@ -22,17 +22,20 @@
     var CONFIG = {"hostname":"iceinsky.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="乱我心者，今日之日多烦忧">
+  <meta name="description" content="sublime text 4.0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sublime text 4.0 简单配置（竞赛向）">
 <meta property="og:url" content="http://iceinsky.top/2024/05/03/sublime-text-4-0-%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%EF%BC%88%E7%AB%9E%E8%B5%9B%E5%90%91%EF%BC%89/index.html">
 <meta property="og:site_name" content="咕咕咕">
-<meta property="og:description" content="乱我心者，今日之日多烦忧">
+<meta property="og:description" content="sublime text 4.0">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://iceinsky.top/2024/05/03/sublime-text-4-0-%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%EF%BC%88%E7%AB%9E%E8%B5%9B%E5%90%91%EF%BC%89/1.png">
+<meta property="og:image" content="http://iceinsky.top/2024/05/03/sublime-text-4-0-%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%EF%BC%88%E7%AB%9E%E8%B5%9B%E5%90%91%EF%BC%89/2.png">
 <meta property="article:published_time" content="2024-05-02T18:05:39.000Z">
-<meta property="article:modified_time" content="2024-05-02T18:05:40.000Z">
+<meta property="article:modified_time" content="2024-05-03T04:33:00.000Z">
 <meta property="article:author" content="ice_in_sky">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://iceinsky.top/2024/05/03/sublime-text-4-0-%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%EF%BC%88%E7%AB%9E%E8%B5%9B%E5%90%91%EF%BC%89/1.png">
 
 <link rel="canonical" href="http://iceinsky.top/2024/05/03/sublime-text-4-0-%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%EF%BC%88%E7%AB%9E%E8%B5%9B%E5%90%91%EF%BC%89/">
 
@@ -226,7 +229,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-05-03 02:05:39 / 修改时间：02:05:40" itemprop="dateCreated datePublished" datetime="2024-05-03T02:05:39+08:00">2024-05-03</time>
+              <time title="创建时间：2024-05-03 02:05:39 / 修改时间：12:33:00" itemprop="dateCreated datePublished" datetime="2024-05-03T02:05:39+08:00">2024-05-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A7%91%E6%8A%80%C2%B7%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">科技·工程</span></a>
+                </span>
             </span>
 
           <br>
@@ -235,14 +247,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -254,7 +266,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>sublime text 4.0</p>
+<span id="more"></span>
+
+<p>sublime 不含编译器，编译器需要自行另外安装。</p>
+<h2 id="sublime-安装："><a href="#sublime-安装：" class="headerlink" title="sublime 安装："></a>sublime 安装：</h2><p>官网下载：<a target="_blank" rel="noopener" href="https://www.sublimetext.com/download">https://www.sublimetext.com/download</a></p>
+<p>安装过程一路 next 没有需要特别注意的（那个是否固定到主菜单自己选吧）。</p>
+<img src="/2024/05/03/sublime-text-4-0-%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%EF%BC%88%E7%AB%9E%E8%B5%9B%E5%90%91%EF%BC%89/1.png" class="" title="咕咕咕">
+
+<h2 id="sublime-插件安装："><a href="#sublime-插件安装：" class="headerlink" title="sublime 插件安装："></a>sublime 插件安装：</h2><h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h3><ul>
+<li>ChineseLocalizations：汉化。</li>
+<li>ConvertToUTF8：编码转换。</li>
+<li>FastOlympicCoding：刷题辅助。</li>
+<li>FastOlympicCodingHook：小扩展。</li>
+<li>SublimeAStyleFormatter：代码格式化。</li>
+<li>DefaultFileType：默认文件类型。</li>
+</ul>
+<h2 id="sublime-部分插件介绍："><a href="#sublime-部分插件介绍：" class="headerlink" title="sublime 部分插件介绍："></a>sublime 部分插件介绍：</h2><h3 id="ChineseLocalizations"><a href="#ChineseLocalizations" class="headerlink" title="ChineseLocalizations"></a>ChineseLocalizations</h3><p>安装后默认切换成简体中文，实际上还可以设置为其它语言。</p>
+<h3 id="ConvertToUTF8："><a href="#ConvertToUTF8：" class="headerlink" title="ConvertToUTF8："></a>ConvertToUTF8：</h3><p>避免出现中文乱码。</p>
+<h3 id="FastOlympicCoding："><a href="#FastOlympicCoding：" class="headerlink" title="FastOlympicCoding："></a>FastOlympicCoding：</h3><ul>
+<li>打包式帮你配置好了 C++&#x2F;Java&#x2F;Python 的编译环境。</li>
+<li>实时语法检查。</li>
+<li>运行时生成辅助测试样例的编辑页面。个人感觉主要好处是多组数据时，每一组它单独展示，并且一组结果后它自动编译等待下一组输入。不用像终端那样，每一组都编译一次，而且可以把之前的结果存在编辑器里显示。</li>
+<li>数据类型名替代，比如 PII 替代 pair&lt;int,int&gt;。不过我觉得 sublime 的代码片段也能实现同样的功能。</li>
+<li>还有 Debugger 的一些功能，不过我不太用 Debugger。算竞目前我更偏向于静态调试，或者 gdb 就行。</li>
+</ul>
+<h3 id="FastOlympicCodingHook："><a href="#FastOlympicCodingHook：" class="headerlink" title="FastOlympicCodingHook："></a>FastOlympicCodingHook：</h3><p>要结合本地 Python3 环境，浏览器 Competitive Companion 插件和 sublime FastOlympicCoding 插件。</p>
+<p>应该就是加了一个可以爬取 OJ 题目样例到 sublime 的功能，不过也要按三步走，感觉不一定比 ctrl+CV 快多少。大概主要是当题目样例有多个的时候，可以一起加进来会更方便。</p>
+<h3 id="SublimeAStyleFormatter："><a href="#SublimeAStyleFormatter：" class="headerlink" title="SublimeAStyleFormatter："></a>SublimeAStyleFormatter：</h3><p>代码格式化，可以自行设置快捷键。其实就是一个一键加空格和缩进的功能。如果本身就习惯打空格好像也没啥用。</p>
+<h3 id="DefaultFileType："><a href="#DefaultFileType：" class="headerlink" title="DefaultFileType："></a>DefaultFileType：</h3><p>设置新建文件时的默认后缀，如果不设置的话，保存的类型就是所有文件，需要自己加后缀，稍微少了个步骤。</p>
+<h2 id="sublime-单独编译环境配置："><a href="#sublime-单独编译环境配置：" class="headerlink" title="sublime 单独编译环境配置："></a>sublime 单独编译环境配置：</h2><p>具体规则还不清楚。</p>
+<p>直接用模板，自行改改小参数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;cmd&quot;</span>:[<span class="string">&quot;g++&quot;</span>, <span class="string">&quot;$&#123;file&#125;&quot;</span>, <span class="string">&quot;-o&quot;</span>, <span class="string">&quot;$&#123;file_path&#125;\\\\$&#123;file_base_name&#125;&quot;</span>, <span class="string">&quot;&amp;&quot;</span>, <span class="string">&quot;$&#123;file_path&#125;\\\\$&#123;file_base_name&#125;&quot;</span>],</span><br><span class="line">    <span class="string">&quot;file_regex&quot;</span>: <span class="string">&quot;^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$&quot;</span>, <span class="string">&quot;working_dir&quot;</span>: <span class="string">&quot;$&#123;file_path&#125;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;selector&quot;</span>: <span class="string">&quot;source.c, source.c++&quot;</span>, <span class="string">&quot;shell&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;encoding&quot;</span>:<span class="string">&quot;utf-8&quot;</span>, </span><br><span class="line">    <span class="string">&quot;variants&quot;</span>:</span><br><span class="line">    [</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="string">&quot;name&quot;</span> : <span class="string">&quot;Compile &amp; Run - 编译并运行&quot;</span>,</span><br><span class="line">            <span class="string">&quot;cmd&quot;</span>:[<span class="string">&quot;g++&quot;</span>, <span class="string">&quot;$&#123;file&#125;&quot;</span>, <span class="string">&quot;-O2&quot;</span>, <span class="string">&quot;-Wall&quot;</span>, <span class="string">&quot;-Wextra&quot;</span>, <span class="string">&quot;-std=c++17&quot;</span>, <span class="string">&quot;-Wl,--stack=268435456&quot;</span>, <span class="string">&quot;-o&quot;</span>, <span class="string">&quot;$&#123;file_path&#125;\\\\$&#123;file_base_name&#125;&quot;</span>, <span class="string">&quot;&amp;&amp;&quot;</span>, <span class="string">&quot;wt&quot;</span>, <span class="string">&quot;cmd&quot;</span>, <span class="string">&quot;/c&quot;</span>, <span class="string">&quot;\&quot;$&#123;file_path&#125;\\\\$&#123;file_base_name&#125;\&quot; &amp; echo. &amp; pause&quot;</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;name&quot;</span> : <span class="string">&quot;Compile - 编译&quot;</span>,</span><br><span class="line">            <span class="string">&quot;cmd&quot;</span>:[<span class="string">&quot;g++&quot;</span>, <span class="string">&quot;$&#123;file&#125;&quot;</span>, <span class="string">&quot;-O2&quot;</span>, <span class="string">&quot;-Wall&quot;</span>, <span class="string">&quot;-Wextra&quot;</span>, <span class="string">&quot;-std=c++17&quot;</span>, <span class="string">&quot;-Wl,--stack=268435456&quot;</span>, <span class="string">&quot;-o&quot;</span>, <span class="string">&quot;$&#123;file_path&#125;\\\\$&#123;file_base_name&#125;&quot;</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;name&quot;</span> : <span class="string">&quot;Run 运行&quot;</span>,</span><br><span class="line">            <span class="string">&quot;cmd&quot;</span> : [<span class="string">&quot;wt&quot;</span>, <span class="string">&quot;cmd&quot;</span>, <span class="string">&quot;/c&quot;</span>, <span class="string">&quot;\&quot;$&#123;file_path&#125;\\\\$&#123;file_base_name&#125;\&quot; &amp; echo. &amp; pause&quot;</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="sublime-主题、字体、和配色方案："><a href="#sublime-主题、字体、和配色方案：" class="headerlink" title="sublime 主题、字体、和配色方案："></a>sublime 主题、字体、和配色方案：</h2><p>sublime 自带了少数几个主题和配色，需要更多的主题和配色可以去 GitHub 上下载。</p>
+<ul>
+<li>在命令面板中输入 <code>Color Scheme</code>，选择配色方案。</li>
+<li>在命令面板中输入 <code>Select Theme</code>，选择主题。</li>
+</ul>
+<h2 id="sublime-代码片段："><a href="#sublime-代码片段：" class="headerlink" title="sublime 代码片段："></a>sublime 代码片段：</h2><img src="/2024/05/03/sublime-text-4-0-%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%EF%BC%88%E7%AB%9E%E8%B5%9B%E5%90%91%EF%BC%89/2.png" class="" title="咕咕咕">
+
+
     </div>
 
     
@@ -351,6 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sublime-%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">sublime 安装：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sublime-%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">sublime 插件安装：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">常用插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sublime-%E9%83%A8%E5%88%86%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">sublime 部分插件介绍：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ChineseLocalizations"><span class="nav-number">3.1.</span> <span class="nav-text">ChineseLocalizations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConvertToUTF8%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">ConvertToUTF8：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FastOlympicCoding%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">FastOlympicCoding：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FastOlympicCodingHook%EF%BC%9A"><span class="nav-number">3.4.</span> <span class="nav-text">FastOlympicCodingHook：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SublimeAStyleFormatter%EF%BC%9A"><span class="nav-number">3.5.</span> <span class="nav-text">SublimeAStyleFormatter：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DefaultFileType%EF%BC%9A"><span class="nav-number">3.6.</span> <span class="nav-text">DefaultFileType：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sublime-%E5%8D%95%E7%8B%AC%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">sublime 单独编译环境配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sublime-%E4%B8%BB%E9%A2%98%E3%80%81%E5%AD%97%E4%BD%93%E3%80%81%E5%92%8C%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">sublime 主题、字体、和配色方案：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sublime-%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">sublime 代码片段：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -373,7 +426,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -415,12 +468,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">117k</span>
+    <span title="站点总字数">120k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:46</span>
+    <span title="站点阅读时长">1:49</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
